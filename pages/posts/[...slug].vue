@@ -2,10 +2,26 @@
 import Giscus from "@giscus/vue";
 import { inView, animate } from "motion";
 import "@/components/markdown.css";
+const link = ref();
 const formatDate = (dateString: string) => {
   const D1 = { year: "numeric", month: "long", day: "numeric" };
   return new Date(dateString).toLocaleDateString("zh-TW", D1);
 };
+const route = useRoute();
+const slug = route.params.slug;
+onMounted(async () => {
+  try {
+    const req = await fetch("/api/db/obtainshortlink", {
+      method: "POST",
+      body: `/posts/${slug}`,
+    });
+    const res = await req.json();
+    link.value = res.short;
+    console.log("onMounted: " + link.value);
+  } catch (e) {
+    console.log(e);
+  }
+});
 </script>
 <template>
   <main>
@@ -18,8 +34,10 @@ const formatDate = (dateString: string) => {
           </div>
           <ContentRenderer :value="doc" class="content" />
         </article>
+
         <div class="comments">
-          <Giscus
+          <!--Remove load on Giscus Server (maybe github)-->
+          <!--<Giscus
             repo="hpware/posts"
             repo-id="R_kgDONg6K8Q"
             category="posts"
@@ -34,9 +52,15 @@ const formatDate = (dateString: string) => {
             loading="lazy"
             crossorigin="anonymous"
             async
-          />
+          />-->
         </div>
         <div class="footer">
+          <div class="force-center">
+            <div class="create-quick-link">
+              <p>短連結</p>
+              <div>{{ link }}</div>
+            </div>
+          </div>
           <p>
             Built using <a href="https://nuxtjs.org">NuxtJS</a> &
             <a href="https://giscus.app">Giscus.</a>
@@ -157,6 +181,36 @@ article {
     p.end {
       font-size: 0.8em;
     }
+  }
+}
+.force-center {
+  width: 100%;
+}
+.create-quick-link {
+  background-color: lightskyblue;
+  color: black;
+  max-width: 300px;
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  text-align: center;
+  justify-items: center;
+  justify-content: center;
+  align-items: center;
+  align-self: center;
+  align-content: center;
+  position: absolute;
+  left: 0;
+  right: 0;
+  animation: fade-in 300ms ease-in;
+  p {
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+  div {
+    margin-top: 0;
+    font-size: 0.7em;
   }
 }
 </style>
