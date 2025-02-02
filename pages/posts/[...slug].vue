@@ -16,7 +16,7 @@ onMounted(async () => {
       body: `/posts/${slug}`,
     });
     const res = await req.json();
-    link.value = res.short;
+    link.value = `https://yhw.tw/${res.short}`;
     console.log("onMounted: " + link.value);
   } catch (e) {
     console.log(e);
