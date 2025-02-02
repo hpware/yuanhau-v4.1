@@ -212,5 +212,9 @@ article {
     margin-top: 0;
     font-size: 0.7em;
   }
+  ::selection {
+    opacity: 1;
+    background-color: #9c84a7;
+  }
 }
 </style>
