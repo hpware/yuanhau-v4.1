@@ -9,9 +9,9 @@ const supabase = createClient(
 import * as shlink from "@shlinkio/shlink-js-sdk";
 import { NodeHttpClient } from "@shlinkio/shlink-js-sdk/node";
 const serverInfo = {
-  baseUrl: "https://go.yuanhau.com", // NOT PROD
-  //baseUrl: "https://yhw.tw" // PROD
-  apiKey: process.env.shlink_api_not_prod,
+  //baseUrl: "https://go.yuanhau.com", // NOT PROD
+  baseUrl: "https://yhw.tw" // PROD
+  apiKey: process.env.shlink_api,
 };
 export const shlinkapi = new shlink.ShlinkApiClient(
   new NodeHttpClient(),
