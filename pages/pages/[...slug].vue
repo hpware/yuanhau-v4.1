@@ -1,41 +1,7 @@
-<script setup lang="ts">
-import { marked } from "marked";
-import "@/components/markdown.css";
-const markdown = ref();
-const router = useRoute();
-const id = router.params.slug;
-async function md(id: string) {
-  try {
-    const req = await fetch(`/api/pages-content/markdown/${id}`);
-    const reqtext = await req.text();
-    if (
-      reqtext.includes("403") &&
-      reqtext.includes("message") &&
-      reqtext.includes("No Content") &&
-      reqtext.startsWith("{") &&
-      reqtext.endsWith("}") &&
-      reqtext.includes("statusCode")
-    ) {
-      markdown.value = marked("Markdown not found in db");
-      return;
-    }
-    markdown.value = marked(reqtext);
-  } catch (e) {}
-}
-md(id);
-useHead({
-  title: `Magic View ${id}`,
-});
-</script>
 <template>
-  <main>
-    <article>
-      <div v-html="markdown"></div>
-    </article>
-    <div class="footer">
-      <p>Built using markedJS</p>
-    </div>
-  </main>
+  <div>
+    <p>Oops! 暫時無法存取資料!</p>
+  </div>
 </template>
 <style scoped>
 h1.title {

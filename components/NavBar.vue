@@ -116,15 +116,17 @@ onUnmounted(() => {
         </nav>
         <div class="user">
           <div v-if="!Boolean(user)">
-            <i class="bi bi-person"></i>
+            <a href="/sign-in">
+              <i class="bi bi-person"></i><span>&nbsp;尚未登入</span>
+            </a>
           </div>
           <div v-else>
             <NuxtLink to="/user/" @click="closeSidebar" class="user-item">
               <i v-if="!user.picture" class="bi bi-person"></i><img v-else :src="user.picture"/><span>&nbsp;{{ user.name ? user.name : user.username }}</span>
             <span></span>
           </NuxtLink>
-          </div>
           <a :href="`/sign-${ user ? 'out' : 'in' }`"> 登 {{ user ? '出' : '入' }} </a>
+          </div>
         </div>
         <div class="sidebar-footer">
           <div class="social-links">
