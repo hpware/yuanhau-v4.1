@@ -9,20 +9,19 @@ export default defineNuxtConfig({
 
   routeRules: {
     "/": { prerender: true },
-    "/**": { prerender: true },
-    "/prerender/**": { prerender: true },
+    "/bio": { prerender: true },
+    // Redirect old content to old content. and /blog to new.
     "/posts/": { redirect: "/blog/"},
     "/posts/**": { redirect: "https://yuanhau-site-2-14-content.vercel.app/posts/**"},
     "/api/**": { cors: true },
     "/admin/": { redirect: "/admin/login" },
     "/admin/**": { ssr: true },
-    "/signal": { redirect: "https://yhw.tw/signal" }, // Compatibility with the Wordpresss version link aka https://yuanhau.com/signal
+    "/signal": { redirect: "https://yhw.tw/signal" }, // Compatibility with the Wordpresss version link aka https://wp.yuanhau.com/signal
     // Old Redirect stuff here.
     "/post": { redirect: "/posts" },
     "/post/**": { redirect: "/posts/**" },
     // Sync the old with the new
-    "/mdview/**": { ssr: true },
-    "/en-about": { redirect: "/mdview/6" },
+    "/mdview/**": { redirect: "https://yuanhau-site-2-14-content.vercel.app/mdview/**" },
     "/form/**": { ssr: true },
   },
 
