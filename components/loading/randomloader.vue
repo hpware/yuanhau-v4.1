@@ -1,6 +1,6 @@
 <script setup>
 const min = Math.max(1000);
-const max = Math.min(300);
+const max = Math.min(500);
 const math = ref();
 onMounted(() => {
   const interval = setInterval(() => {
