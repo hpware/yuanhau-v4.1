@@ -13,7 +13,6 @@ export default defineNuxtConfig({
     "/prerender/**": { prerender: true },
     "/posts/": { redirect: "/blog/"},
     "/posts/**": { redirect: "https://yuanhau-site-2-14-content.vercel.app/posts/**"},
-    "/web3/**": { prerender: true },
     "/api/**": { cors: true },
     "/admin/": { redirect: "/admin/login" },
     "/admin/**": { ssr: true },
