@@ -1,8 +1,10 @@
 <script setup lang="ts">
 import { ref } from "vue";
-import Loading from "@/components/loading/default.vue";
-import type { QueryBuilderParams } from "@nuxt/content/dist/runtime/types";
-const loading = ref(false);
+import Loading from "@/components/loading/randomloader.vue";
+const loading = ref(true);
+const error = ref(false);
+const errormsg = ref(""); 
+const data = ref();
 useSeoMeta({
   title: "Blog | 吳元皓",
 });
@@ -14,6 +16,20 @@ const fdate = (dateString: string) => {
     console.error(JSON.stringify(e));
   }
 };
+const fetchPosts = async () => {
+  try {
+    const fetchreq = await fetch("/api/blog/list");
+    const fetchres = await fetchreq.json();
+    data.value = fetchres;
+    loading.value = false;
+  } catch (e) {
+    error.value = true;
+    errormsg.value = e.message;
+  }
+}
+onMounted(() =>{
+  fetchPosts
+})
 </script>
 <template>
   <div class="main" id="main">
@@ -22,7 +38,15 @@ const fdate = (dateString: string) => {
       <h6 class="dec">我的部落格</h6>
     </div>
     <Loading v-if="loading" />
-    <p>Oops! 這個頁面正在大改! 請稍後在回來 或把網址在 https:// 與 yuanhau 之間加上 2-14.</p>
+    <div v-else>
+    <div v-if="error">
+      <p>Oops! 暫時無法存取部落格資料!</p>
+      <p>{{ errormsg }}</p>
+    </div>
+    <div v-else>
+
+    </div>
+  </div>
   </div>
 </template>
 <style scoped>
