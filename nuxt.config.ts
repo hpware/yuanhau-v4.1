@@ -11,6 +11,8 @@ export default defineNuxtConfig({
     "/": { prerender: true },
     "/**": { prerender: true },
     "/prerender/**": { prerender: true },
+    "/posts/": {swr: 3600},
+    "/posts/*": { swr: 3600 },
     "/web3/**": { prerender: true },
     "/api/**": { cors: true },
     "/admin/": { redirect: "/admin/login" },
@@ -152,14 +154,14 @@ logto: {
     callback: '/api/auth/callback',
   },
 },
-  sentry: {
+  /*sentry: {
     sourceMapsUploadOptions: {
       org: "hwtwcc",
       project: "yuanhau-v4dot1",
     },
 
     autoInjectServerSentry: "top-level-import",
-  },
+  },*/
 
   sourcemap: {
     client: "hidden",

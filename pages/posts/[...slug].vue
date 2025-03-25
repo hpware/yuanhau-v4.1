@@ -36,65 +36,7 @@ const copylink = async () => {
 </script>
 <template>
   <main>
-    <ContentDoc>
-      <template v-slot="{ doc }">
-        <article>
-          <h1 class="title">{{ doc.title }}</h1>
-          <div class="meta">
-            <span>最後編輯: {{ formatDate(doc.ldate) }}</span>
-          </div>
-          <ContentRenderer :value="doc" class="content" />
-        </article>
-        <p class="share">
-          分享連結:
-          <span v-if="link"
-            >{{ link }}
-            <button @click="copylink()" v-if="!clipboardthingy">
-              <i class="bi bi-clipboard"></i>
-            </button>
-            <button v-if="clipboardthingy"><i class="bi bi-check"></i></button>
-          </span>
-          <span v-else-if="!link">創立中...</span>
-        </p>
-        <div class="comments">
-          <!--Remove load on Giscus Server (maybe github)-->
-          <Giscus
-            repo="hpware/posts"
-            repo-id="R_kgDONg6K8Q"
-            category="posts"
-            category-id="DIC_kwDONg6K8c4Clc9m"
-            mapping="title"
-            strict="0"
-            reactions-enabled="1"
-            emit-metadata="0"
-            input-position="bottom"
-            theme="cobalt"
-            lang="zh-TW"
-            loading="lazy"
-            crossorigin="anonymous"
-            async
-          />
-        </div>
-        <div class="footer">
-          <!--<div class="force-center">
-            <div class="create-quick-link">
-              <p>短連結</p>
-              <div>{{ link }}</div>
-            </div>
-          </div>-->
-          <p>
-            Built using <a href="https://nuxtjs.org">NuxtJS</a> &
-            <a href="https://giscus.app">Giscus.</a>
-          </p>
-          <p class="end">我的網站，我的規則</p>
-        </div>
-      </template>
-      <template #not-found>
-        <h1>>_<</h1>
-        <h2>沒有這個文章</h2>
-        <a href="/blog"><button>返回Blog主頁</button></a>
-      </template>
-    </ContentDoc>
+    <p>Oops! 這個頁面正在大改! 請稍後在回來 或把網址在 https:// 與 yuanhau 之間加上 2-14.</p>
   </main>
 </template>
 <style scoped>

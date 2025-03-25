@@ -14,58 +14,15 @@ const fdate = (dateString: string) => {
     console.error(JSON.stringify(e));
   }
 };
-const submit_search = (e: Event) => {
-  e.preventDefault();
-};
-const query: QueryBuilderParams = {
-  sort: [{ date: -1 }],
-};
 </script>
 <template>
   <div class="main" id="main">
     <div class="top">
       <h1 class="title">Blog</h1>
-      <h6 class="dec">這裡是我的分享天地，逃離演算法的控制!(雖然有時候會壞)</h6>
+      <h6 class="dec">我的部落格</h6>
     </div>
     <Loading v-if="loading" />
-    <div v-else class="list">
-      <!--<div class="search">
-        <form @submit="">
-          <input type="text" placeholder="Ex: Editor" />
-          <button>search</button>
-        </form>
-      </div>-->
-      <ContentList path="/posts/" :query="query" v-slot="{ list }">
-        <div v-if="list && list.length">
-          <div v-for="article in list" :key="article._path">
-            <NuxtLink :to="article._path" class="card">
-              <div class="a">
-                <div class="title">
-                  <h2>{{ article.title }}</h2>
-                  <span>{{ fdate(article.date) }}</span>
-                </div>
-                <p>{{ article.description }}</p>
-              </div>
-            </NuxtLink>
-          </div>
-          <div class="footer">
-            <p class="adminpanel"><a href="/admin/login">管理員後台</a></p>
-            <p>
-              Built using <a href="https://nuxtjs.org">NuxtJS</a> &
-              <a href="https://giscus.app">Giscus.</a>
-            </p>
-            <p class="end">我的網站，我的規則</p>
-          </div>
-        </div>
-        <div v-else>
-          <div class="not-found">
-            <p>沒有文章 :(</p>
-            <p>可能這個系統沒有設定好，記得跑</p>
-            <p><code>git submodule update --init --remote</code></p>
-          </div>
-        </div>
-      </ContentList>
-    </div>
+    <p>Oops! 這個頁面正在大改! 請稍後在回來 或把網址在 https:// 與 yuanhau 之間加上 2-14.</p>
   </div>
 </template>
 <style scoped>
