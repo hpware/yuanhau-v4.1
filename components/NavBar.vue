@@ -98,7 +98,7 @@ onUnmounted(() => {
             <span>關於我</span>
           </NuxtLink>
           
-          <NuxtLink to="/posts/" @click="closeSidebar" class="nav-item">
+          <NuxtLink to="/blog/" @click="closeSidebar" class="nav-item">
             <i class="bi bi-journal-text"></i>
             <span>Blog</span>
           </NuxtLink>

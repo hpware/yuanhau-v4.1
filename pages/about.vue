@@ -3,7 +3,7 @@ import { ref } from "vue";
 import { marked } from "marked";
 import { animate } from "motion";
 import "~/components/markdown.css";
-import Loading from "~/components/loading/discordstyle.vue";
+import Loading from "~/components/loading/randomloader.vue";
 useHead({
   title: "關於我 | 吳元皓",
   link: [
@@ -30,9 +30,7 @@ async function getCodingHistoryMD() {
     });
     loading.value = false;
   } finally {
-    setTimeout(() => {
       loading.value = false;
-    }, 1000);
   }
 }
 getCodingHistoryMD();
