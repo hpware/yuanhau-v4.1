@@ -146,7 +146,7 @@ onUnmounted(() => {
               <i class="bi bi-youtube"></i>
             </a>
           </div>
-          <div class="copyright">版權 © 2025 吳元皓</div>
+          <div class="copyright">版權 © 2025 <a href="https://yuanhau.com">吳元皓</a><br/>這個網站在 <a href="https://github.com/hpware/yuanhau-site">GitHub</a> 上</div>
         </div>
       </div>
     </Transition>
@@ -375,6 +375,12 @@ onUnmounted(() => {
 .copyright {
   font-size: 0.75rem;
   color: rgba(255, 255, 255, 0.6);
+  a {
+    color: rgba(255, 255, 255, 0.6);
+  }
+  a:hover {
+    color: rgba(255, 255, 255, 0.422);
+  }
 }
 
 /* Animations */
