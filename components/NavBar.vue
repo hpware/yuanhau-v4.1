@@ -113,6 +113,14 @@ onUnmounted(() => {
             <i class="bi bi-chat-left-text"></i>
             <span>建議/聯絡</span>
           </NuxtLink>
+          <NuxtLink to="/chatbot" @click="closeSidebar" class="nav-item">
+            <i class="bi bi-robot"></i>
+            <span>AI 機器人</span>
+          </NuxtLink>
+          <NuxtLink to="/donate" @click="closeSidebar" class="nav-item">
+            <i class="fa-solid fa-money-check-dollar"></i>
+            <span>Donate?</span>
+          </NuxtLink>
         </nav>
         <div class="user">
           <div v-if="!Boolean(user)">

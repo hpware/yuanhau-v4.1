@@ -11,7 +11,14 @@ const formatDate = (dateString: string) => {
 };
 // Fetch Short URL
 const route = useRoute();
-const slug = route.params.slug;
+const slug = computed(() => {
+  // If slug is an array, join with "/" to create proper path
+  if (Array.isArray(route.params.slug)) {
+    return route.params.slug.join('/');
+  }
+  // If it's a single segment, return as is
+  return route.params.slug;
+});
 onMounted(async () => {
   try {
     const req = await fetch("/api/db/obtainshortlink", {
@@ -36,6 +43,7 @@ const copylink = async () => {
 </script>
 <template>
   <main>
+    <p>你想去的地方 https://yuanhau.com/blog/{{ slug }}</p>
     <p>Oops! 這個頁面正在大改! 請稍後在回來 或把網址在 https:// 與 yuanhau 之間加上 2-14.</p>
   </main>
 </template>
