@@ -2,8 +2,33 @@
 useHead({
   title: "首頁 | 吳元皓",
 });
+
+interface Progress {
+  progress: {
+    js: number,
+    server: number,
+    py: number,
+  }
+}
 // Init
-import DiscordStatus from "~/components/DiscordStatus.vue";
+import DiscordStatus from "~/components/legacy/DiscordStatus.vue";
+
+const progress = ref<Progress>({
+  progress: {
+    js: 0,
+    server: 0,
+    py: 0,
+  }
+});
+onMounted(async () => {
+  progress.value = ({
+    progress: {
+      js: 32,
+      server: 32,
+      py: 10,
+    }
+  })
+})
 </script>
 <template>
   <div class="aboutme">
@@ -20,17 +45,23 @@ import DiscordStatus from "~/components/DiscordStatus.vue";
   <div class="info">
     我是一個五專生，我對Typescript與Javascipt有興趣(現在不只網頁了)，我也對伺服器(就是Linux)極度有興趣。
   </div>
-  <div class="progress">
-    <label for="javascript">JS:</label>
-    <progress id="javascript" value="32" max="100"></progress>
+  <div class="progress-panel">
+    <div><label for="javascript">JS:</label>
+    <progress id="javascript" :value="progress.progress.js" max="100"></progress>
+    </div>
+    <div>
     <label for="server">Server shit:</label>
-    <progress id="server" value="32" max="100"></progress> 
+    <progress id="server" :value="progress.progress.server" max="100"></progress> 
+    </div>
+    <div>
     <label for="python">Python??:</label>
-    <progress id="python" value="32" max="100"></progress>  
+    <progress id="python" :value="progress.progress.py" max="100"></progress> 
+    </div>
   </div>
   <div class="status">
   <section id="spotify">
     Spotify Status:
+    <SpotifyStatus/>
   </section>
   <section id="discord">
     Discord Status:
@@ -59,15 +90,20 @@ import DiscordStatus from "~/components/DiscordStatus.vue";
   justify-content: center;
   padding: 20px;
 }
-.progress {
+.progress-panel {
   display:flex;
   flex-direction: column;
   justify-content:center;
-  progress {
+  div{
+    flex-direction:row;
+    justify-content:center;
+    align-self:center;
+    width:70%;
+    progress {
     width: 80%;
     justify-content:center;
     align-self:center;
-  }
+  }}
 }
 div.status {
   gap: 10px;

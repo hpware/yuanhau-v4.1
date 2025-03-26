@@ -4,7 +4,7 @@ useHead({
 });
 // Init
 import { ref, onMounted } from "vue";
-import DiscordStatus from "~/components/DiscordStatus.vue";
+import DiscordStatus from "~/components/legacy/DiscordStatus.vue";
 import { marked } from "marked";
 import { animate } from "motion";
 import { NuxtImg } from "#components";
