@@ -10,8 +10,13 @@ interface Progress {
     py: number,
   }
 }
+
 // Init
-import DiscordStatus from "~/components/legacy/DiscordStatus.vue";
+import DiscordStatus from "~/components/plugins/discordStatus.vue";
+import Loader from "~/components/loading/randomloader.vue";
+
+//values
+const loadingProgressPanel = ref(true);
 
 const progress = ref<Progress>({
   progress: {
@@ -43,8 +48,9 @@ onMounted(async () => {
     <h1>吳元皓</h1>
   </div>
   <div class="info">
-    我是一個五專生，我對Typescript與Javascipt有興趣(現在不只網頁了)，我也對伺服器(就是Linux)極度有興趣。
+    我是一個五專生，我對Typescript與Javascipt有興趣，我也對伺服器(也就是Linux)極度有興趣。
   </div>
+  <div v-if="!loadingProgressPanel">
   <div class="progress-panel">
     <div><label for="javascript">JS:</label>
     <progress id="javascript" :value="progress.progress.js" max="100"></progress>
@@ -57,6 +63,10 @@ onMounted(async () => {
     <label for="python">Python??:</label>
     <progress id="python" :value="progress.progress.py" max="100"></progress> 
     </div>
+  </div>
+  </div>
+  <div v-else>
+    <Loader size="20px"/>
   </div>
   <div class="status">
   <section id="spotify">
@@ -76,10 +86,20 @@ onMounted(async () => {
   padding-left: 20px;
   padding-top :20px;
   display:flex;
+  flex-direction: column;
+  h1 {
+    margin-top:0;
+  }
   NuxtImg,img {
-    width:100px;
-    height: 100px;
-    border-radius: 50px;
+    width:200px;
+    height: 200px;
+    border-radius: 50%;
+    justify-content:center;
+    align-self:center;
+    left:0;
+    right:0;
+    align-content:center;
+    margin-bottom:0;
   }
 }
 .info {
