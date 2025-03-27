@@ -60,10 +60,10 @@ onMounted(async () => {
     load="lazy"
     :style="{ display: bgloading ? 'none' : 'block' }"
   />
-      <Loader v-if="bgloading" size="40px" class="main-loader" />
-      <div class="blur" v-if="!bgloading"></div>
+      <Loader v-if="bgloading" size="40px" class="mainloader" />
     <transition name="slide-fade">
       <div v-if="!bgloading">
+        <div class="aboutmeinfoblock">
     <div class="aboutme">
       <NuxtImg
         alt="大頭貼"
@@ -78,6 +78,11 @@ onMounted(async () => {
     <div class="info">
       我是一個五專生，我對Typescript與Javascipt有興趣，我也對伺服器(也就是Linux)極度有興趣。
     </div>
+    <div class="scrolldown">
+      <i class="bi bi-arrow-down"></i><span>&nbsp;滑下來看更多</span>
+    </div>
+    </div>
+    <div class="displaybackground"></div>
     <div class="progress-block">
       <div v-if="!progressloading">
         <div class="progress-panel">
@@ -126,6 +131,13 @@ onMounted(async () => {
 </div>
 </template>
 <style scoped>
+.mainloader {
+  position: fixed;
+  left:0;
+  right:0;
+  top:0;
+  bottom:0; 
+}
 .background {
   display:flex;
   position: fixed;
@@ -152,7 +164,15 @@ onMounted(async () => {
   background-color:#6363634e;
   z-index:-1;
 }
-
+.aboutmeinfoblock {
+  background: rgb(0,0,0);
+  background: linear-gradient(180deg, rgba(0,0,0,1) 0%, rgba(52,52,52,1) 28%, rgba(52,52,52,1) 56%, rgba(114,115,117,0.7315125879453344) 83%, rgba(79,79,80,0) 100%); 
+  height: 100dvh;
+}
+.displaybackground {
+  width:100%;
+  height: 300px;
+}
 .aboutme {
   justify-content: center;
   padding-left: 20px;
@@ -183,10 +203,21 @@ onMounted(async () => {
   justify-content: center;
   padding: 20px;
 }
+.scrolldown {
+  justify-content:center;
+  align-self:center;
+  align-content:center;
+  text-align:center;
+  position: absolute;
+  left:0;
+  right:0;
+  top:calc(100dvh - 150px);
+}
 .progress-block {
   width: 100%;
-  background-color: #8e8e8e92;
-  padding-block: 100px;
+  background: rgb(0,0,0);
+  background: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(52,52,52,1) 35%, rgba(52,52,52,1) 68%, rgba(79,79,80,0) 100%); 
+  padding-block: 20dvh;
 }
 .progress-panel {
   display: flex;

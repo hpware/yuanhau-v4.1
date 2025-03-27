@@ -28,7 +28,6 @@ async function getCodingHistoryMD() {
       statusCode: 500,
       message: "錯誤: " + e,
     });
-    loading.value = false;
   } finally {
     loading.value = false;
   }
@@ -36,19 +35,18 @@ async function getCodingHistoryMD() {
 getCodingHistoryMD();
 </script>
 <template>
-  <div v-if="loading" class="loading">
-    <Loading />
-  </div>
+    <Loading class="mainloader" v-if="loading" />
   <section id="about" class="about" v-if="!loading">
     <div v-html="codinghistory"></div>
   </section>
 </template>
 <style scoped>
-.loading {
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  margin-top: 5%;
+.mainloader {
+  position: fixed;
+  left:0;
+  right:0;
+  top:0;
+  bottom:0; 
 }
 .about {
   animation: fade-in 1200ms ease-in-out;
