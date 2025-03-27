@@ -246,6 +246,7 @@ onMounted(async () => {
     color:white;
   }
 }
+
 .socials {
   display: flex;
   justify-content: center;
@@ -271,7 +272,7 @@ onMounted(async () => {
   position: absolute;
   left:0;
   right:0;
-  top:calc(100dvh - 100px);
+  top:calc(100dvh - 33px);
   animation: bounce 2s infinite;
   a {
     color: white;
