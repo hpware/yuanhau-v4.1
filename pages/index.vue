@@ -36,7 +36,7 @@ onMounted(async () => {
     draggable="false"
     src="/img/bg.jpg"
     @load="bgloading = false"
-    @error="bgloading = true"
+    @error="bgloading = false"
     v-lazy-load
     load="lazy"
     :style="{ display: bgloading ? 'none' : 'block' }"
@@ -191,6 +191,10 @@ onMounted(async () => {
 .aboutmeinfoblock {
   background: linear-gradient(180deg, rgba(0, 0, 0, 0.9) 0%, rgba(52, 52, 52, 0.9) 28%, rgba(52, 52, 52, 0.8) 56%, rgba(114, 115, 117, 0.6) 83%, rgba(79, 79, 80, 0) 100%);
   height: 100dvh;
+  position: relative;
+  justify-content: center;
+  display: flex;
+  flex-direction: column;
 }
 .displaybackground {
   width:100%;
@@ -331,7 +335,6 @@ footer {
   background: linear-gradient(180deg, rgba(79,79,80,0) 0%, rgba(24,24,24,0.4261904590937937) 15%, rgba(0,0,0,0.767927153771665) 30%); 
   width:100%;
   height:50px;
-  padding:10px;
 }
 
 /** Animations */
