@@ -11,24 +11,24 @@ export default defineEventHandler(async (event) => {
     `http://${event.node.req.headers.host}`,
   );
   const id = url.searchParams.get("id");
-    try {
-      const { data, error } = await supabase
-        .from("markdown")
-        .select("content")
-        .eq("id", `${id}`)
-        .single();
-      if (error || data === null) {
-        throw createError({
-          statusCode: 403,
-          message: "No Content",
-        });
-      }
-      event.node.res.setHeader("Content-Type", "text/markdown; charset=utf-8");
-      return `${data.content}`;
-    } catch (e) {
-      console.log("error", e);
-      return {
-        error: 500,
-      };
+  try {
+    const { data, error } = await supabase
+      .from("markdown")
+      .select("content")
+      .eq("id", `${id}`)
+      .single();
+    if (error || data === null) {
+      throw createError({
+        statusCode: 403,
+        message: "No Content",
+      });
     }
+    event.node.res.setHeader("Content-Type", "text/markdown; charset=utf-8");
+    return `${data.content}`;
+  } catch (e) {
+    console.log("error", e);
+    return {
+      error: 500,
+    };
+  }
 });

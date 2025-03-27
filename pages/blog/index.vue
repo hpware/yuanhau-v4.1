@@ -3,7 +3,7 @@ import { ref } from "vue";
 import Loading from "@/components/loading/randomloader.vue";
 const loading = ref(true);
 const error = ref(false);
-const errormsg = ref(""); 
+const errormsg = ref("");
 const data = ref();
 useSeoMeta({
   title: "Blog | 吳元皓",
@@ -26,10 +26,10 @@ const fetchPosts = async () => {
     error.value = true;
     errormsg.value = e.message;
   }
-}
-onMounted(() =>{
-  fetchPosts
-})
+};
+onMounted(() => {
+  fetchPosts;
+});
 </script>
 <template>
   <div class="main" id="main">
@@ -39,14 +39,12 @@ onMounted(() =>{
     </div>
     <Loading v-if="loading" />
     <div v-else>
-    <div v-if="error">
-      <p>Oops! 暫時無法存取部落格資料!</p>
-      <p>{{ errormsg }}</p>
+      <div v-if="error">
+        <p>Oops! 暫時無法存取部落格資料!</p>
+        <p>{{ errormsg }}</p>
+      </div>
+      <div v-else></div>
     </div>
-    <div v-else>
-
-    </div>
-  </div>
   </div>
 </template>
 <style scoped>

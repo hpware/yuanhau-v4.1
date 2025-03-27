@@ -7,13 +7,13 @@ const supabase = createClient(
 
 export default defineEventHandler(async (event) => {
   console.log("event", event, event.node.req.method);
-    try {
-      const { data } = await supabase.from("images").select();
-      return data;
-    } catch (error) {
-      console.log("error", error);
-      return {
-        error: 500,
-      };
-    }
+  try {
+    const { data } = await supabase.from("images").select();
+    return data;
+  } catch (error) {
+    console.log("error", error);
+    return {
+      error: 500,
+    };
+  }
 });

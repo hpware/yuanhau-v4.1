@@ -5,31 +5,33 @@ const math = ref();
 onMounted(() => {
   const interval = setInterval(() => {
     math.value = Math.floor(Math.random() * (max - min + 1) + min);
-   }, 5000);
-   onUnmounted(() => {
+  }, 5000);
+  onUnmounted(() => {
     clearInterval(interval);
-   })
+  });
 });
 const p = defineProps({
   size: {
-  type: String,
-  default: "50px"
-  }
-})
+    type: String,
+    default: "50px",
+  },
+});
 </script>
 <template>
   <div class="container">
-    <div class="loader"
-    :style="{ 
-        animationDuration: `${duration}ms`, 
-        width: p.size, 
-        height: p.size 
-      }"></div>
+    <div
+      class="loader"
+      :style="{
+        animationDuration: `${duration}ms`,
+        width: p.size,
+        height: p.size,
+      }"
+    ></div>
     <p>載入中...</p>
   </div>
 </template>
 
-<style scoped >
+<style scoped>
 .container {
   display: flex;
   flex-direction: column;
@@ -37,7 +39,7 @@ const p = defineProps({
   justify-content: center;
   padding: 4rem 2rem;
   text-align: center;
-  gap:0px;
+  gap: 0px;
 }
 .loader {
   justify-content: center;
@@ -53,6 +55,8 @@ p {
 }
 
 @keyframes spin {
-  to { transform: rotate(360deg); }
+  to {
+    transform: rotate(360deg);
+  }
 }
 </style>

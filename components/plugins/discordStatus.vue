@@ -39,52 +39,53 @@ onMounted(async () => {
       statusIcon.value = "bi-circle-fill";
       text.value = "Offline";
     }
-for (const data in dcdata.data.activities) {
-    // Activity Listening to Spotify, Playing Games or Coding
-    console.log(JSON.stringify(data));
-    const ActivityStatus0 = dcdata.data.activities[data];
-    if (ActivityStatus0) {
-      if (ActivityStatus0.type === 0) {
-        if (
-          ActivityStatus0.name === "WebStorm" ||
-          ActivityStatus0.name === "Visual Studio Code" ||
-          ActivityStatus0.name === "PyCharm" ||
-          ActivityStatus0.name === "Code" ||
-          ActivityStatus0.name === "IntelliJ IDEA" ||
-          ActivityStatus0.name === "Zed"
-        ) {
-          const FileNameStatus = ref(ActivityStatus0.state);
-          const ProjectName = ref(ActivityStatus0.details);
-          text.value += `${FileNameStatus.value} ${ProjectName.value}`;
-          statusIcon.value = "bi-code-slash .fontsize1";
-        } else {
-          const ActivityName = ref(ActivityStatus0.name);
-          text.value += `Playing ${ActivityName.value}`;
-          statusIcon.value = "bi-controller .fontsize1";
-        }
-      } else if (ActivityStatus0.type === 2) {
-        const SpotifyCurrentlyPlayingSong = ref(ActivityStatus0.details);
-        const SpotifyCurrentlyPlayingArtist = ref(ActivityStatus0.state);
-        const SpotifyCurrentlyPlayingArtistComma = ref(
-          SpotifyCurrentlyPlayingArtist.value.replace(/;/g, ", "),
-        );
-        const SpotifyCurrentlyPlaying = ref(
-          `${SpotifyCurrentlyPlayingSong.value} - ${SpotifyCurrentlyPlayingArtistComma.value}`,
-        );
-        text.value = SpotifyCurrentlyPlaying.value;
+    for (const data in dcdata.data.activities) {
+      // Activity Listening to Spotify, Playing Games or Coding
+      console.log(JSON.stringify(data));
+      const ActivityStatus0 = dcdata.data.activities[data];
+      if (ActivityStatus0) {
+        if (ActivityStatus0.type === 0) {
+          if (
+            ActivityStatus0.name === "WebStorm" ||
+            ActivityStatus0.name === "Visual Studio Code" ||
+            ActivityStatus0.name === "PyCharm" ||
+            ActivityStatus0.name === "Code" ||
+            ActivityStatus0.name === "IntelliJ IDEA" ||
+            ActivityStatus0.name === "Zed"
+          ) {
+            const FileNameStatus = ref(ActivityStatus0.state);
+            const ProjectName = ref(ActivityStatus0.details);
+            text.value += `${FileNameStatus.value} ${ProjectName.value}`;
+            statusIcon.value = "bi-code-slash .fontsize1";
+          } else {
+            const ActivityName = ref(ActivityStatus0.name);
+            text.value += `Playing ${ActivityName.value}`;
+            statusIcon.value = "bi-controller .fontsize1";
+          }
+        } else if (ActivityStatus0.type === 2) {
+          const SpotifyCurrentlyPlayingSong = ref(ActivityStatus0.details);
+          const SpotifyCurrentlyPlayingArtist = ref(ActivityStatus0.state);
+          const SpotifyCurrentlyPlayingArtistComma = ref(
+            SpotifyCurrentlyPlayingArtist.value.replace(/;/g, ", "),
+          );
+          const SpotifyCurrentlyPlaying = ref(
+            `${SpotifyCurrentlyPlayingSong.value} - ${SpotifyCurrentlyPlayingArtistComma.value}`,
+          );
+          text.value = SpotifyCurrentlyPlaying.value;
 
-        statusIcon.value = "bi-spotify fontsize1";
-      } else if (ActivityStatus0.type === 3) {
-        const Watching = ref(ActivityStatus0.name);
-        const Details = ref(ActivityStatus0.details);
-        text.value = `Watching: ${Watching.value} - ${Details.value}`;
-        text.value += SpotifyCurrentlyPlaying.value;
-        statusIcon.value = "bi-spotify fontsize1";
-      } else if (ActivityStatus0.type === 4) {
-        const ActivityName = ref(ActivityStatus0.state);
-        text.value += `Status: ${ActivityName.value}`;
+          statusIcon.value = "bi-spotify fontsize1";
+        } else if (ActivityStatus0.type === 3) {
+          const Watching = ref(ActivityStatus0.name);
+          const Details = ref(ActivityStatus0.details);
+          text.value = `Watching: ${Watching.value} - ${Details.value}`;
+          text.value += SpotifyCurrentlyPlaying.value;
+          statusIcon.value = "bi-spotify fontsize1";
+        } else if (ActivityStatus0.type === 4) {
+          const ActivityName = ref(ActivityStatus0.state);
+          text.value += `Status: ${ActivityName.value}`;
+        }
       }
-    }}
+    }
   } catch (error) {
     errorb.value = true;
   } finally {
@@ -94,9 +95,9 @@ for (const data in dcdata.data.activities) {
 </script>
 
 <template>
-    <div v-if="loading">
-        <Loader size="20px"/>
-    </div>
+  <div v-if="loading">
+    <Loader size="20px" />
+  </div>
   <span class="onlinepr" v-if="errorb === true"
     ><i class="bi bi-circle-fill" style="color: grey"></i>&nbsp;
     <span>Error fetching Status.</span>

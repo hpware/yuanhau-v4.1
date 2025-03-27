@@ -5,14 +5,16 @@ export default defineNuxtConfig({
 
   devtools: {
     enabled: true,
-  }, 
+  },
 
   routeRules: {
     "/": { prerender: true },
     "/bio": { prerender: true },
     // Redirect old content to old content. and /blog to new.
-    "/posts/": { redirect: "/blog/"},
-    "/posts/**": { redirect: "https://yuanhau-site-2-14-content.vercel.app/posts/**"},
+    "/posts/": { redirect: "/blog/" },
+    "/posts/**": {
+      redirect: "https://yuanhau-site-2-14-content.vercel.app/posts/**",
+    },
     "/api/**": { cors: true },
     "/admin/": { redirect: "/admin/login" },
     "/admin/**": { ssr: true },
@@ -21,7 +23,9 @@ export default defineNuxtConfig({
     "/post": { redirect: "/posts" },
     "/post/**": { redirect: "/posts/**" },
     // Sync the old with the new
-    "/mdview/**": { redirect: "https://yuanhau-site-2-14-content.vercel.app/mdview/**" },
+    "/mdview/**": {
+      redirect: "https://yuanhau-site-2-14-content.vercel.app/mdview/**",
+    },
     "/form/**": { ssr: true },
   },
 
@@ -141,17 +145,17 @@ export default defineNuxtConfig({
       posthogHost: "https://us.i.posthog.com",
     },
     logto: {
-      endpoint: 'https://logto.yuanhau.com/',
-      appId: '02l4vunlf4f17jpks449h',
-      appSecret: 'fAej9glG1MhbfmEnfhtCVfa1yxv0M4Hd',
-      cookieEncryptionKey: 'aIG2EC9souxqOgEPQXtSqwCZZLwUsd6e', // Random-generated
+      endpoint: "https://logto.yuanhau.com/",
+      appId: "02l4vunlf4f17jpks449h",
+      appSecret: "fAej9glG1MhbfmEnfhtCVfa1yxv0M4Hd",
+      cookieEncryptionKey: "aIG2EC9souxqOgEPQXtSqwCZZLwUsd6e", // Random-generated
     },
   },
-logto: {
-  pathnames: {
-    callback: '/api/auth/callback',
+  logto: {
+    pathnames: {
+      callback: "/api/auth/callback",
+    },
   },
-},
   /*sentry: {
     sourceMapsUploadOptions: {
       org: "hwtwcc",

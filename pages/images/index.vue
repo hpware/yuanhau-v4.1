@@ -56,9 +56,7 @@ onMounted(() => {
 <template>
   <div class="main" id="main">
     <h1 class="title">相簿</h1>
-    <h6 class="dec">
-      這裡全部都是我拍的照片!
-    </h6>
+    <h6 class="dec">這裡全部都是我拍的照片!</h6>
     <Loading v-if="loading" />
     <div :style="{ display: loading ? 'none' : 'block' }">
       <div v-for="(images, group) in groupimg" :key="group" class="container">

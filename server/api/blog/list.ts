@@ -5,16 +5,20 @@ const supabase = createClient(
   `${supabasetoken}`,
 );
 export default defineEventHandler(async (event) => {
-    try {
-        const { data, error } = await supabase.from("bloglist").select("*").eq("type", "homepage").maybeSingle();
-        console.log(data);
-        return {
-          data: data.text
-        }
-    } catch(e) {
-      console.log(e);
-      return {
-        data: "Server Side Error."
-      }
-    }
-})
+  try {
+    const { data, error } = await supabase
+      .from("bloglist")
+      .select("*")
+      .eq("type", "homepage")
+      .maybeSingle();
+    console.log(data);
+    return {
+      data: data.text,
+    };
+  } catch (e) {
+    console.log(e);
+    return {
+      data: "Server Side Error.",
+    };
+  }
+});

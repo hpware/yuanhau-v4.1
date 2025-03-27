@@ -30,7 +30,7 @@ async function getCodingHistoryMD() {
     });
     loading.value = false;
   } finally {
-      loading.value = false;
+    loading.value = false;
   }
 }
 getCodingHistoryMD();

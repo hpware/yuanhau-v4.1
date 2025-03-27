@@ -38,8 +38,7 @@ const pfp = ref();
         Debian(Ubuntu)<br />
       </p>
       <h3 class="buttons">
-        <NuxtLink class="not-a-button profilebutton" to="/"
-          >主頁</NuxtLink
+        <NuxtLink class="not-a-button profilebutton" to="/">主頁</NuxtLink
         >|<NuxtLink class="not-a-button profilebutton" to="/about"
           >關於我</NuxtLink
         >|<NuxtLink class="not-a-button profilebutton" to="/images/"
@@ -50,7 +49,10 @@ const pfp = ref();
         <a href="https://github.com/hpware" aria-label="github" id="github"
           ><i class="bi bi-github"></i
         ></a>
-        <a href="https://instagram.com/yh_.5_26" aria-label="instagram" id="instagram"
+        <a
+          href="https://instagram.com/yh_.5_26"
+          aria-label="instagram"
+          id="instagram"
           ><i class="bi bi-instagram"></i
         ></a>
         <a href="https://threads.net/yh_.5_26" aria-label="threads" id="threads"
@@ -65,7 +67,11 @@ const pfp = ref();
         <a href="https://youtube.com/@號" aria-label="youtube" id="youtube"
           ><i class="bi bi-youtube"></i
         ></a>
-        <a href="https://unsplash.com/@hwtw" aria-label="unsplash" id="unsplash">
+        <a
+          href="https://unsplash.com/@hwtw"
+          aria-label="unsplash"
+          id="unsplash"
+        >
           <i class="fab fa-unsplash"></i>
         </a>
         <a href="mailto:hw@yuanhau.com" aria-label="email" id="email"
