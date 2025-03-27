@@ -59,6 +59,7 @@ onUnmounted(() => {
   document.removeEventListener("click", handleClickOutside);
   document.removeEventListener("keydown", handleKeyDown);
 });
+
 </script>
 
 <template>
@@ -179,7 +180,8 @@ onUnmounted(() => {
           <div class="copyright">
             版權 © 2025 <a href="https://yuanhau.com">吳元皓</a
             ><br />這個網站在
-            <a href="https://github.com/hpware/yuanhau-site">GitHub</a> 上
+            <!--<a href="https://github.com/hpware/yuanhau-site">GitHub</a> 上-->
+            版本 <a href="https:/github.com/hpware/yuanhau-v4.1">v4.1.3</a>
           </div>
         </div>
       </div>

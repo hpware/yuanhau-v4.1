@@ -63,6 +63,7 @@ onMounted(async () => {
       <Loader v-if="bgloading" size="40px" class="mainloader" />
     <transition name="slide-fade">
       <div v-if="!bgloading">
+        <div class="preventoverpull"></div>
         <div class="aboutmeinfoblock">
     <div class="aboutme">
       <NuxtImg
@@ -79,7 +80,7 @@ onMounted(async () => {
       我是一個五專生，我對Typescript與Javascipt有興趣，我也對伺服器(也就是Linux)極度有興趣。
     </div>
     <div class="scrolldown">
-      <i class="bi bi-arrow-down"></i><span>&nbsp;滑下來看更多</span>
+      <i class="bi bi-arrow-down"></i><span>&nbsp;更多資訊</span>
     </div>
     </div>
     <div class="displaybackground"></div>
@@ -131,6 +132,18 @@ onMounted(async () => {
 </div>
 </template>
 <style scoped>
+.preventoverpull {
+  z-index: -1;
+  background-color: #000;
+  width: 0; 
+  overflow: hidden; 
+  position: absolute;
+  top: -100px; 
+  left:0;
+  right:0;
+  width:100%;
+  height:100px;
+}
 .mainloader {
   position: fixed;
   left:0;
@@ -217,7 +230,7 @@ onMounted(async () => {
   width: 100%;
   background: rgb(0,0,0);
   background: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(52,52,52,1) 35%, rgba(52,52,52,1) 68%, rgba(79,79,80,0) 100%); 
-  padding-block: 20dvh;
+  padding-block: 50dvh;
 }
 .progress-panel {
   display: flex;
