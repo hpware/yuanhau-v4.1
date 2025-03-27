@@ -53,13 +53,15 @@ onMounted(async () => {
     alt="背景"
     class="background"
     draggable="false"
-    src="https://1qz92oj9ol.ufs.sh/f/CCLPSN5W2HD5Hjx9nW7XEuSOswWPIZ09j31aUTe7gopyNmnk"
+    src="/img/bg.jpg"
     @load="bgloading = false"
+    @error="bgloading = true"
     v-lazy-load
     load="lazy"
     :style="{ display: bgloading ? 'none' : 'block' }"
   />
       <Loader v-if="bgloading" size="40px" class="main-loader" />
+      <div class="blur" v-if="!bgloading"></div>
     <transition name="slide-fade">
       <div v-if="!bgloading">
     <div class="aboutme">
@@ -132,12 +134,25 @@ onMounted(async () => {
   right:0;
   top:0;
   bottom:0;
-  z-index: -1;
+  z-index: -2;
   width:100%;
   height:100%;
   object-fit: cover;
   object-position: center;
 }
+.blur {
+  display:flex;
+  left:0;
+  right:0;
+  top:0;
+  bottom:0;
+  position: fixed;
+  width:100%;
+  height: 100%;
+  background-color:#6363634e;
+  z-index:-1;
+}
+
 .aboutme {
   justify-content: center;
   padding-left: 20px;
