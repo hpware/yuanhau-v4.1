@@ -181,7 +181,7 @@ onUnmounted(() => {
             版權 © {{ new Date().getFullYear() }} <a href="https://yuanhau.com">吳元皓</a
             ><br />這個網站在
             <!--<a href="https://github.com/hpware/yuanhau-site">GitHub</a> 上-->
-            版本 <a href="https:/github.com/hpware/yuanhau-v4.1">v4.1.3</a>
+            版本 <a href="https://github.com/hpware/yuanhau-v4.1">v4.1.3</a>
           </div>
         </div>
       </div>
