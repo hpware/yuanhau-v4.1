@@ -1,5 +1,6 @@
 <script setup lang="ts">
-const { locale, t } = useI18n();
+const { t } = useI18n();
+const localePath = useLocalePath()
 import { animate } from "motion";
 import { ref, onMounted, onUnmounted } from "vue";
 import { useLogtoUser } from "#imports";
@@ -92,39 +93,39 @@ onUnmounted(() => {
         </div>
 
         <nav class="sidebar-nav">
-          <NuxtLink to="/" @click="closeSidebar" class="nav-item">
+          <NuxtLink :to="localePath('/')" @click="closeSidebar" class="nav-item">
             <i class="bi bi-house"></i>
             <span>{{ t("title.home") }}</span>
           </NuxtLink>
 
-          <NuxtLink to="/about" @click="closeSidebar" class="nav-item">
+          <NuxtLink :to="localePath('/about')" @click="closeSidebar" class="nav-item">
             <i class="bi bi-info-circle"></i>
             <span>{{ t('title.about') }}</span>
           </NuxtLink>
 
-          <NuxtLink to="/blog/" @click="closeSidebar" class="nav-item">
+          <NuxtLink :to="localePath('/blog/')" @click="closeSidebar" class="nav-item">
             <i class="bi bi-journal-text"></i>
             <span>{{ t('title.blog')}}</span>
           </NuxtLink>
 
-          <NuxtLink to="/images/" @click="closeSidebar" class="nav-item">
+          <NuxtLink :to="localePath('/images/')" @click="closeSidebar" class="nav-item">
             <i class="bi bi-images"></i>
             <span>相簿</span>
           </NuxtLink>
 
           <NuxtLink
-            to="/recommendations"
+            :to="localePath('/recommendations')"
             @click="closeSidebar"
             class="nav-item"
           >
             <i class="bi bi-chat-left-text"></i>
             <span>{{  t("title.contact") }}</span>
           </NuxtLink>
-          <NuxtLink to="/chatbot" @click="closeSidebar" class="nav-item">
+          <NuxtLink :to="localePath('/chatbot')" @click="closeSidebar" class="nav-item">
             <i class="bi bi-robot"></i>
             <span>AI 機器人</span>
           </NuxtLink>
-          <NuxtLink to="/donate" @click="closeSidebar" class="nav-item">
+          <NuxtLink :to="localePath('/donate')" @click="closeSidebar" class="nav-item">
             <i class="fa-solid fa-money-check-dollar"></i>
             <span>Donate?</span>
           </NuxtLink>
@@ -132,11 +133,11 @@ onUnmounted(() => {
         <div class="user">
           <div v-if="!Boolean(user)">
             <a href="/sign-in">
-              <i class="bi bi-person"></i><span>&nbsp;尚未登入</span>
+              <i class="bi bi-person"></i><span>&nbsp;{{ t("login.notloggedin") }}</span>
             </a>
           </div>
           <div v-else>
-            <NuxtLink to="/user/" @click="closeSidebar" class="user-item">
+            <NuxtLink :to="localePath('/user/')" @click="closeSidebar" class="user-item">
               <i v-if="!user.picture" class="bi bi-person"></i
               ><img v-else :src="user.picture" /><span
                 >&nbsp;{{ user.name ? user.name : user.username }}</span

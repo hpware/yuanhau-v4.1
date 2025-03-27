@@ -10,7 +10,7 @@ export default defineI18nConfig(() => ({
           about: "關於我",
           projects: "專案作品",
           contact: "聯絡資訊",
-          blog: "部落格",
+          blog: "Blog",
         },
         home :{
           learnmore: '更多資訊',
@@ -20,13 +20,7 @@ export default defineI18nConfig(() => ({
           cancel: "取消",
           send: "發送"
         },
-        navigation: {
-          next: "下一頁",
-          previous: "上一頁",
-          back: "返回"
-        },
         content: {
-          welcome: "歡迎來到我的網站",
           introduction: " 我是一個五專生，我對Typescript與Javascipt有興趣，我也對伺服器(也就是Linux)極度有興趣。 ",
           readMore: "閱讀更多"
         },
@@ -36,6 +30,9 @@ export default defineI18nConfig(() => ({
           chinese: "中文",
           current: "目前語言",
           select: "選擇語言"
+        },
+        login: {
+          notloggedin: "尚未登入",
         }
       },
       en: {
@@ -56,13 +53,7 @@ export default defineI18nConfig(() => ({
           cancel: "Cancel",
           send: "Send"
         },
-        navigation: {
-          next: "Next",
-          previous: "Previous",
-          back: "Back"
-        },
         content: {
-          welcome: "Welcome to my website",
           introduction: "I'm currently a High school student in Taiwan, currently working on Typescript and Javascript projects, I'm also super intrested in server stuff like Linux. ",
         },
         lang: {
@@ -71,6 +62,9 @@ export default defineI18nConfig(() => ({
           chinese: "Chinese",
           current: "Current language",
           select: "Select language"
+        },
+        login: {
+          notloggedin: "Not Logged in",
         }
       }
     }
