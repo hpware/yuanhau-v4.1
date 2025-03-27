@@ -7,9 +7,21 @@ interface Progress {
 }
 
 export default defineEventHandler(async (event) => {
-  return {
-    js: 32,
-    server: 2,
-    py: 100,
-  };
+    return {
+        0: {
+            lang: "js",
+            icon: "filetype-js",
+            progress: "50",
+        },
+        1: {
+          lang: "server",
+          icon: "server",
+          progress: "60",
+        },
+        2: {
+          lang: "python",
+          icon: "filetype-py",
+          progress: "4",
+        }
+    }
 });

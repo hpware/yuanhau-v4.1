@@ -3,13 +3,6 @@ useHead({
   title: "首頁 | 吳元皓",
 });
 
-interface Progress {
-  progress: {
-    js: number;
-    server: number;
-    py: number;
-  };
-}
 
 // Init
 import DiscordStatus from "~/components/plugins/discordStatus.vue";
@@ -18,13 +11,7 @@ import Loader from "~/components/loading/randomloader.vue";
 //values
 const bgloading = ref(true);
 const progressloading = ref(false);
-const progress = ref<Progress>({
-  progress: {
-    js: 0,
-    server: 0,
-    py: 0,
-  },
-});
+const progress = ref();
 const progresserror = ref(false);
 onMounted(async () => {
   try {
@@ -33,13 +20,7 @@ onMounted(async () => {
       method: "GET",
     });
     const res = await req.json();
-    progress.value = {
-      progress: {
-        js: res.js,
-        server: res.server,
-        py: res.py,
-      },
-    };
+    progress.value = res;
   } catch (e) {
     progresserror.value = true;
   } finally {
@@ -75,41 +56,63 @@ onMounted(async () => {
         load="lazy"
       />
       <h1>吳元皓</h1>
-    </div>
-    <div class="info">
+      <div class="info">
       我是一個五專生，我對Typescript與Javascipt有興趣，我也對伺服器(也就是Linux)極度有興趣。
     </div>
+    <p class="socials">
+        <a href="https://github.com/hpware" aria-label="github" id="github"
+          ><i class="bi bi-github"></i
+        ></a>
+        <a
+          href="https://instagram.com/yh_.5_26"
+          aria-label="instagram"
+          id="instagram"
+          ><i class="bi bi-instagram"></i
+        ></a>
+        <a href="https://threads.net/yh_.5_26" aria-label="threads" id="threads"
+          ><i class="bi bi-threads"></i
+        ></a>
+        <a href="https://yhw.tw/bluesky" aria-label="bluesky" id="bluesky"
+          ><i class="fab fa-bluesky"></i
+        ></a>
+        <a href="https://twitter.com/ictechz" aria-label="Twitter (X)">
+          <i class="bi bi-twitter"></i>
+        </a>
+        <a href="https://youtube.com/@號" aria-label="youtube" id="youtube"
+          ><i class="bi bi-youtube"></i
+        ></a>
+        <a
+          href="https://unsplash.com/@hwtw"
+          aria-label="unsplash"
+          id="unsplash"
+        >
+          <i class="fab fa-unsplash"></i>
+        </a>
+        <a href="mailto:hw@yuanhau.com" aria-label="email" id="email"
+          ><i class="bi bi-inbox"></i
+        ></a>
+      </p>
+    </div>
     <div class="scrolldown">
-      <i class="bi bi-arrow-down"></i><span>&nbsp;更多資訊</span>
+      <a href="/#content"><i class="bi bi-arrow-down"></i><span>&nbsp;更多資訊</span></a>
     </div>
     </div>
     <div class="displaybackground"></div>
+    <section id="content">
     <div class="progress-block">
+      <h4>技能熟練度</h4>
       <div v-if="!progressloading">
         <div class="progress-panel">
-          <div>
-            <label for="javascript">js: </label>
+          <div v-for="list in progress" :key="list.id">
+            <div>
+            <label :for="list.lang" v-if="list.icon" v-html="`<i class='bi bi-${list.icon}'><i>: `"></label>
+            <label :for="list.lang" v-else>{{ list.lang }}: </label>
             <progress
-              id="javascript"
-              :value="progress.progress.js"
+              :id="list.lang"
+              :value="list.progress"
               max="100"
-            ></progress>
-          </div>
-          <div>
-            <label for="server">伺服器 :</label>
-            <progress
-              id="server"
-              :value="progress.progress.server"
-              max="100"
-            ></progress>
-          </div>
-          <div>
-            <label for="python">py: </label>
-            <progress
-              id="python"
-              :value="progress.progress.py"
-              max="100"
-            ></progress>
+            ></progress><span>&nbsp;{{ list.progress }}%</span>
+            </div>
           </div>
         </div>
       </div>
@@ -127,11 +130,19 @@ onMounted(async () => {
         <DiscordStatus />
       </section>
     </div>
+  </section>
+    <footer>
+      <span>
+        版權 © {{ new Date().getFullYear() }} <a href="https://yuanhau.com">吳元皓</a>
+      </span>
+      <span>使用 Nuxt || 網站 v4.1.3</span>
+  </footer>
   </div>
 </transition>
 </div>
 </template>
 <style scoped>
+@import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css");
 .preventoverpull {
   z-index: -1;
   background-color: #000;
@@ -178,8 +189,7 @@ onMounted(async () => {
   z-index:-1;
 }
 .aboutmeinfoblock {
-  background: rgb(0,0,0);
-  background: linear-gradient(180deg, rgba(0,0,0,1) 0%, rgba(52,52,52,1) 28%, rgba(52,52,52,1) 56%, rgba(114,115,117,0.7315125879453344) 83%, rgba(79,79,80,0) 100%); 
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.9) 0%, rgba(52, 52, 52, 0.9) 28%, rgba(52, 52, 52, 0.8) 56%, rgba(114, 115, 117, 0.6) 83%, rgba(79, 79, 80, 0) 100%);
   height: 100dvh;
 }
 .displaybackground {
@@ -187,18 +197,30 @@ onMounted(async () => {
   height: 300px;
 }
 .aboutme {
-  justify-content: center;
-  padding-left: 20px;
-  padding-top: 20px;
   display: flex;
   flex-direction: column;
+  position: relative;
+  justify-content: center;
+  margin-top: -20px; 
+  padding-top:-20px;
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  left:0;
+  right:0;
+  top:0;
+  bottom:0;
   h1 {
     margin-top: 0;
   }
+  a {
+    text-decoration: none;
+    color:white;
+  }
   NuxtImg,
   img {
-    width: 200px;
-    height: 200px;
+    width: 300px;
+    height: 300px;
     border-radius: 50%;
     justify-content: center;
     align-self: center;
@@ -207,14 +229,35 @@ onMounted(async () => {
     align-content: center;
     margin-bottom: 0;
   }
-}
-.info {
+  .info {
   width: calc(100% - 50px);
   align-self: center;
   text-align: center;
   align-content: center;
   justify-content: center;
   padding: 20px;
+  text-decoration: none;
+  a {
+    text-decoration: none;
+    color:white;
+  }
+}
+.socials {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding:0;
+  margin:0;
+  padding-bottom:10px;
+  a {
+    color: white;
+    transition: all 200ms;
+    margin: 10px;
+  }
+  a:hover {
+    color: #b3b3b3;
+  }
+}
 }
 .scrolldown {
   justify-content:center;
@@ -224,14 +267,18 @@ onMounted(async () => {
   position: absolute;
   left:0;
   right:0;
-  top:calc(100dvh - 150px);
+  top:calc(100dvh - 100px);
+  animation: bounce 2s infinite;
+  a {
+    color: white;
+    text-decoration: none;
+  }
 }
 .progress-block {
   width: 100%;
   background: rgb(0,0,0);
   background: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(52,52,52,1) 35%, rgba(52,52,52,1) 68%, rgba(79,79,80,0) 100%); 
-  padding-block: 50dvh;
-}
+  }
 .progress-panel {
   display: flex;
   flex-direction: column;
@@ -264,11 +311,29 @@ onMounted(async () => {
 div.status {
   gap: 10px;
   padding: 10px;
+  display:flex;
+  flex-direction: linear;
+  justify-content:center;
+  align-items: center;
   section {
     gap: 10px;
     padding: 10px;
+    background-color: #000000;
+    border-radius: 10px;
   }
 }
+
+footer {
+  display:flex;
+  flex-direction: column;
+  font-size: 0.5em;
+  background: rgb(79,79,80);
+  background: linear-gradient(180deg, rgba(79,79,80,0) 0%, rgba(24,24,24,0.4261904590937937) 15%, rgba(0,0,0,0.767927153771665) 30%); 
+  width:100%;
+  height:50px;
+  padding:10px;
+}
+
 /** Animations */
 .loadingtomainanimation {
   transition: all 300ms ease-in-out;
@@ -295,6 +360,17 @@ div.status {
   }
   to {
     opacity: 1;
+    transform: translateY(0);
+  }
+}
+@keyframes bounce {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+  100% {
     transform: translateY(0);
   }
 }
