@@ -121,10 +121,10 @@ onMounted(async () => {
       </div>
     </div>
     <div class="status">
-      <section id="spotify">
+      <!--<section id="spotify">
         Spotify Status:
         <SpotifyStatus />
-      </section>
+      </section>-->
       <section id="discord">
         Discord Status:
         <DiscordStatus />
@@ -133,7 +133,7 @@ onMounted(async () => {
   </section>
     <footer>
       <span>
-        版權 © {{ new Date().getFullYear() }} <a href="https://yuanhau.com">吳元皓</a>
+        版權 &copy; {{ new Date().getFullYear() }} <a href="https://yuanhau.com">吳元皓</a>
       </span>
       <span>使用 Nuxt || 網站 v4.1.3</span>
   </footer>
