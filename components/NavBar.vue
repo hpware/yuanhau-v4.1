@@ -1,4 +1,5 @@
 <script setup lang="ts">
+const { locale, t } = useI18n();
 import { animate } from "motion";
 import { ref, onMounted, onUnmounted } from "vue";
 import { useLogtoUser } from "#imports";
@@ -87,23 +88,23 @@ onUnmounted(() => {
         @mouseleave="handleMouseLeave"
       >
         <div class="sidebar-header">
-          <h2 class="sidebar-title">吳元皓</h2>
+          <h2 class="sidebar-title">{{ t('yhname') }}</h2>
         </div>
 
         <nav class="sidebar-nav">
           <NuxtLink to="/" @click="closeSidebar" class="nav-item">
             <i class="bi bi-house"></i>
-            <span>首頁</span>
+            <span>{{ t("title.home") }}</span>
           </NuxtLink>
 
           <NuxtLink to="/about" @click="closeSidebar" class="nav-item">
             <i class="bi bi-info-circle"></i>
-            <span>關於我</span>
+            <span>{{ t('title.about') }}</span>
           </NuxtLink>
 
           <NuxtLink to="/blog/" @click="closeSidebar" class="nav-item">
             <i class="bi bi-journal-text"></i>
-            <span>Blog</span>
+            <span>{{ t('title.blog')}}</span>
           </NuxtLink>
 
           <NuxtLink to="/images/" @click="closeSidebar" class="nav-item">
@@ -117,7 +118,7 @@ onUnmounted(() => {
             class="nav-item"
           >
             <i class="bi bi-chat-left-text"></i>
-            <span>建議/聯絡</span>
+            <span>{{  t("title.contact") }}</span>
           </NuxtLink>
           <NuxtLink to="/chatbot" @click="closeSidebar" class="nav-item">
             <i class="bi bi-robot"></i>

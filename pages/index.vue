@@ -1,6 +1,8 @@
 <script setup lang="ts">
+const { locale, t } = useI18n();
+
 useHead({
-  title: "首頁 | 吳元皓",
+  title: `${ t('home')} | ${ t('yhname') }`,
 });
 
 
@@ -55,21 +57,19 @@ onMounted(async () => {
         v-lazy-load
         load="lazy"
       />
-      <h1>吳元皓</h1>
-      <div class="info">
-      我是一個五專生，我對Typescript與Javascipt有興趣，我也對伺服器(也就是Linux)極度有興趣。
-    </div>
+      <h1>{{ t("yhname") }}</h1>
+      <div class="info">{{ t('content.introduction') }}</div>
     <p class="socials">
         <a href="https://github.com/hpware" aria-label="github" id="github"
           ><i class="bi bi-github"></i
         ></a>
         <a
-          href="https://instagram.com/yh_.5_26"
+          href="https://instagram.com/yhw_tw"
           aria-label="instagram"
           id="instagram"
           ><i class="bi bi-instagram"></i
         ></a>
-        <a href="https://threads.net/yh_.5_26" aria-label="threads" id="threads"
+        <a href="https://threads.net/yhw_tw" aria-label="threads" id="threads"
           ><i class="bi bi-threads"></i
         ></a>
         <a href="https://yhw.tw/bluesky" aria-label="bluesky" id="bluesky"
@@ -94,7 +94,7 @@ onMounted(async () => {
       </p>
     </div>
     <div class="scrolldown">
-      <a href="/#content"><i class="bi bi-arrow-down"></i><span>&nbsp;更多資訊</span></a>
+      <a href="#content"><i class="bi bi-arrow-down"></i><span>&nbsp;{{ t('home.learnmore') }}</span></a>
     </div>
     </div>
     <div class="displaybackground"></div>
@@ -198,7 +198,7 @@ onMounted(async () => {
 }
 .displaybackground {
   width:100%;
-  height: 300px;
+  height: 80dvh;
 }
 .aboutme {
   display: flex;

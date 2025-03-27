@@ -39,7 +39,7 @@ export default defineNuxtConfig({
     "@nuxt/content",
     "nuxt-gtag",
     "@bg-dev/nuxt-s3",
-    //"@nuxtjs/i18n",
+    "@nuxtjs/i18n",
     "@logto/nuxt",
   ],
 
@@ -156,16 +156,36 @@ export default defineNuxtConfig({
       callback: "/api/auth/callback",
     },
   },
-  /*sentry: {
+  sentry: {
     sourceMapsUploadOptions: {
       org: "hwtwcc",
       project: "yuanhau-v4dot1",
     },
 
     autoInjectServerSentry: "top-level-import",
-  },*/
+  },
 
   sourcemap: {
     client: "hidden",
   },
+  i18n: {
+    vueI18n: './i18n.config.ts',
+    strategy: 'prefix_except_default',
+    defaultLocale: 'zh-tw',
+    locales: [
+      {
+        code: 'zh-tw',
+        name: '繁體中文',
+      },
+      {
+        code: 'en',
+        name: 'English',
+      }
+    ],
+    detectBrowserLanguage: {
+      useCookie: true,
+      cookieKey: 'i18n_redirected',
+      redirectOn: 'root',
+    }
+  }
 });

@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import NavBar from "~/components/NavBar.vue";
 const error = useError();
+
 useHead({
   title: `系統錯誤 | 吳元皓`,
 });
@@ -13,9 +14,6 @@ useHead({
       <h1>{{ error.statusCode }}</h1>
       <h3>{{ error.message }}</h3>
     </main>
-    <footer>
-      <p>Copyright © {{ new Date().getFullYear() }} 吳元皓</p>
-    </footer>
   </NuxtLayout>
 </template>
 <style scoped>

@@ -1,4 +1,5 @@
 <script setup>
+const { locale, t } = useI18n();
 const min = 1000;
 const max = 500;
 const math = ref();
@@ -27,7 +28,7 @@ const p = defineProps({
         height: p.size,
       }"
     ></div>
-    <p>載入中...</p>
+    <p>{{ t("loading") }}...</p>
   </div>
 </template>
 
