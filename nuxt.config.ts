@@ -10,6 +10,7 @@ export default defineNuxtConfig({
   routeRules: {
     "/": { prerender: true },
     "/bio": { prerender: true },
+    "/about": { prerender: true },
     // Redirect old content to old content. and /blog to new.
     "/posts/": { redirect: "/blog/" },
     "/posts/**": {
@@ -67,6 +68,10 @@ export default defineNuxtConfig({
       link: [
         { rel: "dns-prefetch", href: "https://utfs.io" },
         { rel: "dns-prefetch", href: "https://s3.yhw.tw" },
+        {
+          rel: "prefetch",
+          href: "https://utfs.io/f/CCLPSN5W2HD5ziRBkeSZ5pJYf32lWLvIK8uGb41xkHCUnXm7",
+        },
         { rel: "icon", href: "/favicon.ico" },
       ],
       meta: [
