@@ -85,7 +85,6 @@ export default defineI18nConfig(() => ({
       loading: "Loading",
       /** AI GENERATED WORD LIST START */
       title: {
-        home: "Home",
         about: "About",
         projects: "Projects",
         contact: "Contact",

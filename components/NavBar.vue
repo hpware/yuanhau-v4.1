@@ -98,7 +98,7 @@ onUnmounted(() => {
             class="nav-item"
           >
             <i class="bi bi-house"></i>
-            <span>{{ t("title.home") }}</span>
+            <span>{{ t("home.title") }}</span>
           </NuxtLink>
 
           <NuxtLink
