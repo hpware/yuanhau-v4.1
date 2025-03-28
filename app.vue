@@ -37,6 +37,7 @@ const changeLang = () => {
   padding: 10px;
   button {
     background-color: #ffffff14;
+    color:white;
     border-color: rgba(195, 195, 195, 0.618);
     border-radius: 100px;
     transition: all 200ms ease-in-out;

@@ -31,6 +31,7 @@ onMounted(async () => {
 </script>
 <template>
   <div class="loadingtomainanimation">
+    <!--btw, this can just be a video playing. This is just a reminder for future me.-->
     <NuxtImg
       alt="背景"
       class="background"
