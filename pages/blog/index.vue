@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { ref } from "vue";
 import Loading from "@/components/loading/randomloader.vue";
+const { t } = useI18n();
 const loading = ref(true);
 const error = ref(false);
 const errormsg = ref("");
@@ -34,8 +35,8 @@ onMounted(() => {
 <template>
   <div class="main" id="main">
     <div class="top">
-      <h1 class="title">Blog</h1>
-      <h6 class="dec">我的部落格</h6>
+      <h1 class="title">{{ t("title.blog") }}</h1>
+      <h6 class="dec">{{ t("blog.description") }}</h6>
     </div>
     <Loading v-if="loading" />
     <div v-else>

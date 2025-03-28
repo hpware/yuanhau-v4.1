@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { ref, onMounted } from "vue";
 import Loading from "@/components/loading/randomloader.vue";
+const { t } = useI18n();
 // Start AI Code change (i still need to type to explain what the code is or I will forget)
 
 const loading = ref(true);
@@ -55,8 +56,8 @@ onMounted(() => {
 
 <template>
   <div class="main" id="main">
-    <h1 class="title">相簿</h1>
-    <h6 class="dec">這裡全部都是我拍的照片!</h6>
+    <h1 class="title">{{ t("photos.title") }}</h1>
+    <h6 class="dec">{{ t("photos.description") }}</h6>
     <Loading v-if="loading" />
     <div :style="{ display: loading ? 'none' : 'block' }">
       <div v-for="(images, group) in groupimg" :key="group" class="container">

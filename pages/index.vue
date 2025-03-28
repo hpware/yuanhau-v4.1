@@ -2,7 +2,7 @@
 const { locale, t } = useI18n();
 
 useHead({
-  title: `${t("home")} | ${t("yhname")}`,
+  title: `${t("home.title")} | ${t("yhname")}`,
 });
 
 // Init
@@ -58,7 +58,7 @@ onMounted(async () => {
               load="lazy"
             />
             <h1>{{ t("yhname") }}</h1>
-            <div class="info">{{ t("content.introduction") }}</div>
+            <div class="info">{{ t("home.introduction") }}</div>
             <p class="socials">
               <a
                 href="https://github.com/hpware"

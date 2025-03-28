@@ -6,8 +6,9 @@ export default defineI18nConfig(() => ({
     "zh-tw": {
       yhname: "吳元皓",
       loading: "載入中",
+      /** AI GENERATED WORD LIST START */
       title: {
-        home: "首頁",
+
         about: "關於我",
         projects: "專案作品",
         contact: "聯絡資訊",
@@ -20,15 +21,6 @@ export default defineI18nConfig(() => ({
         contact: "聯繫",
         blog: "部落格",
         learnmore: "更多資訊",
-      },
-      home: {
-        learnmore: "更多資訊",
-        codeknowledge: "技能熟練度",
-      },
-      content: {
-        introduction:
-          " 我是一個五專生，我對Typescript與Javascipt有興趣，我也對伺服器(也就是Linux)極度有興趣。 ",
-        readMore: "閱讀更多",
       },
       lang: {
         switchTo: "切換語言至",
@@ -67,24 +59,32 @@ export default defineI18nConfig(() => ({
         skills: "使用技術",
         duration: "專案期間",
       },
+      /** AI GENERATED WORD LIST END */
+      home: {
+        title: "首頁",
+        introduction:
+          " 我是一個五專生，我對Typescript與Javascipt有興趣，我也對伺服器(也就是Linux)極度有興趣。 ",
+          learnmore: "更多資訊",
+          codeknowledge: "技能熟練度",
+      },
+      blog: {
+        description: "我的部落格",
+      },
+      photos: {
+        title: "相簿",
+        description: "這裡全部都是我拍的照片!",
+      }
     },
     en: {
       yhname: "Yuan-Hau Wu",
       loading: "Loading",
+      /** AI GENERATED WORD LIST START */
       title: {
         home: "Home",
         about: "About",
         projects: "Projects",
         contact: "Contact",
         blog: "Blog",
-      },
-      home: {
-        learnmore: "Scroll down",
-        codeknowledge: "My code skills",
-      },
-      content: {
-        introduction:
-          "I'm currently a High school student in Taiwan, currently working on Typescript and Javascript projects, I'm also super intrested in server stuff like Linux. ",
       },
       lang: {
         switchTo: "Switch to",
@@ -131,6 +131,21 @@ export default defineI18nConfig(() => ({
         skills: "Skills Used",
         duration: "Project Duration",
       },
+      /** AI GENERATED WORD LIST END */
+      home: {
+        title: "Home",
+        introduction:
+          "I'm currently a High school student in Taiwan, currently working on Typescript and Javascript projects, I'm also super intrested in server stuff like Linux. ",
+          learnmore: "Scroll down",
+          codeknowledge: "My code skills",
+      },
+      blog: {
+        description: "My blog posts.",
+      },
+      photos: {
+        title: "Images",
+        description: "These pictures are all captured by @yhw_tw",
+      }
     },
   },
 }));
