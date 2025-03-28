@@ -2,10 +2,13 @@
 const data = ref("");
 const announce = ref(false);
 const animationComplete = ref(false);
-
+const { t } = useI18n();
 onMounted(() => {
-  data.value = "測試";
-  announce.value = true;
+  data.value = "Beta testing the site.";
+
+  if (data.value.replace("\n", "") !== "") {
+    announce.value = true
+  }
 
   setTimeout(() => {
     closeAnnouncement();
@@ -32,7 +35,7 @@ function closeAnnouncement() {
           <i class="bi bi-x"></i>
         </button>
         <div class="message">
-          <h3>系統訊息</h3>
+          <h3>{{ t("core.announce.title") }}</h3>
           <span class="data" v-html="data"></span>
         </div>
       </div>

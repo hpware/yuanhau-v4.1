@@ -60,6 +60,11 @@ export default defineI18nConfig(() => ({
         duration: "專案期間",
       },
       /** AI GENERATED WORD LIST END */
+      core: {
+        announce: {
+          title: "系統訊息"
+        }
+      },
       home: {
         title: "首頁",
         introduction:
@@ -132,6 +137,11 @@ export default defineI18nConfig(() => ({
         duration: "Project Duration",
       },
       /** AI GENERATED WORD LIST END */
+      core: {
+        announce: {
+          title: "System Message"
+        }
+      },
       home: {
         title: "Home",
         introduction:
