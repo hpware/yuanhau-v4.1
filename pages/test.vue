@@ -1,8 +1,8 @@
 <script setup>
-const { locale, t, setLocale } = useI18n()
+const { locale, t, setLocale } = useI18n();
 
 function switchLocale(localeCode) {
-  locale.value = localeCode
+  locale.value = localeCode;
 }
 </script>
 
@@ -11,7 +11,7 @@ function switchLocale(localeCode) {
     <div>
       <button @click="setLocale('en')">English</button>
       <button @click="setLocale('zh-tw')">繁體中文</button>
-      <p>{{ t('yhname') }}</p>
+      <p>{{ t("yhname") }}</p>
       <p>Current locale: {{ locale }}</p>
     </div>
   </div>

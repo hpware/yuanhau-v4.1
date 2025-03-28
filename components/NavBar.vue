@@ -1,6 +1,6 @@
 <script setup lang="ts">
 const { t } = useI18n();
-const localePath = useLocalePath()
+const localePath = useLocalePath();
 import { animate } from "motion";
 import { ref, onMounted, onUnmounted } from "vue";
 import { useLogtoUser } from "#imports";
@@ -61,7 +61,6 @@ onUnmounted(() => {
   document.removeEventListener("click", handleClickOutside);
   document.removeEventListener("keydown", handleKeyDown);
 });
-
 </script>
 
 <template>
@@ -89,26 +88,42 @@ onUnmounted(() => {
         @mouseleave="handleMouseLeave"
       >
         <div class="sidebar-header">
-          <h2 class="sidebar-title">{{ t('yhname') }}</h2>
+          <h2 class="sidebar-title">{{ t("yhname") }}</h2>
         </div>
 
         <nav class="sidebar-nav">
-          <NuxtLink :to="localePath('/')" @click="closeSidebar" class="nav-item">
+          <NuxtLink
+            :to="localePath('/')"
+            @click="closeSidebar"
+            class="nav-item"
+          >
             <i class="bi bi-house"></i>
             <span>{{ t("title.home") }}</span>
           </NuxtLink>
 
-          <NuxtLink :to="localePath('/about')" @click="closeSidebar" class="nav-item">
+          <NuxtLink
+            :to="localePath('/about')"
+            @click="closeSidebar"
+            class="nav-item"
+          >
             <i class="bi bi-info-circle"></i>
-            <span>{{ t('title.about') }}</span>
+            <span>{{ t("title.about") }}</span>
           </NuxtLink>
 
-          <NuxtLink :to="localePath('/blog/')" @click="closeSidebar" class="nav-item">
+          <NuxtLink
+            :to="localePath('/blog/')"
+            @click="closeSidebar"
+            class="nav-item"
+          >
             <i class="bi bi-journal-text"></i>
-            <span>{{ t('title.blog')}}</span>
+            <span>{{ t("title.blog") }}</span>
           </NuxtLink>
 
-          <NuxtLink :to="localePath('/images/')" @click="closeSidebar" class="nav-item">
+          <NuxtLink
+            :to="localePath('/images/')"
+            @click="closeSidebar"
+            class="nav-item"
+          >
             <i class="bi bi-images"></i>
             <span>相簿</span>
           </NuxtLink>
@@ -119,13 +134,21 @@ onUnmounted(() => {
             class="nav-item"
           >
             <i class="bi bi-chat-left-text"></i>
-            <span>{{  t("title.contact") }}</span>
+            <span>{{ t("title.contact") }}</span>
           </NuxtLink>
-          <NuxtLink :to="localePath('/chatbot')" @click="closeSidebar" class="nav-item">
+          <NuxtLink
+            :to="localePath('/chatbot')"
+            @click="closeSidebar"
+            class="nav-item"
+          >
             <i class="bi bi-robot"></i>
             <span>AI 機器人</span>
           </NuxtLink>
-          <NuxtLink :to="localePath('/donate')" @click="closeSidebar" class="nav-item">
+          <NuxtLink
+            :to="localePath('/donate')"
+            @click="closeSidebar"
+            class="nav-item"
+          >
             <i class="fa-solid fa-money-check-dollar"></i>
             <span>Donate?</span>
           </NuxtLink>
@@ -133,11 +156,16 @@ onUnmounted(() => {
         <div class="user">
           <div v-if="!Boolean(user)">
             <a href="/sign-in">
-              <i class="bi bi-person"></i><span>&nbsp;{{ t("login.notloggedin") }}</span>
+              <i class="bi bi-person"></i
+              ><span>&nbsp;{{ t("login.notloggedin") }}</span>
             </a>
           </div>
           <div v-else>
-            <NuxtLink :to="localePath('/user/')" @click="closeSidebar" class="user-item">
+            <NuxtLink
+              :to="localePath('/user/')"
+              @click="closeSidebar"
+              class="user-item"
+            >
               <i v-if="!user.picture" class="bi bi-person"></i
               ><img v-else :src="user.picture" /><span
                 >&nbsp;{{ user.name ? user.name : user.username }}</span
@@ -180,8 +208,8 @@ onUnmounted(() => {
             </a>
           </div>
           <div class="copyright">
-            版權 © {{ new Date().getFullYear() }} <a href="https://yuanhau.com">吳元皓</a
-            ><br />這個網站在
+            版權 © {{ new Date().getFullYear() }}
+            <a href="https://yuanhau.com">吳元皓</a><br />這個網站在
             <!--<a href="https://github.com/hpware/yuanhau-site">GitHub</a> 上-->
             版本 <a href="https://github.com/hpware/yuanhau-v4.1">v4.1.3</a>
           </div>

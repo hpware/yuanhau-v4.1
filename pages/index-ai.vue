@@ -2,8 +2,11 @@
 useHead({
   title: "首頁 | 吳元皓",
   meta: [
-    { name: 'description', content: '吳元皓的個人網站 - 專注於Typescript、Javascript和伺服器技術' }
-  ]
+    {
+      name: "description",
+      content: "吳元皓的個人網站 - 專注於Typescript、Javascript和伺服器技術",
+    },
+  ],
 });
 
 interface Progress {
@@ -17,7 +20,7 @@ interface Progress {
 // Init
 import DiscordStatus from "~/components/plugins/discordStatus.vue";
 import Loader from "~/components/loading/randomloader.vue";
-import { ref, onMounted } from 'vue';
+import { ref, onMounted } from "vue";
 
 //values
 const bgloading = ref(true);
@@ -111,7 +114,9 @@ onMounted(() => {
                     :value="progress.progress.js"
                     max="100"
                   ></progress>
-                  <span class="progress-value">{{ progress.progress.js }}%</span>
+                  <span class="progress-value"
+                    >{{ progress.progress.js }}%</span
+                  >
                 </div>
               </div>
               <div class="progress-item">
@@ -122,7 +127,9 @@ onMounted(() => {
                     :value="progress.progress.server"
                     max="100"
                   ></progress>
-                  <span class="progress-value">{{ progress.progress.server }}%</span>
+                  <span class="progress-value"
+                    >{{ progress.progress.server }}%</span
+                  >
                 </div>
               </div>
               <div class="progress-item">
@@ -133,7 +140,9 @@ onMounted(() => {
                     :value="progress.progress.py"
                     max="100"
                   ></progress>
-                  <span class="progress-value">{{ progress.progress.py }}%</span>
+                  <span class="progress-value"
+                    >{{ progress.progress.py }}%</span
+                  >
                 </div>
               </div>
             </div>
@@ -215,7 +224,14 @@ onMounted(() => {
 }
 
 .aboutmeinfoblock {
-  background: linear-gradient(180deg, rgba(0, 0, 0, 0.9) 0%, rgba(52, 52, 52, 0.9) 28%, rgba(52, 52, 52, 0.8) 56%, rgba(114, 115, 117, 0.6) 83%, rgba(79, 79, 80, 0) 100%);
+  background: linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 0.9) 0%,
+    rgba(52, 52, 52, 0.9) 28%,
+    rgba(52, 52, 52, 0.8) 56%,
+    rgba(114, 115, 117, 0.6) 83%,
+    rgba(79, 79, 80, 0) 100%
+  );
   height: 100dvh;
   display: flex;
   flex-direction: column;
@@ -283,7 +299,8 @@ onMounted(() => {
 }
 
 @keyframes bounce {
-  0%, 100% {
+  0%,
+  100% {
     transform: translateY(0);
   }
   50% {
@@ -293,7 +310,13 @@ onMounted(() => {
 
 .progress-block {
   width: 100%;
-  background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(52, 52, 52, 0.9) 15%, rgba(52, 52, 52, 0.9) 85%, rgba(79, 79, 80, 0) 100%);
+  background: linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 0) 0%,
+    rgba(52, 52, 52, 0.9) 15%,
+    rgba(52, 52, 52, 0.9) 85%,
+    rgba(79, 79, 80, 0) 100%
+  );
   padding: 4rem 0;
   margin: 3rem 0;
 }
@@ -344,7 +367,8 @@ onMounted(() => {
   font-weight: 600;
 }
 
-.loading-container, .error-container {
+.loading-container,
+.error-container {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -389,7 +413,9 @@ onMounted(() => {
   background: rgba(30, 30, 30, 0.7);
   border-radius: 10px;
   padding: 1rem;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
 }
 
 .status-item:hover {
@@ -410,7 +436,7 @@ onMounted(() => {
     flex-direction: row;
     align-items: center;
   }
-  
+
   .progress-item label {
     min-width: 180px;
     text-align: right;
@@ -422,21 +448,21 @@ onMounted(() => {
   .progress-block {
     padding: 3rem 0;
   }
-  
+
   .progress-item label {
     margin-bottom: 0.5rem;
   }
-  
+
   .name-title {
     font-size: 2rem;
   }
-  
+
   .info {
     width: 90%;
     font-size: 1rem;
     padding: 1rem;
   }
-  
+
   .pfp {
     width: 150px;
     height: 150px;

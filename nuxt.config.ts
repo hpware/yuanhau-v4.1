@@ -170,23 +170,23 @@ export default defineNuxtConfig({
     client: "hidden",
   },
   i18n: {
-    vueI18n: './i18n.config.ts',
-    strategy: 'prefix_except_default',
-    defaultLocale: 'zh-tw',
+    vueI18n: "./i18n.config.ts",
+    strategy: "prefix_except_default",
+    defaultLocale: "zh-tw",
     locales: [
       {
-        code: 'zh-tw',
-        name: '繁體中文',
+        code: "zh-tw",
+        name: "繁體中文",
       },
       {
-        code: 'en',
-        name: 'English',
-      }
+        code: "en",
+        name: "English",
+      },
     ],
     detectBrowserLanguage: {
       useCookie: true,
-      cookieKey: 'i18n_redirected',
-      redirectOn: 'root',
-    }
-  }
+      cookieKey: "i18n_redirected",
+      redirectOn: "root",
+    },
+  },
 });

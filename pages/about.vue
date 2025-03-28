@@ -35,7 +35,7 @@ async function getCodingHistoryMD() {
 getCodingHistoryMD();
 </script>
 <template>
-    <Loading class="mainloader" v-if="loading" />
+  <Loading class="mainloader" v-if="loading" />
   <section id="about" class="about" v-if="!loading">
     <div v-html="codinghistory"></div>
   </section>
@@ -43,10 +43,10 @@ getCodingHistoryMD();
 <style scoped>
 .mainloader {
   position: fixed;
-  left:0;
-  right:0;
-  top:0;
-  bottom:0; 
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
 }
 .about {
   animation: fade-in 1200ms ease-in-out;
