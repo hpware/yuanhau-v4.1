@@ -313,6 +313,40 @@ onMounted(async () => {
     }
   }
 }
+@media screen and (max-width: 480px) {
+  .aboutme {
+    h1 {
+      font-size: 2em;
+    }
+    img {
+      width:150px;
+      height:150px;
+    }
+    .info {
+      font-size: 0.8em;
+    }
+  }
+  .scrolldown {
+    font-size: 0.8em;
+  }
+}
+@media screen and (max-height: 570px) {
+  .aboutme {
+    h1 {
+      font-size: 2em;
+    }
+    img {
+      width:150px;
+      height:150px;
+    }
+    .info {
+      font-size: 0.8em;
+    }
+  }
+  .scrolldown {
+    font-size: 0.8em;
+  }
+}
 div.status {
   gap: 10px;
   padding: 10px;
