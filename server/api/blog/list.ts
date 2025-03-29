@@ -7,7 +7,7 @@ const supabase = createClient(
 export default defineEventHandler(async (event) => {
   try {
     const { data, error } = await supabase
-      .from("dynamicMsg")
+      .from("bloglist")
       .select("*")
       .eq("type", "homepage")
       .maybeSingle();

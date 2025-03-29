@@ -5,15 +5,15 @@ const supabase = createClient(
   `${supabasetoken}`,
 );
 export default defineEventHandler(async (event) => {
+  setHeader(event, "Content-Type", "appication/json");
   try {
     const { data, error } = await supabase
-      .from("dynamicMsg")
+      .from("hackclubprojects")
       .select("*")
-      .eq("type", "homepage")
       .maybeSingle();
     console.log(data);
     return {
-      data: data.text,
+      data: data,
     };
   } catch (e) {
     console.log(e);

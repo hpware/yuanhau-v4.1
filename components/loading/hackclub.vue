@@ -3,6 +3,7 @@ const { locale, t } = useI18n();
 const min = 1000;
 const max = 500;
 const math = ref();
+import "~/components/css/hackclub.css";
 onMounted(() => {
   const interval = setInterval(() => {
     math.value = Math.floor(Math.random() * (max - min + 1) + min);
@@ -34,6 +35,7 @@ const p = defineProps({
 
 <style scoped>
 .container {
+  font-family: Phantom Sans;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -46,13 +48,14 @@ const p = defineProps({
   justify-content: center;
   border: 10px solid rgba(255, 255, 255, 0.1);
   border-radius: 50%;
-  border-top-color: #0e69f2;
+  border-top-color: #ec3750;
   animation: spin 1s linear infinite;
   margin-bottom: 0;
 }
 p {
   text-align: center;
   margin-top: 10px;
+  font-family: Phantom Sans;
 }
 
 @keyframes spin {
