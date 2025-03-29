@@ -75,16 +75,6 @@ onMounted(() => {
           </div>
         </div>
       </div>
-      <footer class="beg">
-        <p>
-          如果你想用這些照片，去用吧！你只需要把我與我的網站放在照片的來源就好了。
-        </p>
-        <p>
-          如果想支持我，我可以在<a href="https://yhw.tw/paypal" target="_blank"
-            >Paypal</a
-          >上贊助～
-        </p>
-      </footer>
     </div>
   </div>
 </template>

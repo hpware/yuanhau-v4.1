@@ -7,7 +7,7 @@ onMounted(() => {
   data.value = "Beta testing the site.";
 
   if (data.value.replace("\n", "") !== "") {
-    announce.value = true
+    announce.value = true;
   }
 
   setTimeout(() => {

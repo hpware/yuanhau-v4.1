@@ -11,6 +11,8 @@ export default defineNuxtConfig({
     "/": { prerender: true },
     "/bio": { prerender: true },
     "/about": { prerender: true },
+    "/images/": { prerender: true },
+    "/threads": { prerender: true },
     // Redirect old content to old content. and /blog to new.
     "/posts/": { redirect: "/blog/" },
     "/posts/**": {
@@ -28,6 +30,22 @@ export default defineNuxtConfig({
       redirect: "https://yuanhau-site-2-14-content.vercel.app/mdview/**",
     },
     "/form/**": { ssr: true },
+    // FOR OTHER LANGS
+    // en
+    "/en": { prerender: true },
+    "/en/bio": { prerender: true },
+    "/en/about": { prerender: true },
+    "/en/images/": { prerender: true },
+    "/en/threads": { prerender: true },
+    // Redirect old content to old content. and /blog to new.
+    "/en/posts/": { redirect: "/blog/" },
+    "/en/posts/**": {
+      redirect: "https://yuanhau-site-2-14-content.vercel.app/posts/**",
+    },
+    "/en/admin/": { redirect: "/admin/login" },
+    "/en/admin/**": { redirect: "/admin/**" },
+    // Sync the old with the new
+    "/en/form/**": { ssr: true },
   },
 
   modules: [

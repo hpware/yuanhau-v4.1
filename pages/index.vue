@@ -28,6 +28,10 @@ onMounted(async () => {
     progressloading.value = false;
   }
 });
+
+const chatbot = async () => {
+
+}
 </script>
 <template>
   <div class="loadingtomainanimation">
@@ -66,6 +70,11 @@ onMounted(async () => {
                 id="github"
                 ><i class="bi bi-github"></i
               ></a>
+              <a 
+              href="https://discord.com/users/918723093646684180"
+              aria-label="Discord"
+              id="Discord"
+              ><i class="bi bi-discord"></i></a>
               <a
                 href="https://instagram.com/yhw_tw"
                 aria-label="instagram"
@@ -109,7 +118,10 @@ onMounted(async () => {
             >
           </div>
         </div>
-        <div class="displaybackground"></div>
+        <div
+          class="displaybackground"
+          style="--displaybackground-height: 60dvh"
+        ></div>
         <section id="content">
           <div class="progress-block">
             <h4>{{ t("home.codeknowledge") }}</h4>
@@ -137,6 +149,21 @@ onMounted(async () => {
               <Loader size="20px" />
             </div>
           </div>
+          <div
+            class="displaybackground"
+            style="--displaybackground-height: 10dvh"
+          ></div>
+          <section id="chatbot" class="chatbot">
+            <h3>{{ t("core.chatbot.title") }}</h3>
+            <div class="chatbot-content">
+              <form @submit.prevent="">
+                <textarea
+                  :placeholder="'Ex: ' + t('core.chatbot.placeholder')"
+                />
+                <button><i class="bi bi-arrow-right"></i></button>
+              </form>
+            </div>
+          </section>
           <div class="status">
             <!--<section id="spotify">
         Spotify Status:
@@ -148,6 +175,10 @@ onMounted(async () => {
             </section>
           </div>
         </section>
+        <div
+          class="displaybackground"
+          style="--displaybackground-height: 20dvh"
+        ></div>
         <footer>
           <span>
             版權 &copy; {{ new Date().getFullYear() }}
@@ -159,6 +190,11 @@ onMounted(async () => {
     </transition>
   </div>
 </template>
+<style>
+:root {
+  --displaybackground-height: 80dvh;
+}
+</style>
 <style scoped>
 /**It works?? */
 .preventoverpull {
@@ -221,7 +257,7 @@ onMounted(async () => {
 }
 .displaybackground {
   width: 100%;
-  height: 80dvh;
+  height: var(--displaybackground-height);
 }
 .aboutme {
   display: flex;
@@ -302,15 +338,10 @@ onMounted(async () => {
   }
 }
 .progress-block {
-  width: 100%;
-  background: rgb(0, 0, 0);
-  background: linear-gradient(
-    180deg,
-    rgba(0, 0, 0, 0) 0%,
-    rgba(52, 52, 52, 1) 35%,
-    rgba(52, 52, 52, 1) 68%,
-    rgba(79, 79, 80, 0) 100%
-  );
+  width: calc(100% - 20px);
+  background: rgb(38, 38, 38);
+  background: linear-gradient(180deg, rgba(38,38,38,0.6858168761220826) 0%, rgba(38,38,38,1) 11%, rgba(38,38,38,1) 82%, rgba(38,38,38,0.696588868940754) 100%);
+  padding:10px 10px 10px 10px;
 }
 .progress-panel {
   display: flex;
@@ -428,7 +459,80 @@ footer {
   transform: translateY(20px);
   opacity: 0;
 }
+section.chatbot {
+  background: rgb(38, 38, 38);
+  background: linear-gradient(180deg, rgba(38,38,38,0.6858168761220826) 0%, rgba(38,38,38,1) 11%, rgba(38,38,38,1) 82%, rgba(38,38,38,0.696588868940754) 100%);
+  padding:20px 20px 20px 20px;
+  h3 {
+    padding-top: 0;
+    padding-bottom:0;
+  }
+  h6 {
+    padding-top:0;
+    padding-bottom:0;
+  }
+}
+div.chatbot-content {
+  padding-top:0;
+  width: 100%;
+  height: calc(100% - 60px);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: 0;
+  form {
+    padding-top:0;
+    background-color: rgb(38, 38, 38);
+    width: 80%;
+    justify-content: center;
+    align-self: center;
+    align-items: center;
+    text-align: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-self: center !important;
+    max-width: 500px;
+    border-radius: 20px;
+    margin: 0 auto;
+    padding: 5px 15px;
+    border: 2px solid white;
+    button {
+      color: white;
+      background-color: rgb(38, 38, 38);
+      border: 0px;
+    }
+    button:hover {
+      color: rgb(169, 168, 168);
+    }
+  }
+  textarea {
+    width: calc(100% - 30px);
+    height: 30px;
+    justify-content: left;
+    align-self: left;
+    align-items: left;
+    text-align: start;
+    background-color: rgb(38, 38, 38);
+    color: white;
+    font-size: 0.8em;
+    border: 0px;
+    transition: all 300ms ease-in-out;
+    border-radius: 20px;
+    resize: none;
+    outline: none;
+    align-self: center;
+    padding: 8px 0 8px 5px;
+  }
 
+  textarea:hover {
+    background-color: rgba(38, 38, 38, 0.788);
+  }
+
+  textarea::placeholder {
+    color: rgba(255, 255, 255, 0.6);
+  }
+}
 @keyframes content-appear {
   from {
     opacity: 0;
