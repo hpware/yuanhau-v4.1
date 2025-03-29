@@ -60,6 +60,7 @@ export default defineI18nConfig(() => ({
       },
       /** AI GENERATED WORD LIST END */
       core: {
+        contentnotavaible: "該項目無法使用",
         announce: {
           title: "系統訊息",
         },
@@ -146,6 +147,7 @@ export default defineI18nConfig(() => ({
       },
       /** AI GENERATED WORD LIST END */
       core: {
+        contentnotavaible: "Item unavaible",
         announce: {
           title: "System Message",
         },

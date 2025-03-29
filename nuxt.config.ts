@@ -9,6 +9,7 @@ export default defineNuxtConfig({
 
   routeRules: {
     "/": { prerender: true },
+    "/**": { prerender: true },
     "/bio": { prerender: true },
     "/about": { prerender: true },
     "/images/": { prerender: true },
@@ -85,6 +86,7 @@ export default defineNuxtConfig({
       },
       link: [
         { rel: "icon", href: "/img/pfp-1.jpg" },
+        { rel: "favicon", href: "/img/pfp-1.jpg" },
         { rel: "dns-prefetch", href: "https://utfs.io" },
         { rel: "dns-prefetch", href: "https://s3.yhw.tw" },
         {
