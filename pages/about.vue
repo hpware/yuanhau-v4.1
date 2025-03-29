@@ -2,7 +2,7 @@
 import { ref } from "vue";
 import { marked } from "marked";
 import { animate } from "motion";
-import "~/components/markdown.css";
+import "~/components/css/markdown.css";
 import Loading from "~/components/loading/randomloader.vue";
 useHead({
   title: "關於我 | 吳元皓",

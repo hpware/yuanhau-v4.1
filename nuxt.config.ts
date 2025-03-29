@@ -84,13 +84,13 @@ export default defineNuxtConfig({
         lang: "zh-Hant",
       },
       link: [
+        { rel: "icon", href: "/img/pfp-1.jpg" },
         { rel: "dns-prefetch", href: "https://utfs.io" },
         { rel: "dns-prefetch", href: "https://s3.yhw.tw" },
         {
           rel: "prefetch",
           href: "https://utfs.io/f/CCLPSN5W2HD5ziRBkeSZ5pJYf32lWLvIK8uGb41xkHCUnXm7",
         },
-        { rel: "icon", href: "/favicon.ico" },
       ],
       meta: [
         { charset: "utf-8" },

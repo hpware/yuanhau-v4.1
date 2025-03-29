@@ -4,6 +4,7 @@ const localePath = useLocalePath();
 import { animate } from "motion";
 import { ref, onMounted, onUnmounted } from "vue";
 import { useLogtoUser } from "#imports";
+import hackclubsvg from "~/components/svg/hackclub.svg";
 const user = useLogtoUser();
 
 const isOpen = ref(false);
@@ -137,20 +138,20 @@ onUnmounted(() => {
             <span>{{ t("title.contact") }}</span>
           </NuxtLink>
           <NuxtLink
-            :to="localePath('/chatbot')"
-            @click="closeSidebar"
-            class="nav-item"
-          >
-            <i class="bi bi-robot"></i>
-            <span>AI 機器人</span>
-          </NuxtLink>
-          <NuxtLink
             :to="localePath('/donate')"
             @click="closeSidebar"
             class="nav-item"
           >
             <i class="fa-solid fa-money-check-dollar"></i>
             <span>Donate?</span>
+          </NuxtLink>
+          <NuxtLink
+            :to="localePath('/hackclub')"
+            @click="closeSidebar"
+            class="nav-item"
+          >
+            <img :src="hackclubsvg" style="width: 30px;height:30px; padding-right:10px;"></img>
+            <span>Hack Club</span>
           </NuxtLink>
         </nav>
         <div class="user">

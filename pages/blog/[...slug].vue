@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import Giscus from "@giscus/vue";
 import { inView, animate } from "motion";
-import "@/components/markdown.css";
+import "@/components/css/markdown.css";
 const clipboardthingy = ref(false);
 // Year stuff
 const link = ref();

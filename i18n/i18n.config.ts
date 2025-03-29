@@ -157,7 +157,7 @@ export default defineI18nConfig(() => ({
       home: {
         title: "Home",
         introduction:
-          "I'm currently a High school student in Taiwan, currently working on Typescript and Javascript projects, I'm also super intrested in server stuff like Linux. ",
+          "I'm currently a High school student in Taiwan, currently working on Typescript and Javascript projects, I'm also super intrested in server stuff like Linux.",
         learnmore: "Scroll down",
         codeknowledge: "My code skills",
       },

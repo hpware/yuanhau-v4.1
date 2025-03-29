@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import "~/components/icons.css";
-import "~/components/app.css";
+import "~/components/css/icons.css";
+import "~/components/css/app.css";
 import NavBar from "~/components/NavBar.vue";
 import msgComponent from "~/components/msgComponent.vue";
 import { defineProps, ref, onMounted } from "vue";
