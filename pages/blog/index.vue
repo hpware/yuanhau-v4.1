@@ -31,17 +31,16 @@ const fetchPosts = async (filter?: string) => {
   }
 };
 
-
 const route = useRoute();
 const q = route.query;
 onMounted(() => {
   if (q.id === "tags") {
     fetchPosts(q.tags);
-} else if (q.id === "year") {
-  fetchPosts(q.year);
-} else {
-  fetchPosts();
-}
+  } else if (q.id === "year") {
+    fetchPosts(q.year);
+  } else {
+    fetchPosts();
+  }
 });
 </script>
 <template>
@@ -57,7 +56,7 @@ onMounted(() => {
         <p>{{ errormsg }}</p>
       </div>
       <div v-else>
-        <SideBar/>
+        <SideBar />
       </div>
     </div>
   </div>

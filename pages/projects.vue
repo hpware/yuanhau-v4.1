@@ -4,7 +4,6 @@ useHead({
   title: `Threads | | ${t("yhname")}`,
 });
 const projects = ref();
-
 </script>
 <template>
   <div class="main" id="main">

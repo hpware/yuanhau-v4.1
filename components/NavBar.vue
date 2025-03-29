@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import "~/components/css/hackclub.css"
+import "~/components/css/hackclub.css";
 const { t } = useI18n();
 const localePath = useLocalePath();
 import { animate } from "motion";
@@ -151,7 +151,10 @@ onUnmounted(() => {
             @click="closeSidebar"
             class="nav-item"
           >
-            <img :src="hackclubsvg" style="width: 30px;height:30px; padding-right:10px;"></img>
+            <img
+              :src="hackclubsvg"
+              style="width: 30px; height: 30px; padding-right: 10px"
+            />
             <span>Hack Club</span>
           </NuxtLink>
         </nav>

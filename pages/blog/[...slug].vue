@@ -25,7 +25,7 @@ const slug = computed(() => {
   return route.params.slug;
 });
 onMounted(async () => {
-  try {
+  /**try {
     const req = await fetch("/api/db/obtainshortlink", {
       method: "POST",
       body: `/posts/${slug}`,
@@ -35,7 +35,7 @@ onMounted(async () => {
     console.log("onMounted: " + link.value);
   } catch (e) {
     console.log(e);
-  }
+  }*/
 });
 // Copy Link
 const copylink = async () => {

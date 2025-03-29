@@ -75,8 +75,7 @@ const placeholderimg = `data:image/svg+xml,%3Csvg width='280' height='320' xmlns
     </div>
   </div>
 </template>
-<style>
-</style>
+<style></style>
 <style scoped>
 .background {
   background-color: #205b8b;
