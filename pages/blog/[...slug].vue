@@ -1,7 +1,12 @@
 <script setup lang="ts">
+const { t } = useI18n();
 import Giscus from "@giscus/vue";
 import { inView, animate } from "motion";
 import "@/components/css/markdown.css";
+import SideBar from "~/components/BlogSidebar.vue";
+useHead({
+  title: `${t("nav.blog")} | | ${t("yhname")}`,
+});
 const clipboardthingy = ref(false);
 // Year stuff
 const link = ref();

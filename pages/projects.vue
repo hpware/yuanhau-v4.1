@@ -1,15 +1,16 @@
 <script setup lang="ts">
-import { ref } from "vue";
-useSeoMeta({
-  title: "我的專案 | 吳元皓",
+const { t } = useI18n();
+useHead({
+  title: `Threads | | ${t("yhname")}`,
 });
-const projects = [1];
+const projects = ref();
+
 </script>
 <template>
   <div class="main" id="main">
-    <h1 class="title">我的專案</h1>
+    <h1 class="title">{{ t("nav.projects") }}</h1>
     <div class="content">
-      <div v-for="obj in projcontent" :key="obj.name">
+      <div v-for="obj in projects" :key="obj.name">
         <div class="item">
           <h4>{{ obj.name }}</h4>
           <p>{{ obj.description }}</p>

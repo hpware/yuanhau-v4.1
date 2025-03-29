@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import "~/components/css/hackclub.css"
 const { t } = useI18n();
 const localePath = useLocalePath();
 import { animate } from "motion";
@@ -229,6 +230,7 @@ onUnmounted(() => {
   --sidebar-active: hsl(208, 100%, 73%);
   --transition-speed: 0.3s;
   --backdrop-blur: 10px;
+  font-family: Phantom Sans;
 }
 .menu-button-container {
   position: fixed;

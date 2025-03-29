@@ -76,9 +76,6 @@ const placeholderimg = `data:image/svg+xml,%3Csvg width='280' height='320' xmlns
   </div>
 </template>
 <style>
-body {
-  font-family: Phantom Sans;
-}
 </style>
 <style scoped>
 .background {

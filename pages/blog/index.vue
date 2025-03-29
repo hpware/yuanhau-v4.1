@@ -1,14 +1,14 @@
 <script setup lang="ts">
 import { ref } from "vue";
 import Loading from "@/components/loading/randomloader.vue";
-import sidebar from "";
+import SideBar from "~/components/BlogSidebar.vue";
 const { t } = useI18n();
 const loading = ref(false);
 const error = ref(false);
 const errormsg = ref("");
 const data = ref();
-useSeoMeta({
-  title: "Blog | 吳元皓",
+useHead({
+  title: `${t("nav.blog")} | | ${t("yhname")}`,
 });
 const fdate = (dateString: string) => {
   try {
@@ -18,9 +18,10 @@ const fdate = (dateString: string) => {
     console.error(JSON.stringify(e));
   }
 };
-const fetchPosts = async () => {
+const fetchPosts = async (filter?: string) => {
   try {
-    const fetchreq = await fetch("/api/blog/list");
+    console.log(filter);
+    const fetchreq = await fetch(`/api/blog/list?filter=${filter}`);
     const fetchres = await fetchreq.json();
     data.value = fetchres;
     loading.value = false;
@@ -29,8 +30,18 @@ const fetchPosts = async () => {
     errormsg.value = e.message;
   }
 };
+
+
+const route = useRoute();
+const q = route.query;
 onMounted(() => {
-  fetchPosts;
+  if (q.id === "tags") {
+    fetchPosts(q.tags);
+} else if (q.id === "year") {
+  fetchPosts(q.year);
+} else {
+  fetchPosts();
+}
 });
 </script>
 <template>
@@ -45,7 +56,9 @@ onMounted(() => {
         <p>Oops! 暫時無法存取部落格資料!</p>
         <p>{{ errormsg }}</p>
       </div>
-      <div v-else></div>
+      <div v-else>
+        <SideBar/>
+      </div>
     </div>
   </div>
 </template>

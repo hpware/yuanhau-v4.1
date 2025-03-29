@@ -17,4 +17,4 @@ This repo contains the unreleased versions and the released verisons of the yuan
 
 ## How long have spent time developing this website?
 
-Uncountable. Just on March 30th 2025 alone, I spent at least 4 hours making this better. I could've made a new one to same some time.
+Uncountable. Just on Hackatime it recorded 39 hours and 54 mintues in total.
