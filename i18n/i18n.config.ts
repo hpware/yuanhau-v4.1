@@ -1,3 +1,5 @@
+import recommendations from "~/server/api/db/recommendations";
+
 // Mini word list.
 export default defineI18nConfig(() => ({
   legacy: false,
@@ -84,11 +86,11 @@ export default defineI18nConfig(() => ({
         description: "這裡全部都是我拍的照片!",
       },
       words: {
-        post: "貼文"
+        post: "貼文",
       },
       threads: {
-        description: "以下為我在 Threads 上放的文"
-      }
+        description: "以下為我在 Threads 上放的文",
+      },
     },
     en: {
       yhname: "Yuan-Hau Wu",
@@ -171,11 +173,11 @@ export default defineI18nConfig(() => ({
         description: "These pictures are all captured by @yhw_tw",
       },
       words: {
-        post: "posts"
+        post: "posts",
       },
       threads: {
-        description: "Below is all my posts from Threads"
-      }
+        description: "Below is all my posts from Threads",
+      },
     },
   },
 }));

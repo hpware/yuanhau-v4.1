@@ -3,9 +3,10 @@ const data = ref("");
 const announce = ref(false);
 const animationComplete = ref(false);
 const { t } = useI18n();
-onMounted(() => {
-  data.value = "Beta testing the site.";
-
+onMounted(async () => {
+  const req = await fetch("/api/announce");
+  const res = await req.text();
+  data.value = res;
   if (data.value.replace("\n", "") !== "") {
     announce.value = true;
   }
@@ -35,7 +36,8 @@ function closeAnnouncement() {
           <i class="bi bi-x"></i>
         </button>
         <div class="message">
-          <h3>{{ t("core.announce.title") }}</h3>
+          &nbsp;<i class="bi bi-exclamation-triangle-fill"></i>&nbsp;
+          <h3>{{ t("core.announce.title") }}:</h3>
           <span class="data" v-html="data"></span>
         </div>
       </div>
@@ -50,12 +52,12 @@ function closeAnnouncement() {
   top: 0;
   left: 0;
   right: 0;
-  background-color: #d5a718;
+  background-color: #ffbf00e4;
   color: #000;
   z-index: 999;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
   overflow: hidden;
-  max-height: 80px;
+  max-height: 90px;
   h3 {
     margin: 0 0 5px 0;
     font-size: 0.9em;
@@ -68,13 +70,15 @@ function closeAnnouncement() {
     position: relative;
   }
   .message {
-    flex: 1;
+    display: flex;
+    flex-direction: row;
   }
 
   .data {
-    font-size: 0.85em;
-    display: block;
-    line-height: 1.4;
+    font-size: 0.8em;
+    display: contents;
+    line-height: -0.4em;
+    line-gap-override: -0.2em;
   }
 
   .close-btn {

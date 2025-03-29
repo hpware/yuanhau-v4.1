@@ -5,7 +5,7 @@ const supabase = createClient(
   `${supabasetoken}`,
 );
 export default defineEventHandler(async (event) => {
-    setHeader(event, "Content-Type", "appication/json");
+  setHeader(event, "Content-Type", "appication/json");
   try {
     const { data, error } = await supabase
       .from("hackclubprojects")
@@ -13,8 +13,8 @@ export default defineEventHandler(async (event) => {
       .maybeSingle();
     console.log(data);
     return {
-        data:data,
-    }
+      data: data,
+    };
   } catch (e) {
     console.log(e);
     return {

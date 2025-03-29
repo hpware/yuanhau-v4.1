@@ -1,8 +1,9 @@
 <script setup lang="ts">
 import { ref } from "vue";
 import LoadingAnimation from "@/components/loading/discordstyle.vue";
+const { t } = useI18n();
 useHead({
-  title: "建議 | 吳元皓",
+  title: `${t("nav.contact")} | | ${t("yhname")}`,
 });
 const loading = ref();
 const dchandle_matrix = ref();
@@ -49,19 +50,19 @@ const func = async () => {
   </div>
   <div v-if="successq && !loading && !errorq">
     <div class="main">
-      <h1 class="title">建議平台</h1>
+      <h1 class="title">{{ t("nav.contact") }}</h1>
       <p class="message">{{ success }}</p>
     </div>
   </div>
   <div v-if="errorq && !loading && !successq">
     <div class="main">
-      <h1 class="title">建議平台</h1>
+      <h1 class="title">{{ t("nav.contact") }}</h1>
       <p class="message">{{ error }}</p>
     </div>
   </div>
   <div class="background" v-if="!successq && !errorq && !loading">
     <div class="main">
-      <h1 class="title">建議平台</h1>
+      <h1 class="title">{{ t("nav.contact") }}</h1>
       <form @submit.prevent="func">
         <label for="dchandle_matrix">Discord 或 Matrix 帳號</label>
         <input

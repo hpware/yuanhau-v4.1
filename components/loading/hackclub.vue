@@ -35,7 +35,7 @@ const p = defineProps({
 
 <style scoped>
 .container {
-font-family: Phantom Sans;
+  font-family: Phantom Sans;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -56,7 +56,6 @@ p {
   text-align: center;
   margin-top: 10px;
   font-family: Phantom Sans;
-
 }
 
 @keyframes spin {

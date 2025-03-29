@@ -1,8 +1,9 @@
 <script setup lang="ts">
 import { ref } from "vue";
 import Loading from "@/components/loading/randomloader.vue";
+import sidebar from "";
 const { t } = useI18n();
-const loading = ref(true);
+const loading = ref(false);
 const error = ref(false);
 const errormsg = ref("");
 const data = ref();

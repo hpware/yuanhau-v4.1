@@ -29,9 +29,7 @@ onMounted(async () => {
   }
 });
 
-const chatbot = async () => {
-
-}
+const chatbot = async () => {};
 </script>
 <template>
   <div class="loadingtomainanimation">
@@ -70,11 +68,12 @@ const chatbot = async () => {
                 id="github"
                 ><i class="bi bi-github"></i
               ></a>
-              <a 
-              href="https://discord.com/users/918723093646684180"
-              aria-label="Discord"
-              id="Discord"
-              ><i class="bi bi-discord"></i></a>
+              <a
+                href="https://discord.com/users/918723093646684180"
+                aria-label="Discord"
+                id="Discord"
+                ><i class="bi bi-discord"></i
+              ></a>
               <a
                 href="https://instagram.com/yhw_tw"
                 aria-label="instagram"
@@ -340,8 +339,14 @@ const chatbot = async () => {
 .progress-block {
   width: calc(100% - 20px);
   background: rgb(38, 38, 38);
-  background: linear-gradient(180deg, rgba(38,38,38,0.6858168761220826) 0%, rgba(38,38,38,1) 11%, rgba(38,38,38,1) 82%, rgba(38,38,38,0.696588868940754) 100%);
-  padding:10px 10px 10px 10px;
+  background: linear-gradient(
+    180deg,
+    rgba(38, 38, 38, 0.6858168761220826) 0%,
+    rgba(38, 38, 38, 1) 11%,
+    rgba(38, 38, 38, 1) 82%,
+    rgba(38, 38, 38, 0.696588868940754) 100%
+  );
+  padding: 10px 10px 10px 10px;
 }
 .progress-panel {
   display: flex;
@@ -461,19 +466,25 @@ footer {
 }
 section.chatbot {
   background: rgb(38, 38, 38);
-  background: linear-gradient(180deg, rgba(38,38,38,0.6858168761220826) 0%, rgba(38,38,38,1) 11%, rgba(38,38,38,1) 82%, rgba(38,38,38,0.696588868940754) 100%);
-  padding:20px 20px 20px 20px;
+  background: linear-gradient(
+    180deg,
+    rgba(38, 38, 38, 0.6858168761220826) 0%,
+    rgba(38, 38, 38, 1) 11%,
+    rgba(38, 38, 38, 1) 82%,
+    rgba(38, 38, 38, 0.696588868940754) 100%
+  );
+  padding: 20px 20px 20px 20px;
   h3 {
     padding-top: 0;
-    padding-bottom:0;
+    padding-bottom: 0;
   }
   h6 {
-    padding-top:0;
-    padding-bottom:0;
+    padding-top: 0;
+    padding-bottom: 0;
   }
 }
 div.chatbot-content {
-  padding-top:0;
+  padding-top: 0;
   width: 100%;
   height: calc(100% - 60px);
   display: flex;
@@ -481,7 +492,7 @@ div.chatbot-content {
   justify-content: center;
   margin: 0;
   form {
-    padding-top:0;
+    padding-top: 0;
     background-color: rgb(38, 38, 38);
     width: 80%;
     justify-content: center;

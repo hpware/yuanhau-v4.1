@@ -137,14 +137,14 @@ onUnmounted(() => {
             <i class="bi bi-chat-left-text"></i>
             <span>{{ t("title.contact") }}</span>
           </NuxtLink>
-          <NuxtLink
+          <!--<NuxtLink
             :to="localePath('/donate')"
             @click="closeSidebar"
             class="nav-item"
           >
             <i class="fa-solid fa-money-check-dollar"></i>
             <span>Donate?</span>
-          </NuxtLink>
+          </NuxtLink>-->
           <NuxtLink
             :to="localePath('/hackclub')"
             @click="closeSidebar"
