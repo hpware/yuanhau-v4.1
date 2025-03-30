@@ -56,6 +56,7 @@ const placeholderimg = `data:image/svg+xml,%3Csvg width='280' height='320' xmlns
         <Loading size="20px"/>
     </div>-->
     <h3>My Projects</h3>
+    <Transition name="project-fade">
     <div v-if="!projloading" class="projects">
       <div v-for="obj in projcontent" :key="obj.name">
         <div class="item">
@@ -70,7 +71,8 @@ const placeholderimg = `data:image/svg+xml,%3Csvg width='280' height='320' xmlns
         </div>
       </div>
     </div>
-    <div v-else>
+    </Transition>
+    <div v-if="projloading">
       <Loading />
     </div>
   </div>
@@ -147,5 +149,16 @@ div.header {
       color: #919191;
     }
   }
+}
+.project-fade-enter-active {
+  transition: all 0.5s ease;
+}
+.project-fade-leave-active {
+  transition: all 0.3s cubic-bezier(1, 0.5, 0.8, 1);
+}
+.project-fade-enter-from,
+.project-fade-leave-to {
+  transform: translateY(20px);
+  opacity: 0;
 }
 </style>

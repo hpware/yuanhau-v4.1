@@ -113,6 +113,15 @@ onUnmounted(() => {
           </NuxtLink>
 
           <NuxtLink
+            :to="localePath('/projects')"
+            @click="closeSidebar"
+            class="nav-item"
+          >
+            <i class="fa-solid fa-diagram-project"></i>
+            <span>{{ t("nav.projects") }}</span>
+        </NuxtLink>
+
+          <NuxtLink
             :to="localePath('/blog/')"
             @click="closeSidebar"
             class="nav-item"
@@ -138,14 +147,6 @@ onUnmounted(() => {
             <i class="bi bi-chat-left-text"></i>
             <span>{{ t("title.contact") }}</span>
           </NuxtLink>
-          <!--<NuxtLink
-            :to="localePath('/donate')"
-            @click="closeSidebar"
-            class="nav-item"
-          >
-            <i class="fa-solid fa-money-check-dollar"></i>
-            <span>Donate?</span>
-          </NuxtLink>-->
           <NuxtLink
             :to="localePath('/hackclub')"
             @click="closeSidebar"

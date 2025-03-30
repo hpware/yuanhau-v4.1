@@ -8,7 +8,6 @@ export default defineI18nConfig(() => ({
     "zh-tw": {
       yhname: "吳元皓",
       loading: "載入中",
-      /** AI GENERATED WORD LIST START */
       title: {
         about: "關於我",
         projects: "專案作品",
@@ -33,34 +32,6 @@ export default defineI18nConfig(() => ({
       login: {
         notloggedin: "尚未登入",
       },
-      common: {
-        loadMore: "載入更多",
-        viewAll: "查看全部",
-        back: "返回",
-        next: "下一步",
-        previous: "上一步",
-        search: "搜尋",
-        notFound: "找不到頁面",
-      },
-      buttons: {
-        submit: "提交",
-        cancel: "取消",
-        save: "儲存",
-        delete: "刪除",
-        edit: "編輯",
-      },
-      time: {
-        today: "今天",
-        yesterday: "昨天",
-        days: "{count} 天前",
-        minutes: "{count} 分鐘前",
-      },
-      projects: {
-        viewDetails: "查看詳情",
-        skills: "使用技術",
-        duration: "專案期間",
-      },
-      /** AI GENERATED WORD LIST END */
       core: {
         contentnotavaible: "該項目無法使用",
         announce: {
@@ -91,23 +62,21 @@ export default defineI18nConfig(() => ({
       threads: {
         description: "以下為我在 Threads 上放的文",
       },
+      projects: {
+        useai: "這個程式有使用AI寫作",
+        gitrepo: "Git 專案",
+        webpage: "專案網頁",
+        description: "這裡包含著我在之前做過的東西"
+      }
     },
     en: {
       yhname: "Yuan-Hau Wu",
       loading: "Loading",
-      /** AI GENERATED WORD LIST START */
       title: {
         about: "About",
         projects: "Projects",
         contact: "Contact",
         blog: "Blog",
-      },
-      lang: {
-        switchTo: "Switch to",
-        english: "English",
-        chinese: "Chinese",
-        current: "Current language",
-        select: "Select language",
       },
       login: {
         notloggedin: "Not Logged in",
@@ -120,34 +89,6 @@ export default defineI18nConfig(() => ({
         blog: "Blog",
         learnmore: "Learn more about me",
       },
-      common: {
-        loadMore: "Load More",
-        viewAll: "View All",
-        back: "Back",
-        next: "Next",
-        previous: "Previous",
-        search: "Search",
-        notFound: "Page Not Found",
-      },
-      buttons: {
-        submit: "Submit",
-        cancel: "Cancel",
-        save: "Save",
-        delete: "Delete",
-        edit: "Edit",
-      },
-      time: {
-        today: "Today",
-        yesterday: "Yesterday",
-        days: "{count} days ago",
-        minutes: "{count} minutes ago",
-      },
-      projects: {
-        viewDetails: "View Details",
-        skills: "Skills Used",
-        duration: "Project Duration",
-      },
-      /** AI GENERATED WORD LIST END */
       core: {
         contentnotavaible: "Item unavaible",
         announce: {
@@ -178,6 +119,12 @@ export default defineI18nConfig(() => ({
       threads: {
         description: "Below is all my posts from Threads",
       },
+      projects: {
+        useai: "AI is envolved in some way.",
+        gitrepo: "Git Repo",
+        webpage: "Project webpage",
+        description: "This page includes most what I have done before."
+      }
     },
   },
 }));
