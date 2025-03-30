@@ -8,7 +8,7 @@ const DiscordStatus = ref("");
 const statusColor = ref("");
 const statusIcon = ref("");
 const status = ref("");
-const text = ref("");
+const text = ref([]);
 const error = ref("");
 const errorb = ref(false);
 const loading = ref(false);
@@ -26,19 +26,19 @@ onMounted(async () => {
     if (DiscordStatus.value === "online") {
       statusColor.value = "color:#23a459;";
       statusIcon.value = "bi-circle-fill";
-      text.value = "Online";
+      status.value = "Online";
     } else if (DiscordStatus.value === "idle") {
       statusColor.value = "color:#eeb132;";
       statusIcon.value = "bi-moon-fill";
-      text.value = "Idle";
+      status.value = "Idle";
     } else if (DiscordStatus.value === "dnd") {
       statusColor.value = "color:#f03f42";
       statusIcon.value = "bi-circle-fill";
-      text.value = "Do not Disturb";
+      status.value = "Do not Disturb";
     } else {
       statusColor.value = "color:grey";
       statusIcon.value = "bi-circle-fill";
-      text.value = "Offline";
+      status.value = "Offline";
     }
     for (const data in dcdata.data.activities) {
       // Activity Listening to Spotify, Playing Games or Coding
@@ -56,7 +56,7 @@ onMounted(async () => {
           ) {
             const FileNameStatus = ref(ActivityStatus0.state);
             const ProjectName = ref(ActivityStatus0.details);
-            text.value += `${FileNameStatus.value} ${ProjectName.value}`;
+            text.value.push(`${FileNameStatus.value} ${ProjectName.value}`);
             statusIcon.value = "bi-code-slash .fontsize1";
           } else {
             const ActivityName = ref(ActivityStatus0.name);
@@ -105,6 +105,7 @@ onMounted(async () => {
   </span>
   <span class="onlinepr" v-else
     ><i class="bi" :class="statusIcon" :style="statusColor"></i>&nbsp;
+    <span>{{ status }}</span>&nbsp;
     <span>{{ text }}</span>
   </span>
 </template>
