@@ -7,6 +7,7 @@ import Loader from "~/components/loading/randomloader.vue";
 const DiscordStatus = ref("");
 const statusColor = ref("");
 const statusIcon = ref("");
+const status = ref("");
 const text = ref("");
 const error = ref("");
 const errorb = ref(false);
@@ -79,7 +80,7 @@ onMounted(async () => {
           const Details = ref(ActivityStatus0.details);
           text.value = `Watching: ${Watching.value} - ${Details.value}`;
           text.value += SpotifyCurrentlyPlaying.value;
-          statusIcon.value = "bi-spotify fontsize1";
+          statusIcon.value = "bi-spotify fontsize1"; 
         } else if (ActivityStatus0.type === 4) {
           const ActivityName = ref(ActivityStatus0.state);
           text.value += `Status: ${ActivityName.value}`;

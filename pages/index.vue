@@ -152,7 +152,7 @@ const chatbot = async () => {};
             class="displaybackground"
             style="--displaybackground-height: 10dvh"
           ></div>
-          <section id="chatbot" class="chatbot">
+          <!--<section id="chatbot" class="chatbot">
             <h3>{{ t("core.chatbot.title") }}</h3>
             <div class="chatbot-content">
               <form @submit.prevent="">
@@ -162,7 +162,7 @@ const chatbot = async () => {};
                 <button><i class="bi bi-arrow-right"></i></button>
               </form>
             </div>
-          </section>
+          </section>-->
           <div class="status">
             <!--<section id="spotify">
         Spotify Status:
