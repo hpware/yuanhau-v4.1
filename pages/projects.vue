@@ -32,11 +32,11 @@ onMounted(() => {
     <div v-if="loading">
       <Loader/>
     </div>
-    <div v-if="!loading && !error" class="content">
+    <div v-if="!loading && !error" class="main">
       <div v-for="obj in projects" :key="obj.name">
         <div class="item">
           <h4>{{ obj.name }}</h4>
-          <p>{{ obj.description }}</p>
+          <p class="des">{{ obj.description }}</p>
           <p v-if="obj.useai">{{ t('projects.useai') }}</p>
           <p>
             <a :href="obj.gitrepo">{{ t("projects.gitrepo") }}</a
@@ -59,5 +59,26 @@ h2.title {
 }
 h6.dec {
   margin-top: 0;
+}
+.main {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.item {
+  background-color: #000;
+  padding:10px;
+  margin:10px;
+  h4 {
+    margin: 10px;
+    margin-bottom: 0;
+  }
+  p.des {
+    font-size:0.8em;
+
+  }
 }
 </style>

@@ -2,6 +2,11 @@
 
 This repo contains the unreleased versions and the released verisons of the yuanhau-site website.
 
+Prod: https://yhw.tw/site
+
+Beta: https://yhw.tw/yuanhaucombeta
+
+
 ## The current stack
 
 - Nuxt
