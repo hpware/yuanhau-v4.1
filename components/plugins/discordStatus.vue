@@ -30,19 +30,19 @@ const pullDiscordStatus = async () => {
     if (DiscordStatus === "online") {
       statusColor.value = "color:#23a459;";
       statusIcon.value = "bi-circle-fill";
-      status.value = "Online";
+      status.value = t("dcstatus.online");
     } else if (DiscordStatus === "idle") {
       statusColor.value = "color:#eeb132;";
       statusIcon.value = "bi-moon-fill";
-      status.value = "Idle";
+      status.value = t("dcstatus.idle");
     } else if (DiscordStatus === "dnd") {
       statusColor.value = "color:#f03f42";
       statusIcon.value = "bi-circle-fill";
-      status.value = "Do not Disturb";
+      status.value = t("dcstatus.dnd");
     } else {
       statusColor.value = "color:grey";
       statusIcon.value = "bi-circle-fill";
-      status.value = "Offline";
+      status.value = t("dcstatus.offline");
     }
     const dcuser = dcdata.data.discord_user;
     displayname.value = dcuser.display_name;

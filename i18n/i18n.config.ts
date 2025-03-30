@@ -68,6 +68,12 @@ export default defineI18nConfig(() => ({
         webpage: "專案網頁",
         description: "這裡包含著我在之前做過的東西",
       },
+      dcstatus: {
+        online: "線上",
+        idle: "待線中",
+        dnd: "勿擾",
+        offline: "不在線上"
+      }
     },
     en: {
       yhname: "Yuan-Hau Wu",
@@ -125,6 +131,12 @@ export default defineI18nConfig(() => ({
         webpage: "Project webpage",
         description: "This page includes most what I have done before.",
       },
+      dcstatus: {
+        online: "Online",
+        idle: "Idle",
+        dnd: "Do not disturb",
+        offline: "Offline"
+      }
     },
   },
 }));
