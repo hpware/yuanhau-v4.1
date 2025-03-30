@@ -66,11 +66,11 @@ const pullDiscordStatus = async () => {
             const FileNameStatus = ref(ActivityStatus0.state);
             const ProjectName = ref(ActivityStatus0.details);
             text.value.push(`${FileNameStatus.value} ${ProjectName.value}`);
-            statusIcon.value = "bi-code-slash .fontsize1";
+            
           } else {
             const ActivityName = ref(ActivityStatus0.name);
             text.value.push(`Playing ${ActivityName.value}`);
-            statusIcon.value = "bi-controller .fontsize1";
+            
           }
         } else if (ActivityStatus0.type === 2) {
           const SpotifyCurrentlyPlayingSong = ref(ActivityStatus0.details);
@@ -82,14 +82,11 @@ const pullDiscordStatus = async () => {
             `${SpotifyCurrentlyPlayingSong.value} - ${SpotifyCurrentlyPlayingArtistComma.value}`,
           );
           text.value.push(SpotifyCurrentlyPlaying.value);
-
-          statusIcon.value = "bi-spotify fontsize1";
         } else if (ActivityStatus0.type === 3) {
           const Watching = ref(ActivityStatus0.name);
           const Details = ref(ActivityStatus0.details);
           text.value.push(`Watching: ${Watching.value} - ${Details.value}`);
           text.value.push(SpotifyCurrentlyPlaying.value);
-          statusIcon.value = "bi-spotify fontsize1";
         } else if (ActivityStatus0.type === 4) {
           const ActivityName = ref(ActivityStatus0.state);
           text.value.push(`Status: ${ActivityName.value}`);
@@ -148,11 +145,15 @@ onMounted(() => {
           ><i class="bi bi-circle-fill" style="color: grey"></i>&nbsp;
           <span>Error fetching Status.</span>
         </span>
-        <h3>{{ displayname }}</h3>
-        <h4>{{ username }}</h4>
+        <div class="userinfo">
+          <NuxtImg :src="avatarURL"/>
+          <div class="username">
+            <h3>{{ displayname }}</h3>
+            <h4>{{ username }}</h4>
+            <span class="onlinepr"><i class="bi" :class="statusIcon" :style="statusColor"></i>&nbsp;<span>{{ status }}</span></span>
+          </div>
+        </div>
         <span class="onlinepr" v-if="!errorb"
-          ><i class="bi" :class="statusIcon" :style="statusColor"></i>&nbsp;
-          <span>{{ status }}</span
           >&nbsp;
           <div v-for="i in text" :key="i">{{ i }}<br /></div>
         </span>
@@ -165,16 +166,63 @@ onMounted(() => {
 .component {
   color: white;
   text-decoration: none;
-  div.main {
+}
+div.main {
     color: white;
     padding: 10px;
     border-radius: 10px;
     min-width: 400px;
+    max-width:400px;
     height: 200px !important;
     min-height: 200px;
     max-height: 200px;
-    background-color: #000;
+    background-color: rgb(38, 38, 38);
+    display:flex;
+    flex-direction: column;
+    justify-content:center;
+    align-self:center;
+    align-items:center;
+    text-align:center;
+    overflow:hidden;
+    transition: all 300ms ease-in-out;
+}
+div.main:hover {
+  background-color: #000
+}
+  .userinfo {
+    display:flex;
+    flex-direction: row;
+    gap:10px;
+    flex-wrap:wrap;
+    text-align:left;
+    h4{
+      margin-bottom:0;
+      padding-bottom:0;
+    }
+    .onlinepr {
+      text-align: left;
+      margin-top:0;
+      padding-top:0;
+    }
   }
+NuxtImg, img {
+  width:80px;
+  height:80px;
+  margin-left: 30px;
+  object-fit:cover;
+  margin-bottom: 10px;
+  display: block;
+  border-radius: 20px;
+}
+h3 {
+  margin: 5px 0 0 0; 
+  font-size: 1.2em;
+}
+h4 {
+  margin: 2px 0 5px 0;
+  font-size: 0.9em;
+  opacity: 0.8;
+  text-align:left;
 }
 .onlinepr {
   font-size: 0.6em;
