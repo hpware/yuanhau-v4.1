@@ -66,8 +66,8 @@ export default defineI18nConfig(() => ({
         useai: "這個程式有使用AI寫作",
         gitrepo: "Git 專案",
         webpage: "專案網頁",
-        description: "這裡包含著我在之前做過的東西"
-      }
+        description: "這裡包含著我在之前做過的東西",
+      },
     },
     en: {
       yhname: "Yuan-Hau Wu",
@@ -123,8 +123,8 @@ export default defineI18nConfig(() => ({
         useai: "AI is envolved in some way.",
         gitrepo: "Git Repo",
         webpage: "Project webpage",
-        description: "This page includes most what I have done before."
-      }
+        description: "This page includes most what I have done before.",
+      },
     },
   },
 }));

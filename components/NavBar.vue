@@ -119,7 +119,7 @@ onUnmounted(() => {
           >
             <i class="fa-solid fa-diagram-project"></i>
             <span>{{ t("nav.projects") }}</span>
-        </NuxtLink>
+          </NuxtLink>
 
           <NuxtLink
             :to="localePath('/blog/')"

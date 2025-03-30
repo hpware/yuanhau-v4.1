@@ -23,7 +23,7 @@ const p = defineProps({
     <div
       class="loader"
       :style="{
-        animationDuration: `${duration}ms`,
+        animationDuration: `${math}ms`,
         width: p.size,
         height: p.size,
       }"

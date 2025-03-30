@@ -426,7 +426,6 @@ div.status {
   section {
     gap: 10px;
     padding: 10px;
-    background-color: #000000;
     border-radius: 10px;
   }
 }

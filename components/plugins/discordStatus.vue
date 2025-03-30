@@ -4,34 +4,38 @@ import { onMounted, ref } from "vue";
 import Loader from "~/components/loading/randomloader.vue";
 
 // Set Vars for this thingy
-const DiscordStatus = ref("");
 const statusColor = ref("");
 const statusIcon = ref("");
 const status = ref("");
+const username = ref("");
+const userid = ref("");
+const displayname = ref("");
+const avatarURL = ref("");
 const text = ref([]);
 const error = ref("");
 const errorb = ref(false);
 const loading = ref(false);
 
 // Function
-onMounted(async () => {
+const pullDiscordStatus = async () => {
   try {
     loading.value = true;
+    text.value = [];
     const response = await fetch(
       "https://api.lanyard.rest/v1/users/918723093646684180",
     );
     const dcdata = await response.json();
-    DiscordStatus.value = dcdata.data.discord_status;
+    const DiscordStatus = dcdata.data.discord_status;
     // Status set & color
-    if (DiscordStatus.value === "online") {
+    if (DiscordStatus === "online") {
       statusColor.value = "color:#23a459;";
       statusIcon.value = "bi-circle-fill";
       status.value = "Online";
-    } else if (DiscordStatus.value === "idle") {
+    } else if (DiscordStatus === "idle") {
       statusColor.value = "color:#eeb132;";
       statusIcon.value = "bi-moon-fill";
       status.value = "Idle";
-    } else if (DiscordStatus.value === "dnd") {
+    } else if (DiscordStatus === "dnd") {
       statusColor.value = "color:#f03f42";
       statusIcon.value = "bi-circle-fill";
       status.value = "Do not Disturb";
@@ -40,6 +44,11 @@ onMounted(async () => {
       statusIcon.value = "bi-circle-fill";
       status.value = "Offline";
     }
+    const dcuser = dcdata.data.discord_user;
+    displayname.value = dcuser.display_name;
+    username.value = dcuser.username;
+    userid.value = dcuser.id;
+    avatarURL.value = `https://cdn.discordapp.com/avatars/${dcuser.id}/${dcuser.avatar}.webp?size=256,128`
     for (const data in dcdata.data.activities) {
       // Activity Listening to Spotify, Playing Games or Coding
       console.log(JSON.stringify(data));
@@ -60,7 +69,7 @@ onMounted(async () => {
             statusIcon.value = "bi-code-slash .fontsize1";
           } else {
             const ActivityName = ref(ActivityStatus0.name);
-            text.value += `Playing ${ActivityName.value}`;
+            text.value.push(`Playing ${ActivityName.value}`);
             statusIcon.value = "bi-controller .fontsize1";
           }
         } else if (ActivityStatus0.type === 2) {
@@ -72,45 +81,101 @@ onMounted(async () => {
           const SpotifyCurrentlyPlaying = ref(
             `${SpotifyCurrentlyPlayingSong.value} - ${SpotifyCurrentlyPlayingArtistComma.value}`,
           );
-          text.value = SpotifyCurrentlyPlaying.value;
+          text.value.push(SpotifyCurrentlyPlaying.value);
 
           statusIcon.value = "bi-spotify fontsize1";
         } else if (ActivityStatus0.type === 3) {
           const Watching = ref(ActivityStatus0.name);
           const Details = ref(ActivityStatus0.details);
-          text.value = `Watching: ${Watching.value} - ${Details.value}`;
-          text.value += SpotifyCurrentlyPlaying.value;
-          statusIcon.value = "bi-spotify fontsize1"; 
+          text.value.push(`Watching: ${Watching.value} - ${Details.value}`);
+          text.value.push(SpotifyCurrentlyPlaying.value);
+          statusIcon.value = "bi-spotify fontsize1";
         } else if (ActivityStatus0.type === 4) {
           const ActivityName = ref(ActivityStatus0.state);
-          text.value += `Status: ${ActivityName.value}`;
+          text.value.push(`Status: ${ActivityName.value}`);
         }
       }
     }
+    loading.value = false;
   } catch (error) {
     errorb.value = true;
+    loading.value = false;
   } finally {
     loading.value = false;
   }
+};
+onMounted(async () => {
+  pullDiscordStatus();
+  const intervalId = setInterval(() => {
+    pullDiscordStatus();
+  }, 600000);
+
+  onUnmounted(() => {
+    clearInterval(intervalId);
+  });
+});
+
+const { locale, t } = useI18n();
+const min = 1000;
+const max = 500;
+const math = ref();
+onMounted(() => {
+  const interval = setInterval(() => {
+    math.value = Math.floor(Math.random() * (max - min + 1) + min);
+  }, 5000);
+  onUnmounted(() => {
+    clearInterval(interval);
+  });
 });
 </script>
 
 <template>
-  <div v-if="loading">
-    <Loader size="20px" />
-  </div>
-  <span class="onlinepr" v-if="errorb === true"
-    ><i class="bi bi-circle-fill" style="color: grey"></i>&nbsp;
-    <span>Error fetching Status.</span>
-  </span>
-  <span class="onlinepr" v-else
-    ><i class="bi" :class="statusIcon" :style="statusColor"></i>&nbsp;
-    <span>{{ status }}</span>&nbsp;
-    <span>{{ text }}</span>
-  </span>
+  <a :href="`https://discord.com/users/${userid}`" class="component">
+    <div class="main">
+      <div v-if="loading">
+        <div class="loading">
+          <div
+            class="loader"
+            :style="{
+              animationDuration: `${math}ms`,
+            }"
+          ></div>
+          <p class="loader-p">{{ t("loading") }}...</p>
+        </div>
+      </div>
+      <div v-if="!loading">
+        <span class="onlinepr" v-if="errorb"
+          ><i class="bi bi-circle-fill" style="color: grey"></i>&nbsp;
+          <span>Error fetching Status.</span>
+        </span>
+        <h3>{{ displayname }}</h3>
+        <h4>{{ username }}</h4>
+        <span class="onlinepr" v-if="!errorb"
+          ><i class="bi" :class="statusIcon" :style="statusColor"></i>&nbsp;
+          <span>{{ status }}</span
+          >&nbsp;
+          <div v-for="i in text" :key="i">{{ i }}<br /></div>
+        </span>
+      </div>
+    </div>
+  </a>
 </template>
 
 <style scoped>
+.component {
+  color: white;
+  text-decoration: none;
+  div.main {
+    color: white;
+    padding: 10px;
+    border-radius: 10px;
+    min-width: 400px;
+    height: 200px !important;
+    min-height: 200px;
+    max-height: 200px;
+    background-color: #000;
+  }
+}
 .onlinepr {
   font-size: 0.6em;
   margin-top: 0em;
@@ -121,6 +186,35 @@ onMounted(async () => {
 @media (max-width: 700px) {
   .onlinepr {
     font-size: 0.5em;
+  }
+}
+.loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 4rem 2rem;
+  text-align: center;
+  gap: 0px;
+}
+.loader {
+  justify-content: center;
+  border: 5px solid rgba(255, 255, 255, 0.1);
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border-top-color: #0e69f2;
+  animation: spin 1s linear infinite;
+  margin-bottom: 0;
+}
+.loader-p {
+  text-align: center;
+  margin-top: 10px;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
   }
 }
 </style>

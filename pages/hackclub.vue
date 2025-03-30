@@ -57,20 +57,20 @@ const placeholderimg = `data:image/svg+xml,%3Csvg width='280' height='320' xmlns
     </div>-->
     <h3>My Projects</h3>
     <Transition name="project-fade">
-    <div v-if="!projloading" class="projects">
-      <div v-for="obj in projcontent" :key="obj.name">
-        <div class="item">
-          <h4>{{ obj.name }}</h4>
-          <p>{{ obj.description }}</p>
-          <p>
-            <a :href="obj.gitrepo">Git Repo</a
-            ><span v-if="obj.webpage"
-              >&nbsp;&nbsp;<a :href="obj.webpage">Project Webpage</a></span
-            >
-          </p>
+      <div v-if="!projloading" class="projects">
+        <div v-for="obj in projcontent" :key="obj.name">
+          <div class="item">
+            <h4>{{ obj.name }}</h4>
+            <p>{{ obj.description }}</p>
+            <p>
+              <a :href="obj.gitrepo">Git Repo</a
+              ><span v-if="obj.webpage"
+                >&nbsp;&nbsp;<a :href="obj.webpage">Project Webpage</a></span
+              >
+            </p>
+          </div>
         </div>
       </div>
-    </div>
     </Transition>
     <div v-if="projloading">
       <Loading />
