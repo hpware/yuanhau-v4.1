@@ -34,6 +34,7 @@ export default defineNuxtConfig({
     // FOR OTHER LANGS
     // en
     "/en": { prerender: true },
+    "/en/**": { prerender: true },
     "/en/bio": { prerender: true },
     "/en/about": { prerender: true },
     "/en/images/": { prerender: true },
