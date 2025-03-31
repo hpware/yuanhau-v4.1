@@ -11,7 +11,10 @@ const username = ref("");
 const userid = ref("");
 const displayname = ref("");
 const avatarURL = ref("");
-const text = ref([]);
+const text = ref([{
+  logos: "",
+  text: "",
+}]);
 const error = ref("");
 const errorb = ref(false);
 const loading = ref(false);
@@ -65,10 +68,10 @@ const pullDiscordStatus = async () => {
           ) {
             const FileNameStatus = ref(ActivityStatus0.state);
             const ProjectName = ref(ActivityStatus0.details);
-            text.value.push(`${FileNameStatus.value} ${ProjectName.value}`);
+            text.value.push({ text: `${FileNameStatus.value} ${ProjectName.value}`, logos: "braces" });
           } else {
             const ActivityName = ref(ActivityStatus0.name);
-            text.value.push(`Playing ${ActivityName.value}`);
+            text.value.push({ text: `Playing ${ActivityName.value}`, logos: "controller" });
           }
         } else if (ActivityStatus0.type === 2) {
           const SpotifyCurrentlyPlayingSong = ref(ActivityStatus0.details);
@@ -76,18 +79,15 @@ const pullDiscordStatus = async () => {
           const SpotifyCurrentlyPlayingArtistComma = ref(
             SpotifyCurrentlyPlayingArtist.value.replace(/;/g, ", "),
           );
-          const SpotifyCurrentlyPlaying = ref(
-            `${SpotifyCurrentlyPlayingSong.value} - ${SpotifyCurrentlyPlayingArtistComma.value}`,
-          );
-          text.value.push(SpotifyCurrentlyPlaying.value);
+          const SpotifyCurrentlyPlaying = `${SpotifyCurrentlyPlayingSong.value} - ${SpotifyCurrentlyPlayingArtistComma.value}`;
+          text.value.push({ text: SpotifyCurrentlyPlaying, logos: "spotify" });
         } else if (ActivityStatus0.type === 3) {
-          const Watching = ref(ActivityStatus0.name);
+          const Watching = ActivityStatus0.name;
           const Details = ref(ActivityStatus0.details);
-          text.value.push(`Watching: ${Watching.value} - ${Details.value}`);
-          text.value.push(SpotifyCurrentlyPlaying.value);
+          text.value.push({ text: `Watching: ${Watching} - ${Details}`, logos: "camera-video"});
         } else if (ActivityStatus0.type === 4) {
           const ActivityName = ref(ActivityStatus0.state);
-          text.value.push(`Status: ${ActivityName.value}`);
+          text.value.push({ text: `Status: ${ActivityName.value}`, logos: "activity"});
         }
       }
     }
@@ -110,7 +110,7 @@ onMounted(async () => {
   });
 });
 
-const { locale, t } = useI18n();
+const { t } = useI18n();
 const min = 1000;
 const max = 500;
 const math = ref();
@@ -156,7 +156,7 @@ onMounted(() => {
         </div>
         <span class="onlinepr" v-if="!errorb"
           >&nbsp;
-          <div v-for="i in text" :key="i">{{ i }}<br /></div>
+          <div v-for="i in text" :key="i.text"><i :class="`bi bi-${i.logos}`"></i>&nbsp;{{ i.text }}<br /></div>
         </span>
       </div>
     </div>
