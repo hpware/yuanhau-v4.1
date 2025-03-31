@@ -424,8 +424,8 @@ div.status {
   justify-content: center;
   align-items: center;
   section {
-    gap: 10px;
-    padding: 10px;
+    /*gap: 10px;
+    padding: 10px;*/
     border-radius: 10px;
   }
 }

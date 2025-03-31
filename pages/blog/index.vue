@@ -56,7 +56,22 @@ onMounted(() => {
         <p>{{ errormsg }}</p>
       </div>
       <div v-else>
-        <SideBar />
+        <div class="sidebar">
+          <SideBar />
+        </div>
+        <div class="bloglist">
+          <div v-for="i in blogs" :key="i.id">
+            <NuxtLink :to="i.path" class="card">
+              <div class="a">
+                <div class="title">
+                  <h2>{{ i.title }}</h2>
+                  <span>{{ fdate(i.date) }}</span>
+                </div>
+                <p>{{ i.description }}</p>
+              </div>
+            </NuxtLink>
+          </div>
+        </div>
       </div>
     </div>
   </div>

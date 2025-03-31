@@ -72,8 +72,8 @@ export default defineI18nConfig(() => ({
         online: "線上",
         idle: "待線中",
         dnd: "勿擾",
-        offline: "不在線上"
-      }
+        offline: "不在線上",
+      },
     },
     en: {
       yhname: "Yuan-Hau Wu",
@@ -135,8 +135,8 @@ export default defineI18nConfig(() => ({
         online: "Online",
         idle: "Idle",
         dnd: "Do not disturb",
-        offline: "Offline"
-      }
+        offline: "Offline",
+      },
     },
   },
 }));
