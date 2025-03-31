@@ -1,9 +1,13 @@
 <script setup lang="ts">
+const { t } = useI18n();
 import "~/components/css/hackclub.css";
 import Loading from "~/components/loading/hackclub.vue";
 import hackclubsvg from "~/components/svg/hackclub.svg";
 import hackclubFlag from "~/components/svg/hackclub-flag-orpheus-left.svg";
-const { t } = useI18n();
+const placeholderimg = `data:image/svg+xml,%3Csvg width='280' height='320' xmlns='http://www.w3.org/2000/svg'%3E%3Crect width='100%25' height='100%25' fill='%23333'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' fill='%23666' font-size='16'%3E${t("core.contentnotavaible")}%3C/text%3E%3C/svg%3E`;
+useHead({
+  title: `Hack Club | | ${t("yhname")}`,
+});
 
 // Slack Widget
 const slackloading = ref(false);
@@ -11,13 +15,11 @@ const slackloading = ref(false);
 // Projects
 const projloading = ref(false);
 const projcontent = ref();
-
 const fetchProjects = async () => {
   try {
     projloading.value = true;
     const req = await fetch("/api/hackclub/projects");
     const res = await req.json();
-    console.log(res);
     projcontent.value = res;
   } catch (e) {
     console.log(e);
@@ -28,10 +30,44 @@ const fetchProjects = async () => {
 onMounted(() => {
   fetchProjects();
 });
-useHead({
-  title: `Hack Club | | ${t("yhname")}`,
-});
-const placeholderimg = `data:image/svg+xml,%3Csvg width='280' height='320' xmlns='http://www.w3.org/2000/svg'%3E%3Crect width='100%25' height='100%25' fill='%23333'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' fill='%23666' font-size='16'%3E${t("core.contentnotavaible")}%3C/text%3E%3C/svg%3E`;
+// Images
+const imagesloading = ref(false);
+const imagescontent = ref();
+const fetchImages = async () => {
+    try {
+        imagesloading.value = true;
+        const req = await fetch("/api/hackclub/images");
+        const res = await req.json();
+        console.log(res);
+        imagescontent.value = res;
+    } catch (e) {
+        console.log(e);
+    } finally {
+        imagesloading.value = false;
+    }
+}
+onMounted(() => {
+    fetchImages();
+})
+// Fetch Dino Drawings
+const dinoload = ref(false);
+const dinocontent = ref();
+const fetchdinos = async () => {
+    try {
+        imagesloading.value = true;
+        const req = await fetch("/api/hackclub/drawings");
+        const res = await req.json();
+        console.log(res);
+        imagescontent.value = res;
+    } catch (e) {
+        console.log(e);
+    } finally {
+        imagesloading.value = false;
+    }
+}
+onMounted(() => {
+    fetchdinos();
+})
 </script>
 <template>
   <div class="background"></div>

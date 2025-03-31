@@ -7,6 +7,9 @@ const loading = ref(false);
 const error = ref(false);
 const errormsg = ref("");
 const data = ref();
+const router = useRouter();
+const route = useRoute();
+
 useHead({
   title: `${t("nav.blog")} | | ${t("yhname")}`,
 });
@@ -31,13 +34,14 @@ const fetchPosts = async (filter?: string) => {
   }
 };
 
-const route = useRoute();
 const q = route.query;
 onMounted(() => {
   if (q.id === "tags") {
-    fetchPosts(q.tags);
+    fetchPosts(q.tags, "tags");
   } else if (q.id === "year") {
     fetchPosts(q.year);
+  } else if (q.id === "search") {
+    fetchPosts(q.word);
   } else {
     fetchPosts();
   }

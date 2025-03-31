@@ -4,20 +4,11 @@ const years = ref([]);
 const tags = ref([]);
 const searcharea = ref("");
 const jsonsearchquery = ref();
+const router = useRouter();
 
 const submitsearch = async (e: Event) => {
   e.preventDefault();
-  const req = await fetch("/api/blog/search", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      search: searcharea,
-    })
-  })
-  const res = await req.json();
-  jsonsearchquery.value = JSON.stringify(res);
+  router.push(`/blog/?filter=${searcharea.value}`);
 }
 </script>
 <template>
