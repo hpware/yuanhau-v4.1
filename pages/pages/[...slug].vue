@@ -22,6 +22,7 @@ const fetchPageContent = async () => {
     loading.value = false;
   }
 };
+// On page load
 onMounted(() => {
   fetchPageContent();
 });
