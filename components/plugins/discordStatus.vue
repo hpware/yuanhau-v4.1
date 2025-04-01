@@ -183,7 +183,7 @@ onMounted(() => {
 .component {
   color: white;
   text-decoration: none;
-  overflow:hidden;
+  overflow: hidden;
 }
 div.main {
   color: white;
@@ -284,10 +284,10 @@ h4 {
     transform: rotate(360deg);
   }
 }
-@media only screen and ( max-width: 300px) {
+@media only screen and (max-width: 300px) {
   div.main {
-    margin:0;
-    overflow:hidden;
+    margin: 0;
+    overflow: hidden;
   }
 }
 </style>

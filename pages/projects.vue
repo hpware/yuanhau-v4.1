@@ -37,9 +37,10 @@ onMounted(() => {
             <p>{{ obj.description }}</p>
             <p>
               <a :href="obj.repo" v-if="obj.repo">{{ t("projects.code") }}</a
-              ><span v-if="obj.webpage && obj.repo"
-                >&nbsp;&nbsp;</span
-                ><a :href="obj.webpage" v-if="obj.webpage">{{ t("projects.webpage") }}</a>
+              ><span v-if="obj.webpage && obj.repo">&nbsp;&nbsp;</span
+              ><a :href="obj.webpage" v-if="obj.webpage">{{
+                t("projects.webpage")
+              }}</a>
             </p>
           </div>
         </div>
@@ -92,11 +93,11 @@ h6.dec {
   transform: translateY(20px);
   opacity: 0;
 }
-@media only screen and ( max-width: 500px ) {
+@media only screen and (max-width: 500px) {
   .projects {
     flex-direction: column-reverse;
     .item {
-      width:100px;
+      width: 100px;
     }
   }
 }

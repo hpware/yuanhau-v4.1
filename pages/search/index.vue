@@ -10,26 +10,26 @@ const submitsearch = async (e: Event) => {
 };
 </script>
 <template>
-    <div class="searchcontent">
-        <div class="chatbot-content">
-            <h1>Search Anything</h1>
-    <form id="askai" @submit.prevent="submitsearch">
-      <input v-model="searcharea" placeholder="Search Anything" />
-      <button><i class="bi bi-search"></i></button>
-    </form>
-    <div class="footer">
+  <div class="searchcontent">
+    <div class="chatbot-content">
+      <h1>Search Anything</h1>
+      <form id="askai" @submit.prevent="submitsearch">
+        <input v-model="searcharea" placeholder="Search Anything" />
+        <button><i class="bi bi-search"></i></button>
+      </form>
+      <div class="footer">
         <span>Powered by yuanhau.com/search</span>
+      </div>
     </div>
   </div>
-    </div>
 </template>
 <style scoped>
 div.searchcontent {
-    position: absolute;
-    left:0;
-    right:0;
-    top:0;
-    bottom:0;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
 }
 div.chatbot-content {
   padding-top: 0;
@@ -92,7 +92,7 @@ div.chatbot-content {
     color: rgba(255, 255, 255, 0.6);
   }
   div.footer {
-    font-size:0.4em;
+    font-size: 0.4em;
   }
 }
 </style>

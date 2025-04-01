@@ -4,7 +4,6 @@ const years = ref([]);
 const tags = ref([]);
 const searcharea = ref("");
 const router = useRouter();
-
 </script>
 <template>
   <div class="sidebar">
@@ -24,6 +23,4 @@ const router = useRouter();
     </div>
   </div>
 </template>
-<style scoped>
-
-</style>
+<style scoped></style>

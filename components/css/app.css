@@ -7,7 +7,7 @@ body {
   padding: 0;
   box-sizing: border-box;
   scroll-behavior: smooth;
-  word-wrap:break-word;
+  word-wrap: break-word;
   overflow-wrap: break-word;
 }
 body {

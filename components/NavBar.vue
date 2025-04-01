@@ -70,7 +70,7 @@ const checkparam = route.query.navbar;
 if (checkparam === "active") {
   setTimeout(() => {
     isOpen.value = true;
-  }, 500)
+  }, 500);
 }
 </script>
 

@@ -564,13 +564,13 @@ div.chatbot-content {
     transform: translateY(0);
   }
 }
-@media only screen and ( max-width: 300px) {
+@media only screen and (max-width: 300px) {
   div.status {
-    overflow:hidden;
+    overflow: hidden;
   }
   div.status section {
-    margin:0;
-    border:0;
+    margin: 0;
+    border: 0;
   }
 }
 </style>
