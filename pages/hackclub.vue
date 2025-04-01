@@ -79,6 +79,16 @@ onMounted(() => {
       <h1>Hack Club</h1>
       <h6>What I have done @ hackclub (This is also a special page)</h6>
     </div>
+    <div class="links">
+        <a href="https://hackclub.com/"><i class="bi bi-globe"></i></a>&nbsp;&nbsp;<a href="https://slack.com/app_redirect?channel=U087ATD163V"><i class="bi bi-slack"></i></a>
+    </div>
+    <h3>Hackatime</h3>
+    <div class="hackatime">
+        <NuxtImg 
+            src="https://github-readme-stats.hackclub.dev/api/wakatime?username=128&api_domain=hackatime.hackclub.com&theme=dark&custom_title=Hackatime+Stats&layout=compact&cache_seconds=0&langs_count=8"
+            class="hc-time-widget"
+        />
+    </div>
     <!--<h3>Slack widget</h3>
     <div v-if="!slackloading" class="slackwidgetcontainer">
         <a href="https://hackclub.slack.com/team/U087ATD163V">
@@ -112,6 +122,10 @@ onMounted(() => {
       <Loading />
     </div>
   </div>
+  <footer>
+    <span>Built using Nuxt</span>
+    <span>&copy; {{ new Date().getFullYear() }} Howard Wu / Yuan-Hau Wu / 吳元皓</span>
+  </footer>
 </template>
 <style></style>
 <style scoped>
@@ -135,6 +149,16 @@ div.flag {
     height: 150px;
   }
 }
+.links {
+    margin-top:10px;
+    a {
+        color:white;
+        transition: all 300ms ease-in-out
+    }
+    a:hover {
+        color:rgb(191, 191, 191);
+    }
+}
 div.content {
   font-family: Phantom Sans;
 }
@@ -144,6 +168,7 @@ div.header {
   }
   h6 {
     margin-top: 0;
+    margin-bottom:0;
   }
 }
 /**PENDING!! */
@@ -196,5 +221,18 @@ div.header {
 .project-fade-leave-to {
   transform: translateY(20px);
   opacity: 0;
+}
+div.hackatime {
+    .hc-time-widget {
+        width:50%;
+    }
+}
+footer {
+    display:flex;
+    flex-direction: column;
+    flex-wrap:wrap;
+    font-size:0.5em;
+    margin:50px;
+    margin-bottom:10px;
 }
 </style>
