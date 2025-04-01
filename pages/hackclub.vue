@@ -34,40 +34,40 @@ onMounted(() => {
 const imagesloading = ref(false);
 const imagescontent = ref();
 const fetchImages = async () => {
-    try {
-        imagesloading.value = true;
-        const req = await fetch("/api/hackclub/images");
-        const res = await req.json();
-        console.log(res);
-        imagescontent.value = res;
-    } catch (e) {
-        console.log(e);
-    } finally {
-        imagesloading.value = false;
-    }
-}
+  try {
+    imagesloading.value = true;
+    const req = await fetch("/api/hackclub/images");
+    const res = await req.json();
+    console.log(res);
+    imagescontent.value = res;
+  } catch (e) {
+    console.log(e);
+  } finally {
+    imagesloading.value = false;
+  }
+};
 onMounted(() => {
-    fetchImages();
-})
+  fetchImages();
+});
 // Fetch Dino Drawings
 const dinoload = ref(false);
 const dinocontent = ref();
 const fetchdinos = async () => {
-    try {
-        imagesloading.value = true;
-        const req = await fetch("/api/hackclub/drawings");
-        const res = await req.json();
-        console.log(res);
-        imagescontent.value = res;
-    } catch (e) {
-        console.log(e);
-    } finally {
-        imagesloading.value = false;
-    }
-}
+  try {
+    imagesloading.value = true;
+    const req = await fetch("/api/hackclub/drawings");
+    const res = await req.json();
+    console.log(res);
+    imagescontent.value = res;
+  } catch (e) {
+    console.log(e);
+  } finally {
+    imagesloading.value = false;
+  }
+};
 onMounted(() => {
-    fetchdinos();
-})
+  fetchdinos();
+});
 </script>
 <template>
   <div class="background"></div>

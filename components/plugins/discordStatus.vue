@@ -11,10 +11,12 @@ const username = ref("");
 const userid = ref("");
 const displayname = ref("");
 const avatarURL = ref("");
-const text = ref([{
-  logos: "",
-  text: "",
-}]);
+const text = ref([
+  {
+    logos: "",
+    text: "",
+  },
+]);
 const error = ref("");
 const errorb = ref(false);
 const loading = ref(false);
@@ -68,10 +70,16 @@ const pullDiscordStatus = async () => {
           ) {
             const FileNameStatus = ref(ActivityStatus0.state);
             const ProjectName = ref(ActivityStatus0.details);
-            text.value.push({ text: `${FileNameStatus.value} ${ProjectName.value}`, logos: "braces" });
+            text.value.push({
+              text: `${FileNameStatus.value} ${ProjectName.value}`,
+              logos: "braces",
+            });
           } else {
             const ActivityName = ref(ActivityStatus0.name);
-            text.value.push({ text: `Playing ${ActivityName.value}`, logos: "controller" });
+            text.value.push({
+              text: `Playing ${ActivityName.value}`,
+              logos: "controller",
+            });
           }
         } else if (ActivityStatus0.type === 2) {
           const SpotifyCurrentlyPlayingSong = ref(ActivityStatus0.details);
@@ -84,10 +92,16 @@ const pullDiscordStatus = async () => {
         } else if (ActivityStatus0.type === 3) {
           const Watching = ActivityStatus0.name;
           const Details = ref(ActivityStatus0.details);
-          text.value.push({ text: `Watching: ${Watching} - ${Details}`, logos: "camera-video"});
+          text.value.push({
+            text: `Watching: ${Watching} - ${Details}`,
+            logos: "camera-video",
+          });
         } else if (ActivityStatus0.type === 4) {
           const ActivityName = ref(ActivityStatus0.state);
-          text.value.push({ text: `Status: ${ActivityName.value}`, logos: "activity"});
+          text.value.push({
+            text: `Status: ${ActivityName.value}`,
+            logos: "activity",
+          });
         }
       }
     }
@@ -156,7 +170,9 @@ onMounted(() => {
         </div>
         <span class="onlinepr" v-if="!errorb"
           >&nbsp;
-          <div v-for="i in text" :key="i.text"><i :class="`bi bi-${i.logos}`"></i>&nbsp;{{ i.text }}<br /></div>
+          <div v-for="i in text" :key="i.text">
+            <i :class="`bi bi-${i.logos}`"></i>&nbsp;{{ i.text }}<br />
+          </div>
         </span>
       </div>
     </div>

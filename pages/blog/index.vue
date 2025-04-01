@@ -4,7 +4,7 @@ import Loading from "@/components/loading/randomloader.vue";
 import SideBar from "~/components/BlogSidebar.vue";
 const { t } = useI18n();
 const loading = ref(false);
-const error = ref(false);
+const error = ref(true);
 const errormsg = ref("");
 const data = ref();
 const router = useRouter();
