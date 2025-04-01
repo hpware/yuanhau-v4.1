@@ -54,7 +54,7 @@ const submit = async () => {
 };
 async function fetchmarkdown() {
   try {
-    const res = await fetch(`/api/db/markdown/${id}`);
+    const res = await fetch(`/api/db/markdown-v1/${id}`);
     const md = await res.text();
     markdown.value = md;
   } catch (e) {

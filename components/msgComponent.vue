@@ -35,11 +35,11 @@ function closeAnnouncement() {
         >
           <i class="bi bi-x"></i>
         </button>
-        <div class="message">
+        <span class="message">
           &nbsp;<i class="bi bi-exclamation-triangle-fill"></i>&nbsp;
-          <h3>{{ t("core.announce.title") }}:</h3>
+          <span>{{ t("core.announce.title") }}:</span>
           <span class="data" v-html="data"></span>
-        </div>
+        </span>
       </div>
       <div class="progress-bar"></div>
     </div>

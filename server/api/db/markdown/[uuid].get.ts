@@ -6,13 +6,14 @@ const supabase = createClient(
 );
 
 export default defineEventHandler(async (event) => {
-  const id = getRouterParam(event, "id");
-  if (event.node.req.method === "GET" && id !== null) {
+  const uuid = getRouterParam(event, "uuid");
+  event.node.res.setHeader("Content-Type", "text/markdown; charset=utf-8");
+  if (event.node.req.method === "GET" && uuid !== null) {
     try {
       const { data, error } = await supabase
-        .from("markdown")
+        .from("md")
         .select("content")
-        .eq("id", `${id}`)
+        .eq("uuid", `${uuid}`)
         .single();
       if (error || data === null) {
         return {
@@ -20,17 +21,16 @@ export default defineEventHandler(async (event) => {
           message: "No Content",
         };
       }
-      event.node.res.setHeader("Content-Type", "text/markdown; charset=utf-8");
       return `${data.content}`;
     } catch (e) {
       console.log("error", e);
-      return {
-        error: 500,
-      };
+      return `
+      # Server error or Content not found
+      # 伺服器錯誤 或 檔案不存在`
     }
   } else {
-    return {
-      error: 403,
-    };
+    return `
+    # Content not found 
+    # 檔案不存在`
   }
 });
