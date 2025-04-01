@@ -1,18 +1,23 @@
-export default defineEventHandler(async () => {
-  return {
-    0: {
-      name: "testing",
-      description: "testingsaefsdffsdsfdsfesdeswfsdfsdfsdfsdfsdfsdfdsf",
-      useai: true,
-      repo: "https://github.com/hpware/testing.git",
-      webpage: "https://github.com/hpware/testing.git",
-    },
-    1: {
-      name: "testing",
-      description: "isodfoshjfoishiosdhfiosdhfdoihio",
-      useai: true,
-      repo: "https://github.com/hpware/testing.git",
-      webpage: "https://github.com/hpware/testing.git",
-    },
-  };
+import { createClient } from "@supabase/supabase-js";
+const supabasetoken = process.env.SUPABASE_KEY;
+const supabase = createClient(
+  "https://rlretgpxqtgzsjuhqjwu.supabase.co",
+  `${supabasetoken}`,
+);
+export default defineEventHandler(async (event) => {
+  setHeader(event, "Content-Type", "appication/json");
+  try {
+    const { data, error } = await supabase
+      .from("projects")
+      .select("*")
+      .maybeSingle();
+    return {
+      data: data,
+    };
+  } catch (e) {
+    console.log(e);
+    return {
+      data: "Server Side Error.",
+    };
+  }
 });
