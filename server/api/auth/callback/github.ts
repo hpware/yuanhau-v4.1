@@ -1,6 +1,14 @@
 import { getQuery } from "h3";
 
 export default defineEventHandler(async (event) => {
+  // Next Route
+  const navbaractive = "?navbar=active";
+  const uri = new URL(
+    event.node.req.url!,
+    `http://${event.node.req.headers.host}`,
+  );
+  const getnextRoute = uri.searchParams.get("nextRoute");
+  const nextRoute = `https://${event.node.req.headers.host}/${getnextRoute}${navbaractive}`
   // Query Login Code
   const logincode = getQuery(event).code;
   if (!logincode) {
@@ -24,7 +32,7 @@ export default defineEventHandler(async (event) => {
   // Github Client ID & Secret
   const client_id = process.env.GITHUB_OAUTH_CLIENT;
   const client_secret = process.env.GITHUB_OAUTH_SECRET;
-  const redirect_uri = "https://yuanhau-v4.vercel.app/api/auth/callback/github";
+  const redirect_uri = `https://${event.node.req.headers.host}/api/auth/callback/github`;
   try {
     const res = await fetch("https://github.com/login/oauth/access_token", {
       method: "POST",
@@ -44,7 +52,7 @@ export default defineEventHandler(async (event) => {
       path: "/",
       httpOnly: true,
     });
-    return sendRedirect(event, "/user/panel/");
+    return sendRedirect(event, nextRoute);
   } catch (e) {
     const msg = `
             <html>
@@ -60,7 +68,7 @@ export default defineEventHandler(async (event) => {
     event.node.res.statusCode = 500;
     event.node.res.end(msg);
     setTimeout(() => {
-      return sendRedirect(event, "/user/login");
+      return sendRedirect(event, nextRoute);
     }, 12000);
   }
 });

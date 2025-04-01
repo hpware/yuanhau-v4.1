@@ -63,6 +63,15 @@ onUnmounted(() => {
   document.removeEventListener("click", handleClickOutside);
   document.removeEventListener("keydown", handleKeyDown);
 });
+
+// Check if the navbar needs to be active.
+const route = useRoute();
+const checkparam = route.query.navbar;
+if (checkparam === "active") {
+  setTimeout(() => {
+    isOpen.value = true;
+  }, 500)
+}
 </script>
 
 <template>
@@ -178,7 +187,7 @@ onUnmounted(() => {
               >
               <span></span>
             </NuxtLink>
-            <a :href="`/sign-${user ? 'out' : 'in'}`">
+            <a :href="`/log${user ? 'out' : 'in'}`">
               登 {{ user ? "出" : "入" }}
             </a>
           </div>

@@ -54,7 +54,7 @@ function closeAnnouncement() {
   right: 0;
   background-color: #ffbf00e4;
   color: #000;
-  z-index: 999;
+  z-index: 998;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
   overflow: hidden;
   max-height: 90px;
