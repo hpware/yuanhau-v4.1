@@ -5,17 +5,17 @@ const supabase = createClient(
   `${supabasetoken}`,
 );
 export default defineEventHandler(async (event) => {
-    setHeader(event, "Content-Type", "text/text");
-    try {
+  setHeader(event, "Content-Type", "text/text");
+  try {
     const { data, error } = await supabase
       .from("info")
       .select("*")
       .eq("type", "announce")
       .maybeSingle();
     if (error) {
-        throw new Error(error.message);
+      throw new Error(error.message);
     }
-    return data.data
+    return data.data;
   } catch (e) {
     console.log(e);
     return {

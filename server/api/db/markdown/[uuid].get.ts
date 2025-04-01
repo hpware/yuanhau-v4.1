@@ -26,11 +26,11 @@ export default defineEventHandler(async (event) => {
       console.log("error", e);
       return `
       # Server error or Content not found
-      # 伺服器錯誤 或 檔案不存在`
+      # 伺服器錯誤 或 檔案不存在`;
     }
   } else {
     return `
     # Content not found 
-    # 檔案不存在`
+    # 檔案不存在`;
   }
 });

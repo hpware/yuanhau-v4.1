@@ -1,6 +1,6 @@
 <script setup lang="ts">
 // Import
-import markdownit from 'markdown-it';
+import markdownit from "markdown-it";
 const md = markdownit();
 const route = useRoute();
 // Values
@@ -9,7 +9,7 @@ const loading = ref(false);
 const error = ref();
 // Get Slug
 const uuid = route.params.slug;
-const fetchPageContent =  async () => {
+const fetchPageContent = async () => {
   try {
     loading.value = true;
     const req = await fetch(`/api/db/markdown/${uuid}`);
@@ -21,14 +21,17 @@ const fetchPageContent =  async () => {
   } finally {
     loading.value = false;
   }
-}
+};
 onMounted(() => {
   fetchPageContent();
-})
+});
 </script>
 <template>
-  <div>
+  <div v-if="error">
     <p>Oops! 暫時無法存取資料!</p>
+  </div>
+  <div v-else>
+    <div v-html="md"></div>
   </div>
 </template>
 <style scoped>
