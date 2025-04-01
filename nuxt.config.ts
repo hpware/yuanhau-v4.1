@@ -17,7 +17,7 @@ export default defineNuxtConfig({
     // Redirect old content to old content. and /blog to new.
     "/posts/": { redirect: "/blog/" },
     "/posts/**": {
-      redirect: "https://yuanhau-site-2-14-content.vercel.app/posts/**",
+      redirect: "https:///4-1-2.yuanhau.com/posts/**",
     },
     "/api/**": { cors: true },
     "/admin/": { redirect: "/admin/login" },
@@ -28,7 +28,7 @@ export default defineNuxtConfig({
     "/post/**": { redirect: "/posts/**" },
     // Sync the old with the new
     "/mdview/**": {
-      redirect: "https://yuanhau-site-2-14-content.vercel.app/mdview/**",
+      redirect: "https:///4-1-2.yuanhau.com/mdview/**",
     },
     "/form/**": { ssr: true },
     // FOR OTHER LANGS
@@ -42,7 +42,7 @@ export default defineNuxtConfig({
     // Redirect old content to old content. and /blog to new.
     "/en/posts/": { redirect: "/blog/" },
     "/en/posts/**": {
-      redirect: "https://yuanhau-site-2-14-content.vercel.app/posts/**",
+      redirect: "https://4-1-2.yuanhau.com/posts/**",
     },
     "/en/admin/": { redirect: "/admin/login" },
     "/en/admin/**": { redirect: "/admin/**" },

@@ -1,9 +1,13 @@
 <script setup lang="ts">
-const { t } = useI18n();
+// Import
 import Giscus from "@giscus/vue";
 import { inView, animate } from "motion";
 import "@/components/css/markdown.css";
 import SideBar from "~/components/BlogSidebar.vue";
+import markdownit from "markdown-it";
+const md = markdownit();
+const { t } = useI18n();
+// Title
 useHead({
   title: `${t("nav.blog")} | | ${t("yhname")}`,
 });
@@ -25,6 +29,7 @@ const slug = computed(() => {
   return route.params.slug;
 });
 onMounted(async () => {
+  // 這個先不要使用不然短網址服務會多很多 https://yuanhau.com/posts/[object object] 或 垃圾東西
   /**try {
     const req = await fetch("/api/db/obtainshortlink", {
       method: "POST",
@@ -48,7 +53,7 @@ const copylink = async () => {
 </script>
 <template>
   <main>
-    <p>你想去的地方 https://yuanhau.com/blog/{{ slug }}</p>
+    <p>你想去的地方 https://4-1-2.yuanhau.com/blog/{{ slug }}</p>
     <p>
       Oops! 這個頁面正在大改! 請稍後在回來 或把網址在 https:// 與 yuanhau
       之間加上 2-14.
