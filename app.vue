@@ -3,6 +3,7 @@ import "~/components/css/icons.css";
 import "~/components/css/app.css";
 import NavBar from "~/components/NavBar.vue";
 import msgComponent from "~/components/msgComponent.vue";
+import "bootstrap-icons/font/bootstrap-icons.min.css";
 import { defineProps, ref, onMounted } from "vue";
 import { SpeedInsights } from "@vercel/speed-insights/nuxt";
 const { locale, t, setLocale } = useI18n();

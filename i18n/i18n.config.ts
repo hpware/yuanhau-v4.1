@@ -64,8 +64,8 @@ export default defineI18nConfig(() => ({
       },
       projects: {
         useai: "這個程式有使用AI寫作",
-        gitrepo: "Git 專案",
-        webpage: "專案網頁",
+        code: "程式碼",
+        webpage: "網頁",
         description: "這裡包含著我在之前做過的東西",
       },
       dcstatus: {
@@ -127,8 +127,8 @@ export default defineI18nConfig(() => ({
       },
       projects: {
         useai: "AI is envolved in some way.",
-        gitrepo: "Git Repo",
-        webpage: "Project webpage",
+        code: "Code",
+        webpage: "Webpage",
         description: "This page includes most what I have done before.",
       },
       dcstatus: {

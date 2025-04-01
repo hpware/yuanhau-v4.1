@@ -4,14 +4,14 @@ export default defineEventHandler(async () => {
       name: "testing",
       description: "testingsaefsdffsdsfdsfesdeswfsdfsdfsdfsdfsdfsdfdsf",
       useai: true,
-      gitrepo: "https://github.com/hpware/testing.git",
+      repo: "https://github.com/hpware/testing.git",
       webpage: "https://github.com/hpware/testing.git",
     },
     1: {
       name: "testing",
       description: "isodfoshjfoishiosdhfiosdhfdoihio",
       useai: true,
-      gitrepo: "https://github.com/hpware/testing.git",
+      repo: "https://github.com/hpware/testing.git",
       webpage: "https://github.com/hpware/testing.git",
     },
   };
