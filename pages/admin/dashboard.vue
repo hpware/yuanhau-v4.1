@@ -226,6 +226,7 @@ onMounted(async () => {
   left: 0;
   width: 100%;
   flex-direction: row;
+  flex-wrap: wrap;
   margin-left: auto;
   margin-right: auto;
   align-self: center;
