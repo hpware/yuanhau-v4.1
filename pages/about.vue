@@ -2,8 +2,8 @@
 import { ref } from "vue";
 import { marked } from "marked";
 import { animate } from "motion";
-import "~/components/markdown.css";
-import Loading from "~/components/loading/discordstyle.vue";
+import "~/components/css/markdown.css";
+import Loading from "~/components/loading/randomloader.vue";
 useHead({
   title: "關於我 | 吳元皓",
   link: [
@@ -20,7 +20,7 @@ const loading = ref(true);
 // Coding History List
 async function getCodingHistoryMD() {
   try {
-    const mdfile = await fetch("/api/db/markdown?id=1");
+    const mdfile = await fetch("/api/db/markdown-v1?id=1");
     const mdtext = await mdfile.text();
     codinghistory.value = marked(mdtext);
   } catch (e) {
@@ -28,29 +28,25 @@ async function getCodingHistoryMD() {
       statusCode: 500,
       message: "錯誤: " + e,
     });
-    loading.value = false;
   } finally {
-    setTimeout(() => {
-      loading.value = false;
-    }, 1000);
+    loading.value = false;
   }
 }
 getCodingHistoryMD();
 </script>
 <template>
-  <div v-if="loading" class="loading">
-    <Loading />
-  </div>
+  <Loading class="mainloader" v-if="loading" />
   <section id="about" class="about" v-if="!loading">
     <div v-html="codinghistory"></div>
   </section>
 </template>
 <style scoped>
-.loading {
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  margin-top: 5%;
+.mainloader {
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
 }
 .about {
   animation: fade-in 1200ms ease-in-out;

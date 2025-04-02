@@ -1,28 +1,53 @@
 import { resolve } from "node:path";
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
-  compatibilityDate: "2024-11-01",
+  compatibilityDate: "2025-04-02",
 
   devtools: {
     enabled: true,
-  }, 
+  },
 
   routeRules: {
     "/": { prerender: true },
     "/**": { prerender: true },
-    "/prerender/**": { prerender: true },
-    "/web3/**": { prerender: true },
+    "/legacy-index": { prerender: true },
+    "/about": { prerender: true },
+    "/images/": { prerender: true },
+    "/threads": { prerender: true },
+    // Redirect old content to old content. and /blog to new.
+    "/posts/": { redirect: "https:///4-1-2.yuanhau.com/posts/" },
+    "/posts/**": {
+      redirect: "https:///4-1-2.yuanhau.com/posts/**",
+    },
     "/api/**": { cors: true },
     "/admin/": { redirect: "/admin/login" },
     "/admin/**": { ssr: true },
-    "/signal": { redirect: "https://yhw.tw/signal" }, // Compatibility with the Wordpresss version link aka https://yuanhau.com/signal
+    "/signal": { redirect: "https://yhw.tw/signal" }, // Compatibility with the Wordpresss version link aka https://wp.yuanhau.com/signal
     // Old Redirect stuff here.
     "/post": { redirect: "/posts" },
     "/post/**": { redirect: "/posts/**" },
     // Sync the old with the new
-    "/mdview/**": { ssr: true },
-    "/en-about": { redirect: "/mdview/6" },
+    "/mdview/**": {
+      redirect: "https:///4-1-2.yuanhau.com/mdview/**",
+    },
     "/form/**": { ssr: true },
+    // FOR OTHER LANGS
+    // en
+    "/en": { prerender: true },
+    "/en/**": { prerender: true },
+    "/en/legacy-index": { prerender: true },
+    "/en/about": { prerender: true },
+    "/en/images/": { prerender: true },
+    "/en/threads": { prerender: true },
+    // Redirect old content to old content. and /blog to new.
+    "/en/posts/": { redirect: "/blog/" },
+    "/en/posts/**": {
+      redirect: "https://4-1-2.yuanhau.com/posts/**",
+    },
+    "/en/admin/": { redirect: "/admin/login" },
+    "/en/admin/**": { redirect: "/admin/**" },
+    // Sync the old with the new
+    "/en/form/**": { ssr: true },
   },
 
   modules: [
@@ -35,7 +60,7 @@ export default defineNuxtConfig({
     "@nuxt/content",
     "nuxt-gtag",
     "@bg-dev/nuxt-s3",
-    //"@nuxtjs/i18n",
+    "@nuxtjs/i18n",
     "@logto/nuxt",
   ],
 
@@ -61,13 +86,14 @@ export default defineNuxtConfig({
         lang: "zh-Hant",
       },
       link: [
+        { rel: "icon", href: "/img/pfp-1.jpg" },
+        { rel: "favicon", href: "/img/pfp-1.jpg" },
         { rel: "dns-prefetch", href: "https://utfs.io" },
         { rel: "dns-prefetch", href: "https://s3.yhw.tw" },
         {
           rel: "prefetch",
           href: "https://utfs.io/f/CCLPSN5W2HD5ziRBkeSZ5pJYf32lWLvIK8uGb41xkHCUnXm7",
         },
-        { rel: "icon", href: "/favicon.ico" },
       ],
       meta: [
         { charset: "utf-8" },
@@ -141,17 +167,17 @@ export default defineNuxtConfig({
       posthogHost: "https://us.i.posthog.com",
     },
     logto: {
-      endpoint: 'https://logto.yuanhau.com/',
-      appId: '02l4vunlf4f17jpks449h',
-      appSecret: 'fAej9glG1MhbfmEnfhtCVfa1yxv0M4Hd',
-      cookieEncryptionKey: 'aIG2EC9souxqOgEPQXtSqwCZZLwUsd6e', // Random-generated
+      endpoint: "https://logto.yuanhau.com/",
+      appId: "02l4vunlf4f17jpks449h",
+      appSecret: "fAej9glG1MhbfmEnfhtCVfa1yxv0M4Hd",
+      cookieEncryptionKey: "aIG2EC9souxqOgEPQXtSqwCZZLwUsd6e", // Random-generated
     },
   },
-logto: {
-  pathnames: {
-    callback: '/api/auth/callback',
+  logto: {
+    pathnames: {
+      callback: "/api/auth/callback",
+    },
   },
-},
   sentry: {
     sourceMapsUploadOptions: {
       org: "hwtwcc",
@@ -163,5 +189,25 @@ logto: {
 
   sourcemap: {
     client: "hidden",
+  },
+  i18n: {
+    vueI18n: "./i18n.config.ts",
+    strategy: "prefix_except_default",
+    defaultLocale: "zh-tw",
+    locales: [
+      {
+        code: "zh-tw",
+        name: "繁體中文",
+      },
+      {
+        code: "en",
+        name: "English",
+      },
+    ],
+    detectBrowserLanguage: {
+      useCookie: true,
+      cookieKey: "i18n_redirected",
+      redirectOn: "root",
+    },
   },
 });

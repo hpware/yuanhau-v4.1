@@ -1,7 +1,11 @@
 <script setup lang="ts">
+import "~/components/css/hackclub.css";
+const { t } = useI18n();
+const localePath = useLocalePath();
 import { animate } from "motion";
 import { ref, onMounted, onUnmounted } from "vue";
-import { useLogtoUser } from '#imports';
+import { useLogtoUser } from "#imports";
+import hackclubsvg from "~/components/svg/hackclub.svg";
 const user = useLogtoUser();
 
 const isOpen = ref(false);
@@ -21,18 +25,20 @@ const closeSidebar = () => {
 
 // Close sidebar when clicking outside
 const handleClickOutside = (event) => {
-  if (isOpen.value && 
-      sidebar.value && 
-      !sidebar.value.contains(event.target) && 
-      menuButton.value && 
-      !menuButton.value.contains(event.target)) {
+  if (
+    isOpen.value &&
+    sidebar.value &&
+    !sidebar.value.contains(event.target) &&
+    menuButton.value &&
+    !menuButton.value.contains(event.target)
+  ) {
     closeSidebar();
   }
 };
 
 // Close sidebar on escape key
 const handleKeyDown = (event) => {
-  if (event.key === 'Escape' && isOpen.value) {
+  if (event.key === "Escape" && isOpen.value) {
     closeSidebar();
   }
 };
@@ -48,23 +54,32 @@ const handleMouseLeave = () => {
 
 // Set up event listeners
 onMounted(() => {
-  document.addEventListener('click', handleClickOutside);
-  document.addEventListener('keydown', handleKeyDown);
+  document.addEventListener("click", handleClickOutside);
+  document.addEventListener("keydown", handleKeyDown);
 });
 
 // Clean up event listeners
 onUnmounted(() => {
-  document.removeEventListener('click', handleClickOutside);
-  document.removeEventListener('keydown', handleKeyDown);
+  document.removeEventListener("click", handleClickOutside);
+  document.removeEventListener("keydown", handleKeyDown);
 });
+
+// Check if the navbar needs to be active.
+const route = useRoute();
+const checkparam = route.query.navbar;
+if (checkparam === "active") {
+  setTimeout(() => {
+    isOpen.value = true;
+  }, 500);
+}
 </script>
 
 <template>
   <div class="navbar-component">
     <div class="menu-button-container" ref="menuButton">
-      <button 
-        @click="toggleSidebar" 
-        :class="['menu-button', { 'active': isOpen }]" 
+      <button
+        @click="toggleSidebar"
+        :class="['menu-button', { active: isOpen }]"
         aria-label="Toggle menu"
       >
         <span class="menu-icon"></span>
@@ -76,75 +91,143 @@ onUnmounted(() => {
     </Transition>
 
     <Transition name="slide">
-      <div 
-        v-if="isOpen" 
-        ref="sidebar" 
-        class="sidebar" 
-        @mouseenter="handleMouseEnter" 
+      <div
+        v-if="isOpen"
+        ref="sidebar"
+        class="sidebar"
+        @mouseenter="handleMouseEnter"
         @mouseleave="handleMouseLeave"
       >
         <div class="sidebar-header">
-          <h2 class="sidebar-title">吳元皓</h2>
+          <h2 class="sidebar-title">{{ t("yhname") }}</h2>
         </div>
 
         <nav class="sidebar-nav">
-          <NuxtLink to="/" @click="closeSidebar" class="nav-item">
+          <NuxtLink
+            :to="localePath('/')"
+            @click="closeSidebar"
+            class="nav-item"
+          >
             <i class="bi bi-house"></i>
-            <span>首頁</span>
+            <span>{{ t("home.title") }}</span>
           </NuxtLink>
-          
-          <NuxtLink to="/about" @click="closeSidebar" class="nav-item">
+
+          <NuxtLink
+            :to="localePath('/about')"
+            @click="closeSidebar"
+            class="nav-item"
+          >
             <i class="bi bi-info-circle"></i>
-            <span>關於我</span>
+            <span>{{ t("title.about") }}</span>
           </NuxtLink>
-          
-          <NuxtLink to="/posts/" @click="closeSidebar" class="nav-item">
+
+          <NuxtLink
+            :to="localePath('/projects')"
+            @click="closeSidebar"
+            class="nav-item"
+          >
+            <i class="fa-solid fa-diagram-project"></i>
+            <span>{{ t("nav.projects") }}</span>
+          </NuxtLink>
+
+          <NuxtLink
+            :to="localePath('/posts/')"
+            @click="closeSidebar"
+            class="nav-item"
+          >
             <i class="bi bi-journal-text"></i>
-            <span>Blog</span>
+            <span>{{ t("title.blog") }}</span>
           </NuxtLink>
-    
-          
-          <NuxtLink to="/images/" @click="closeSidebar" class="nav-item">
+
+          <NuxtLink
+            :to="localePath('/images/')"
+            @click="closeSidebar"
+            class="nav-item"
+          >
             <i class="bi bi-images"></i>
             <span>相簿</span>
           </NuxtLink>
-          
-          <NuxtLink to="/recommendations" @click="closeSidebar" class="nav-item">
+
+          <NuxtLink
+            :to="localePath('/recommendations')"
+            @click="closeSidebar"
+            class="nav-item"
+          >
             <i class="bi bi-chat-left-text"></i>
-            <span>建議/聯絡</span>
+            <span>{{ t("title.contact") }}</span>
+          </NuxtLink>
+          <NuxtLink
+            :to="localePath('/hackclub')"
+            @click="closeSidebar"
+            class="nav-item"
+          >
+            <img
+              :src="hackclubsvg"
+              style="width: 30px; height: 30px; padding-right: 10px"
+            />
+            <span>Hack Club</span>
           </NuxtLink>
         </nav>
         <div class="user">
           <div v-if="!Boolean(user)">
-            <i class="bi bi-person"></i>
+            <a href="/sign-in">
+              <i class="bi bi-person"></i
+              ><span>&nbsp;{{ t("login.notloggedin") }}</span>
+            </a>
           </div>
           <div v-else>
-            <NuxtLink to="/user/" @click="closeSidebar" class="user-item">
-              <i v-if="!user.picture" class="bi bi-person"></i><img v-else :src="user.picture"/><span>&nbsp;{{ user.name ? user.name : user.username }}</span>
-            <span></span>
-          </NuxtLink>
+            <NuxtLink
+              :to="localePath('/user/')"
+              @click="closeSidebar"
+              class="user-item"
+            >
+              <i v-if="!user.picture" class="bi bi-person"></i
+              ><img v-else :src="user.picture" /><span
+                >&nbsp;{{ user.name ? user.name : user.username }}</span
+              >
+              <span></span>
+            </NuxtLink>
+            <a :href="`/log${user ? 'out' : 'in'}`">
+              登 {{ user ? "出" : "入" }}
+            </a>
           </div>
-          <a :href="`/sign-${ user ? 'out' : 'in' }`"> 登 {{ user ? '出' : '入' }} </a>
         </div>
         <div class="sidebar-footer">
           <div class="social-links">
-            <a href="https://github.com/hpware" target="_blank" aria-label="GitHub">
+            <a
+              href="https://github.com/hpware"
+              target="_blank"
+              aria-label="GitHub"
+            >
               <i class="bi bi-github"></i>
             </a>
             <a href="https://yhw.tw/ig" target="_blank" aria-label="Instagram">
               <i class="bi bi-instagram"></i>
             </a>
-            <a href="https://yhw.tw/threads" target="_blank" aria-label="Threads">
+            <a
+              href="https://yhw.tw/threads"
+              target="_blank"
+              aria-label="Threads"
+            >
               <i class="bi bi-threads"></i>
             </a>
-            <a href="https://twitter.com/ictechz" target="_blank" aria-label="Twitter">
+            <a
+              href="https://twitter.com/ictechz"
+              target="_blank"
+              aria-label="Twitter"
+            >
               <i class="bi bi-twitter-x"></i>
             </a>
             <a href="mailto:hw@yuanhau.com" target="_blank" aria-label="Email">
               <i class="bi bi-youtube"></i>
             </a>
           </div>
-          <div class="copyright">版權 © 2025 吳元皓</div>
+          <div class="copyright">
+            版權 © {{ new Date().getFullYear() }}
+            <a href="https://yuanhau.com">吳元皓</a><br />這個網站在
+            <!--<a href="https://github.com/hpware/yuanhau-site">GitHub</a> 上-->
+            版本 <a href="https://github.com/hpware/yuanhau-v4.1">v4.1.3</a>
+          </div>
         </div>
       </div>
     </Transition>
@@ -160,6 +243,7 @@ onUnmounted(() => {
   --sidebar-active: hsl(208, 100%, 73%);
   --transition-speed: 0.3s;
   --backdrop-blur: 10px;
+  font-family: Phantom Sans;
 }
 .menu-button-container {
   position: fixed;
@@ -178,15 +262,14 @@ onUnmounted(() => {
   display: flex;
   align-items: center;
   justify-content: center;
-  cursor: pointer; 
+  cursor: pointer;
   transition: all 0.3s ease;
-  left:2px;
+  left: 2px;
 }
 
 .menu-button:hover {
   transform: scale(1.05);
 }
-
 
 .menu-icon {
   position: relative;
@@ -198,7 +281,7 @@ onUnmounted(() => {
 
 .menu-icon::before,
 .menu-icon::after {
-  content: '';
+  content: "";
   position: absolute;
   width: 24px;
   height: 2px;
@@ -299,17 +382,16 @@ onUnmounted(() => {
 }
 
 .user-item {
-  display:flex;
+  display: flex;
   justify-content: center;
   img {
-    width:24px;
+    width: 24px;
     height: 24px;
-    gap:2em;
+    gap: 2em;
     border-radius: 10px;
     justify-content: center;
     align-content: center;
-    align-self:center;
-    
+    align-self: center;
   }
 }
 
@@ -318,7 +400,7 @@ onUnmounted(() => {
   align-items: center;
   padding: 0.75rem 1.5rem;
   color: var(--sidebar-text);
-  font-size:0.9em;
+  font-size: 0.9em;
   text-decoration: none;
   transition: all var(--transition-speed);
   border-left: 3px solid transparent;
@@ -347,16 +429,16 @@ onUnmounted(() => {
 .sidebar-footer {
   padding: 1rem 1.5rem;
   border-top: 1px solid rgba(255, 255, 255, 0.1);
-  text-align:center;
-  align-items:center;
+  text-align: center;
+  align-items: center;
   justify-content: center;
 }
 
 .social-links {
   display: flex;
   gap: 1rem;
-  text-align:center;
-  align-items:center;
+  text-align: center;
+  align-items: center;
   justify-content: center;
   margin-bottom: 0.5rem;
 }
@@ -373,6 +455,12 @@ onUnmounted(() => {
 .copyright {
   font-size: 0.75rem;
   color: rgba(255, 255, 255, 0.6);
+  a {
+    color: rgba(255, 255, 255, 0.6);
+  }
+  a:hover {
+    color: rgba(255, 255, 255, 0.422);
+  }
 }
 
 /* Animations */
@@ -406,7 +494,7 @@ onUnmounted(() => {
     color: white;
   }
   a:hover {
-    color: rgb(182, 182, 182)
+    color: rgb(182, 182, 182);
   }
 }
 
@@ -414,15 +502,15 @@ onUnmounted(() => {
   .navbar-component {
     --sidebar-width: 100%;
   }
-  
+
   .sidebar {
     border-radius: 0;
   }
-  
+
   .social-links {
     justify-content: center;
   }
-  
+
   .copyright {
     text-align: center;
   }

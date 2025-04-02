@@ -1,2 +1,0 @@
-1: git submodule update --recursive --remote
-2: git submodule update --remote --init

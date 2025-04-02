@@ -1,7 +1,7 @@
 <script setup>
-import { ref, onMounted, computed } from 'vue';
+import { ref, onMounted, computed } from "vue";
 
-const activeTab = ref('profile');
+const activeTab = ref("profile");
 const isLoading = ref(true);
 const error = ref(null);
 
@@ -13,21 +13,41 @@ const user = computed(() => logto.user);
 const userSettings = ref({
   notifications: {
     email: true,
-    site: true
+    site: true,
   },
   privacy: {
     publicProfile: true,
-    showActivity: false
+    showActivity: false,
   },
-  theme: 'system'
+  theme: "system",
 });
 
 // Mock activity data (in a real app, fetch this from your API)
 const recentActivity = ref([
-  { id: 1, type: 'login', timestamp: new Date(Date.now() - 2 * 60 * 60 * 1000).toISOString(), details: 'Login from Chrome on macOS' },
-  { id: 2, type: 'comment', timestamp: new Date(Date.now() - 12 * 60 * 60 * 1000).toISOString(), details: 'Commented on a blog post' },
-  { id: 3, type: 'upload', timestamp: new Date(Date.now() - 2 * 24 * 60 * 60 * 1000).toISOString(), details: 'Uploaded 3 new photos' },
-  { id: 4, type: 'login', timestamp: new Date(Date.now() - 5 * 24 * 60 * 60 * 1000).toISOString(), details: 'Login from Safari on iPhone' }
+  {
+    id: 1,
+    type: "login",
+    timestamp: new Date(Date.now() - 2 * 60 * 60 * 1000).toISOString(),
+    details: "Login from Chrome on macOS",
+  },
+  {
+    id: 2,
+    type: "comment",
+    timestamp: new Date(Date.now() - 12 * 60 * 60 * 1000).toISOString(),
+    details: "Commented on a blog post",
+  },
+  {
+    id: 3,
+    type: "upload",
+    timestamp: new Date(Date.now() - 2 * 24 * 60 * 60 * 1000).toISOString(),
+    details: "Uploaded 3 new photos",
+  },
+  {
+    id: 4,
+    type: "login",
+    timestamp: new Date(Date.now() - 5 * 24 * 60 * 60 * 1000).toISOString(),
+    details: "Login from Safari on iPhone",
+  },
 ]);
 
 const setActiveTab = (tab) => {
@@ -36,27 +56,27 @@ const setActiveTab = (tab) => {
 
 const formatDate = (dateString) => {
   const date = new Date(dateString);
-  return new Intl.DateTimeFormat('zh-TW', {
-    year: 'numeric',
-    month: 'long',
-    day: 'numeric',
-    hour: '2-digit',
-    minute: '2-digit'
+  return new Intl.DateTimeFormat("zh-TW", {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+    hour: "2-digit",
+    minute: "2-digit",
   }).format(date);
 };
 
 const saveSettings = () => {
   // In a real app, you would save these settings to your backend
-  alert('設定已保存');
+  alert("設定已保存");
 };
 
 const signOut = async () => {
   try {
     await logto.signOut();
     // Redirect to home page after sign out
-    navigateTo('/');
+    navigateTo("/");
   } catch (err) {
-    console.error('Sign out error:', err);
+    console.error("Sign out error:", err);
   }
 };
 
@@ -65,9 +85,9 @@ onMounted(async () => {
     isLoading.value = true;
     // Here you would typically fetch user data or settings from your API
     // For now, we'll just simulate a delay
-    await new Promise(resolve => setTimeout(resolve, 500));
+    await new Promise((resolve) => setTimeout(resolve, 500));
   } catch (err) {
-    error.value = '無法載入用戶數據';
+    error.value = "無法載入用戶數據";
     console.error(err);
   } finally {
     isLoading.value = false;
@@ -104,40 +124,40 @@ onMounted(async () => {
       <div class="panel-header">
         <div class="user-info">
           <div class="avatar" v-if="user.picture">
-            <img :src="user.picture" alt="Profile picture">
+            <img :src="user.picture" alt="Profile picture" />
           </div>
           <div class="avatar placeholder" v-else>
-            {{ user.name?.charAt(0) || 'U' }}
+            {{ user.name?.charAt(0) || "U" }}
           </div>
           <div class="user-details">
-            <h2>{{ user.name || '用戶' }}</h2>
-            <p>{{ user.email || '' }}</p>
+            <h2>{{ user.name || "用戶" }}</h2>
+            <p>{{ user.email || "" }}</p>
           </div>
         </div>
         <button @click="signOut" class="btn-logout">登出</button>
       </div>
 
       <div class="panel-nav">
-        <button 
-          @click="setActiveTab('profile')" 
+        <button
+          @click="setActiveTab('profile')"
           :class="['nav-btn', { active: activeTab === 'profile' }]"
         >
           個人資料
         </button>
-        <button 
-          @click="setActiveTab('settings')" 
+        <button
+          @click="setActiveTab('settings')"
           :class="['nav-btn', { active: activeTab === 'settings' }]"
         >
           帳戶設定
         </button>
-        <button 
-          @click="setActiveTab('activity')" 
+        <button
+          @click="setActiveTab('activity')"
           :class="['nav-btn', { active: activeTab === 'activity' }]"
         >
           近期活動
         </button>
-        <button 
-          @click="setActiveTab('uploads')" 
+        <button
+          @click="setActiveTab('uploads')"
           :class="['nav-btn', { active: activeTab === 'uploads' }]"
         >
           上傳管理
@@ -172,7 +192,11 @@ onMounted(async () => {
           <div class="section connected-accounts" v-if="user.identities">
             <h3>關聯帳戶</h3>
             <div class="account-list">
-              <div class="account-item" v-for="(value, key) in user.identities" :key="key">
+              <div
+                class="account-item"
+                v-for="(value, key) in user.identities"
+                :key="key"
+              >
                 <div class="account-icon">
                   <i class="bi" :class="`bi-${key}`"></i>
                 </div>
@@ -196,7 +220,10 @@ onMounted(async () => {
                   <span class="setting-description">接收重要更新和通知</span>
                 </div>
                 <label class="toggle">
-                  <input type="checkbox" v-model="userSettings.notifications.email">
+                  <input
+                    type="checkbox"
+                    v-model="userSettings.notifications.email"
+                  />
                   <span class="toggle-slider"></span>
                 </label>
               </div>
@@ -206,7 +233,10 @@ onMounted(async () => {
                   <span class="setting-description">在網站上顯示通知</span>
                 </div>
                 <label class="toggle">
-                  <input type="checkbox" v-model="userSettings.notifications.site">
+                  <input
+                    type="checkbox"
+                    v-model="userSettings.notifications.site"
+                  />
                   <span class="toggle-slider"></span>
                 </label>
               </div>
@@ -219,20 +249,30 @@ onMounted(async () => {
               <div class="setting-item">
                 <div class="setting-label">
                   <span>公開個人資料</span>
-                  <span class="setting-description">其他用戶可以查看你的個人資料</span>
+                  <span class="setting-description"
+                    >其他用戶可以查看你的個人資料</span
+                  >
                 </div>
                 <label class="toggle">
-                  <input type="checkbox" v-model="userSettings.privacy.publicProfile">
+                  <input
+                    type="checkbox"
+                    v-model="userSettings.privacy.publicProfile"
+                  />
                   <span class="toggle-slider"></span>
                 </label>
               </div>
               <div class="setting-item">
                 <div class="setting-label">
                   <span>顯示活動</span>
-                  <span class="setting-description">在個人資料頁面顯示你的活動</span>
+                  <span class="setting-description"
+                    >在個人資料頁面顯示你的活動</span
+                  >
                 </div>
                 <label class="toggle">
-                  <input type="checkbox" v-model="userSettings.privacy.showActivity">
+                  <input
+                    type="checkbox"
+                    v-model="userSettings.privacy.showActivity"
+                  />
                   <span class="toggle-slider"></span>
                 </label>
               </div>
@@ -243,23 +283,41 @@ onMounted(async () => {
             <h3>主題設定</h3>
             <div class="theme-options">
               <label class="theme-option">
-                <input type="radio" v-model="userSettings.theme" value="light">
+                <input
+                  type="radio"
+                  v-model="userSettings.theme"
+                  value="light"
+                />
                 <span class="theme-box light-theme">
-                  <span class="theme-check" v-if="userSettings.theme === 'light'">✓</span>
+                  <span
+                    class="theme-check"
+                    v-if="userSettings.theme === 'light'"
+                    >✓</span
+                  >
                 </span>
                 <span class="theme-label">淺色模式</span>
               </label>
               <label class="theme-option">
-                <input type="radio" v-model="userSettings.theme" value="dark">
+                <input type="radio" v-model="userSettings.theme" value="dark" />
                 <span class="theme-box dark-theme">
-                  <span class="theme-check" v-if="userSettings.theme === 'dark'">✓</span>
+                  <span class="theme-check" v-if="userSettings.theme === 'dark'"
+                    >✓</span
+                  >
                 </span>
                 <span class="theme-label">深色模式</span>
               </label>
               <label class="theme-option">
-                <input type="radio" v-model="userSettings.theme" value="system">
+                <input
+                  type="radio"
+                  v-model="userSettings.theme"
+                  value="system"
+                />
                 <span class="theme-box system-theme">
-                  <span class="theme-check" v-if="userSettings.theme === 'system'">✓</span>
+                  <span
+                    class="theme-check"
+                    v-if="userSettings.theme === 'system'"
+                    >✓</span
+                  >
                 </span>
                 <span class="theme-label">系統預設</span>
               </label>
@@ -275,17 +333,32 @@ onMounted(async () => {
         <div v-if="activeTab === 'activity'" class="activity-tab">
           <h3>近期活動</h3>
           <div class="activity-list">
-            <div class="activity-item" v-for="activity in recentActivity" :key="activity.id">
+            <div
+              class="activity-item"
+              v-for="activity in recentActivity"
+              :key="activity.id"
+            >
               <div class="activity-icon" :class="activity.type">
-                <i class="bi" :class="{
-                  'bi-box-arrow-in-right': activity.type === 'login',
-                  'bi-chat-dots': activity.type === 'comment',
-                  'bi-cloud-upload': activity.type === 'upload'
-                }"></i>
+                <i
+                  class="bi"
+                  :class="{
+                    'bi-box-arrow-in-right': activity.type === 'login',
+                    'bi-chat-dots': activity.type === 'comment',
+                    'bi-cloud-upload': activity.type === 'upload',
+                  }"
+                ></i>
               </div>
               <div class="activity-details">
                 <div class="activity-header">
-                  <h4>{{ activity.type === 'login' ? '登入' : activity.type === 'comment' ? '評論' : '上傳' }}</h4>
+                  <h4>
+                    {{
+                      activity.type === "login"
+                        ? "登入"
+                        : activity.type === "comment"
+                          ? "評論"
+                          : "上傳"
+                    }}
+                  </h4>
                   <time>{{ formatDate(activity.timestamp) }}</time>
                 </div>
                 <p class="activity-description">{{ activity.details }}</p>
@@ -305,7 +378,7 @@ onMounted(async () => {
               </NuxtLink>
             </div>
           </div>
-          
+
           <div class="section">
             <h3>上傳歷史</h3>
             <p class="empty-state">
@@ -351,7 +424,9 @@ onMounted(async () => {
 }
 
 @keyframes spin {
-  to { transform: rotate(360deg); }
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 /* Not authenticated view */
@@ -494,7 +569,7 @@ onMounted(async () => {
 }
 
 .nav-btn.active::after {
-  content: '';
+  content: "";
   position: absolute;
   bottom: 0;
   left: 0;
@@ -647,7 +722,7 @@ onMounted(async () => {
   right: 0;
   bottom: 0;
   background-color: rgba(255, 255, 255, 0.2);
-  transition: .4s;
+  transition: 0.4s;
   border-radius: 34px;
 }
 
@@ -659,7 +734,7 @@ onMounted(async () => {
   left: 4px;
   bottom: 4px;
   background-color: white;
-  transition: .4s;
+  transition: 0.4s;
   border-radius: 50%;
 }
 
@@ -859,37 +934,37 @@ input:checked + .toggle-slider:before {
     margin: 1rem;
     border-radius: 8px;
   }
-  
+
   .panel-header {
     flex-direction: column;
     align-items: flex-start;
   }
-  
+
   .btn-logout {
     margin-top: 1rem;
   }
-  
+
   .user-details {
     margin-top: 0.5rem;
   }
-  
+
   .detail-row {
     flex-direction: column;
   }
-  
+
   .detail-label {
     width: 100%;
     border-bottom: 1px solid rgba(255, 255, 255, 0.05);
   }
-  
+
   .connected-accounts .account-list {
     grid-template-columns: 1fr;
   }
-  
+
   .activity-header {
     flex-direction: column;
   }
-  
+
   .activity-header time {
     margin-top: 0.25rem;
   }

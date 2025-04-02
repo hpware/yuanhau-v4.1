@@ -1,66 +1,139 @@
-import { getQuery } from "h3";
+import { getQuery, setCookie, sendRedirect } from "h3";
 
 export default defineEventHandler(async (event) => {
-  // Query Login Code
-  const logincode = getQuery(event).code;
-  if (!logincode) {
-    const msg = `
-        <html>
-            <head>
-                <title>Error</title>
-            </head>
-            <body>
-            <h1>Error</h1>
-            <p>Error: Failed to obtain access token</p>
-            </body>
-            </html>`;
-    event.node.res.setHeader("Content-Type", "text/html");
-    event.node.res.statusCode = 403;
-    event.node.res.end(msg);
-    setTimeout(() => {
-      return sendRedirect(event, "/user/login");
-    }, 3000);
-  }
-  // Github Client ID & Secret
-  const client_id = process.env.GITHUB_OAUTH_CLIENT;
-  const client_secret = process.env.GITHUB_OAUTH_SECRET;
-  const redirect_uri = "https://yuanhau-v4.vercel.app/api/auth/callback/github";
   try {
-    const res = await fetch("https://github.com/login/oauth/access_token", {
-      method: "POST",
+    // Get the authorization code from the query parameters
+    const query = getQuery(event);
+    const code = query.code as string;
+    const nextRoute = (query.nextRoute as string) || "/";
+    console.log(nextRoute);
+
+    if (!code) {
+      throw new Error("No code provided");
+    }
+
+    // Exchange the code for an access token
+    const clientId = process.env.GITHUB_OAUTH_CLIENT;
+    const clientSecret = process.env.GITHUB_OAUTH_SECRET;
+
+    if (!clientId || !clientSecret) {
+      throw new Error("Missing GitHub OAuth credentials");
+    }
+
+    // Get the host for the redirect URI
+    const host = event.node.req.headers.host;
+    const protocol = process.env.NODE_ENV === "production" ? "https" : "http";
+    const redirectUri = `${protocol}://${host}/api/auth/callback/github`;
+
+    console.log("Exchanging code for token with redirect URI:", redirectUri);
+
+    // Make the request to GitHub for the access token
+    const tokenResponse = await fetch(
+      "https://github.com/login/oauth/access_token",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify({
+          client_id: clientId,
+          client_secret: clientSecret,
+          code,
+          redirect_uri: redirectUri,
+        }),
+      },
+    );
+
+    // Debug the token response
+    const tokenData = await tokenResponse.json();
+    console.log("Token response:", JSON.stringify(tokenData));
+
+    if (!tokenResponse.ok || tokenData.error) {
+      console.error(
+        "GitHub token error:",
+        tokenData.error_description || tokenData.error || "Unknown error",
+      );
+      throw new Error(
+        tokenData.error_description || "Failed to obtain access token",
+      );
+    }
+
+    const accessToken = tokenData.access_token;
+
+    if (!accessToken) {
+      console.error("No access token in response:", tokenData);
+      throw new Error("No access token received");
+    }
+
+    // Get user info from GitHub
+    const userResponse = await fetch("https://api.github.com/user", {
       headers: {
-        "Content-Type": "application/x-www-form-urlencoded",
+        Authorization: `token ${accessToken}`, // Changed from Bearer to token
+        "User-Agent": "YuanHau-v4.1",
         Accept: "application/json",
       },
-      body: `client_id=${client_id}&client_secret=${client_secret}&code=${logincode}&redirect_uri=${redirect_uri}`,
     });
-    const data = await res.json();
-    if (!data.access_token) {
-      throw new Error("Failed to obtain access token");
+
+    if (!userResponse.ok) {
+      const userErrorText = await userResponse.text();
+      console.error("GitHub user API error:", userErrorText);
+      throw new Error("Failed to fetch user information");
     }
-    // Store the access token in a session or cookie
-    // For example, using a cookie:
-    setCookie(event, "token", data.access_token, {
-      path: "/",
+
+    const userData = await userResponse.json();
+    console.log("User data retrieved successfully");
+
+    // Store access token and user info in cookies
+    setCookie(event, "github_access_token", accessToken, {
       httpOnly: true,
+      secure: process.env.NODE_ENV === "production",
+      sameSite: "lax",
+      maxAge: 60 * 60 * 24 * 7, // 7 days
+      path: "/",
     });
-    return sendRedirect(event, "/user/panel/");
-  } catch (e) {
-    const msg = `
-            <html>
-                <head>
-                    <title>Error</title>
-                </head>
-                <body>
-                <h1>Error</h1>
-                <p>${e}</p>
-                </body>
-                </html>`;
-    event.node.res.setHeader("Content-Type", "text/html");
-    event.node.res.statusCode = 500;
-    event.node.res.end(msg);
-    setTimeout(() => {
-      return sendRedirect(event, "/user/login");
-    }, 12000);
+
+    // Store minimal user info (not the token) for client-side use
+    setCookie(event, "github_user_id", userData.id, {
+      httpOnly: false, // Allow client-side access
+      secure: process.env.NODE_ENV === "production",
+      sameSite: "lax",
+      maxAge: 60 * 60 * 24 * 7, // 7 days
+      path: "/",
+    });
+    setCookie(event, "github_user_login", userData.login, {
+      httpOnly: false, // Allow client-side access
+      secure: process.env.NODE_ENV === "production",
+      sameSite: "lax",
+      maxAge: 60 * 60 * 24 * 7, // 7 days
+      path: "/",
+    });
+    setCookie(event, "github_user_name", userData.name, {
+      httpOnly: false, // Allow client-side access
+      secure: process.env.NODE_ENV === "production",
+      sameSite: "lax",
+      maxAge: 60 * 60 * 24 * 7, // 7 days
+      path: "/",
+    });
+    setCookie(event, "github_user_avatar", userData.avatar_url, {
+      httpOnly: false, // Allow client-side access
+      secure: process.env.NODE_ENV === "production",
+      sameSite: "lax",
+      maxAge: 60 * 60 * 24 * 7, // 7 days
+      path: "/",
+    });
+
+    // Redirect to the next route or home
+    return sendRedirect(event, nextRoute !== "null" ? nextRoute : "/");
+  } catch (error) {
+    console.error("GitHub OAuth error:", error);
+
+    // Return an error page instead of redirecting
+    return {
+      statusCode: 500,
+      body: JSON.stringify({
+        error: error.message || "Authentication failed",
+      }),
+    };
   }
 });

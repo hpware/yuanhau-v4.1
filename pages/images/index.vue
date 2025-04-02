@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { ref, onMounted } from "vue";
-import Loading from "@/components/loading/discordstyle.vue";
+import Loading from "@/components/loading/randomloader.vue";
+const { t } = useI18n();
 // Start AI Code change (i still need to type to explain what the code is or I will forget)
 
 const loading = ref(true);
@@ -55,12 +56,10 @@ onMounted(() => {
 
 <template>
   <div class="main" id="main">
-    <h1 class="title">相簿</h1>
-    <h6 class="dec">
-      這裡全部都是我拍的照片! Mostly in <i class="bi bi-badge-hd-fill"></i>
-    </h6>
+    <h1 class="title">{{ t("photos.title") }}</h1>
+    <h6 class="dec">{{ t("photos.description") }}</h6>
     <Loading v-if="loading" />
-    <div v-else>
+    <div :style="{ display: loading ? 'none' : 'block' }">
       <div v-for="(images, group) in groupimg" :key="group" class="container">
         <h2 class="title">{{ group }}</h2>
         <div class="image-grid">
@@ -76,16 +75,6 @@ onMounted(() => {
           </div>
         </div>
       </div>
-      <footer class="beg">
-        <p>
-          如果你想用這些照片，去用吧！你只需要把我與我的網站放在照片的來源就好了。
-        </p>
-        <p>
-          如果想支持我，我可以在<a href="https://yhw.tw/paypal" target="_blank"
-            >Paypal</a
-          >上贊助～
-        </p>
-      </footer>
     </div>
   </div>
 </template>

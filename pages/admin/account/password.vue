@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { ref, onMounted } from "vue";
 import { useRouter } from "vue-router";
-import AccountSideNav from "~/components/AccountSideNav.vue";
 import SHA512 from "crypto-js/sha512";
 import confetti from "js-confetti";
 
