@@ -12,7 +12,9 @@
   },
   "dependencies": {
     "@bg-dev/nuxt-s3": "^2.0.2",
+    "@fontsource/chocolate-classical-sans": "^5.2.6",
     "@fontsource/fira-mono": "^5.2.5",
+    "@fontsource/lxgw-wenkai-tc": "^5.2.5",
     "@giscus/vue": "^3.1.1",
     "@logto/nuxt": "^1.2.1",
     "@mistralai/mistralai": "^1.5.2",

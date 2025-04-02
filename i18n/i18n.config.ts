@@ -74,6 +74,12 @@ export default defineI18nConfig(() => ({
         dnd: "勿擾",
         offline: "不在線上",
       },
+      school: {
+        index: {
+          title: "學校專案",
+          description: "這裡是用來放我在學校做的專案、PPT、程式"
+        }
+      },
     },
     en: {
       yhname: "Yuan-Hau Wu",
@@ -136,6 +142,12 @@ export default defineI18nConfig(() => ({
         idle: "Idle",
         dnd: "Do not disturb",
         offline: "Offline",
+      },
+      school: {
+        index: {
+          title: "School Projects",
+          description: "This is where I store my school projects, PPTs, and code."
+        }
       },
     },
   },

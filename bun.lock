@@ -5,7 +5,9 @@
       "name": "nuxt-app",
       "dependencies": {
         "@bg-dev/nuxt-s3": "^2.0.2",
+        "@fontsource/chocolate-classical-sans": "^5.2.6",
         "@fontsource/fira-mono": "^5.2.5",
+        "@fontsource/lxgw-wenkai-tc": "^5.2.5",
         "@giscus/vue": "^3.1.1",
         "@logto/nuxt": "^1.2.1",
         "@mistralai/mistralai": "^1.5.2",
@@ -200,7 +202,11 @@
 
     "@fastify/accept-negotiator": ["@fastify/accept-negotiator@2.0.1", "", {}, "sha512-/c/TW2bO/v9JeEgoD/g1G5GxGeCF1Hafdf79WPmUlgYiBXummY0oX3VVq4yFkKKVBKDNlaDUYoab7g38RpPqCQ=="],
 
+    "@fontsource/chocolate-classical-sans": ["@fontsource/chocolate-classical-sans@5.2.6", "", {}, "sha512-68d9bbAEp5iW+gWoHkoQ8QPyGeZ9FK/Vo4vuFQUaOeuJuCkBLyYlSPAslfc3hzhMySuO9/+8Pnk/yUzPoWL0GA=="],
+
     "@fontsource/fira-mono": ["@fontsource/fira-mono@5.2.5", "", {}, "sha512-rujrs+J+w2Nmqd6zsNQTzT7eYLKrSQWdF7SuAdjjXVs+Si06Ag6etOYFmF3Mzb0NufmEIPCDUS2ppt6hxX+SLg=="],
+
+    "@fontsource/lxgw-wenkai-tc": ["@fontsource/lxgw-wenkai-tc@5.2.5", "", {}, "sha512-QKXrR+Ca3zFyIPBC5t7WmEs9UhoXe3d3ZsiBSeYbqAUs8C4VVKvu3AjMd4L6I0vrXJzzhvVTTgpSxm7WFPdRpA=="],
 
     "@giscus/vue": ["@giscus/vue@3.1.1", "", { "dependencies": { "giscus": "^1.6.0" }, "peerDependencies": { "vue": ">=3.2.0" } }, "sha512-xgsc93MibRQ0d1glBxN1BrEREHTIf3BPYs/3R+UZHNqawFFoWBV6iJ7uVCXMqoEKZdE2c78B3aKt5gfGqo8I5A=="],
 

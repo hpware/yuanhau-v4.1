@@ -1,12 +1,20 @@
 <script setup lang="ts">
+// Import Fonts
+import "@fontsource/fira-mono/index.css";
+//import "@fontsource/lxgw-wenkai-tc";
+import "@fontsource/chocolate-classical-sans";
+// Import CSS
 import "~/components/css/icons.css";
 import "~/components/css/app.css";
+// Import Other Components
 import NavBar from "~/components/NavBar.vue";
 import msgComponent from "~/components/msgComponent.vue";
 import "bootstrap-icons/font/bootstrap-icons.min.css";
-import { defineProps, ref, onMounted } from "vue";
+// Vercel Speed Insights
 import { SpeedInsights } from "@vercel/speed-insights/nuxt";
-const { locale, t, setLocale } = useI18n();
+// Locale
+const { locale, setLocale } = useI18n();
+
 const changeLang = () => {
   if (locale.value === "zh-tw") {
     setLocale("en");

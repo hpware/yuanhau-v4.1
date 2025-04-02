@@ -1,7 +1,5 @@
-/*Import Font and Icons*/
-@import "@fontsource/fira-mono/index.css";
 /*Component Based*/
-html,
+html, 
 body {
   margin: 0;
   padding: 0;
@@ -14,7 +12,7 @@ body {
   background-color: #0f1c2e;
   color: white;
   text-align: center;
-  font-family: "Fira Mono";
+  font-family: "Fira Mono", "Chocolate Classical Sans";
   font-size: 1.5em;
   align-items: center;
   width: 100%;
