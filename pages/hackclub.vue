@@ -20,7 +20,7 @@ const fetchProjects = async () => {
     projloading.value = true;
     const req = await fetch("/api/hackclub/projects");
     const res = await req.json();
-    projcontent.value = res;
+    projcontent.value = res.data;
   } catch (e) {
     console.log(e);
   } finally {
