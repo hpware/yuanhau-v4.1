@@ -321,6 +321,7 @@ const chatbot = async () => {};
     }
   }
 }
+/*
 .scrolldown {
   justify-content: center;
   align-self: center;
@@ -334,6 +335,37 @@ const chatbot = async () => {};
   a {
     color: white;
     text-decoration: none;
+  }
+}*/
+.scrolldown {
+  justify-content: center;
+  align-self: center;
+  text-align: center;
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 30px;
+  animation: bounce 2s infinite;
+  a {
+    color: white;
+    text-decoration: none;
+    font-size: 0.8em;
+    padding: 8px 16px;
+    background-color: rgba(0, 0, 0, 0.3);
+    border-radius: 30px;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    backdrop-filter: blur(5px);
+  }
+  
+  a:hover {
+    background-color: rgba(255, 255, 255, 0.15);
+    transform: translateY(-2px);
+  }
+  
+  i {
+    margin-right: 5px;
   }
 }
 .progress-block {

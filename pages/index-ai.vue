@@ -1,86 +1,53 @@
 <script setup lang="ts">
-useHead({
-  title: "首頁 | 吳元皓",
-  meta: [
-    {
-      name: "description",
-      content: "吳元皓的個人網站 - 專注於Typescript、Javascript和伺服器技術",
-    },
-  ],
-});
+const { locale, t } = useI18n();
 
-interface Progress {
-  progress: {
-    js: number;
-    server: number;
-    py: number;
-  };
-}
+useHead({
+  title: `${t("home.title")} | ${t("yhname")}`,
+});
 
 // Init
 import DiscordStatus from "~/components/plugins/discordStatus.vue";
 import Loader from "~/components/loading/randomloader.vue";
-import { ref, onMounted } from "vue";
 
 //values
 const bgloading = ref(true);
 const progressloading = ref(false);
-const progress = ref<Progress>({
-  progress: {
-    js: 0,
-    server: 0,
-    py: 0,
-  },
-});
+const progress = ref();
 const progresserror = ref(false);
-const retryLoading = () => {
-  progresserror.value = false;
-  loadProgressData();
-};
-
-const loadProgressData = async () => {
+onMounted(async () => {
   try {
     progressloading.value = true;
     const req = await fetch("/api/home/progress", {
       method: "GET",
     });
-    if (!req.ok) throw new Error("Failed to fetch progress data");
     const res = await req.json();
-    progress.value = {
-      progress: {
-        js: res.js,
-        server: res.server,
-        py: res.py,
-      },
-    };
+    progress.value = res;
   } catch (e) {
     progresserror.value = true;
-    console.error("Error loading progress data:", e);
   } finally {
     progressloading.value = false;
   }
-};
-
-onMounted(() => {
-  loadProgressData();
 });
+
+const chatbot = async () => {};
 </script>
 <template>
   <div class="loadingtomainanimation">
+    <!--btw, this can just be a video playing. This is just a reminder for future me.-->
     <NuxtImg
       alt="背景"
       class="background"
       draggable="false"
       src="/img/bg.jpg"
       @load="bgloading = false"
-      @error="bgloading = true"
+      @error="bgloading = false"
       v-lazy-load
-      loading="lazy"
-      :style="{ opacity: bgloading ? 0 : 1 }"
+      load="lazy"
+      :style="{ display: bgloading ? 'none' : 'block' }"
     />
     <Loader v-if="bgloading" size="40px" class="mainloader" />
-    <transition name="fade">
-      <div v-if="!bgloading" class="content-wrapper">
+    <transition name="slide-fade">
+      <div v-if="!bgloading">
         <div class="preventoverpull"></div>
         <div class="aboutmeinfoblock">
           <div class="aboutme">
@@ -90,92 +57,145 @@ onMounted(() => {
               draggable="false"
               src="/img/pfp-1.jpg"
               v-lazy-load
-              loading="lazy"
+              load="lazy"
             />
-            <h1 class="name-title">吳元皓</h1>
+            <h1>{{ t("yhname") }}</h1>
+            <div class="info">{{ t("home.introduction") }}</div>
+            <p class="socials">
+              <a
+                href="https://github.com/hpware"
+                aria-label="github"
+                id="github"
+                ><i class="bi bi-github"></i
+              ></a>
+              <a
+                href="https://discord.com/users/918723093646684180"
+                aria-label="Discord"
+                id="Discord"
+                ><i class="bi bi-discord"></i
+              ></a>
+              <a
+                href="https://instagram.com/yhw_tw"
+                aria-label="instagram"
+                id="instagram"
+                ><i class="bi bi-instagram"></i
+              ></a>
+              <a
+                href="https://threads.net/yhw_tw"
+                aria-label="threads"
+                id="threads"
+                ><i class="bi bi-threads"></i
+              ></a>
+              <a href="https://yhw.tw/bluesky" aria-label="bluesky" id="bluesky"
+                ><i class="fab fa-bluesky"></i
+              ></a>
+              <a href="https://twitter.com/ictechz" aria-label="Twitter (X)">
+                <i class="bi bi-twitter"></i>
+              </a>
+              <a
+                href="https://youtube.com/@號"
+                aria-label="youtube"
+                id="youtube"
+                ><i class="bi bi-youtube"></i
+              ></a>
+              <a
+                href="https://unsplash.com/@hwtw"
+                aria-label="unsplash"
+                id="unsplash"
+              >
+                <i class="fab fa-unsplash"></i>
+              </a>
+              <a href="mailto:hw@yuanhau.com" aria-label="email" id="email"
+                ><i class="bi bi-inbox"></i
+              ></a>
+            </p>
           </div>
-          <div class="info">
-            我是一個五專生，我對Typescript與Javascipt有興趣，我也對伺服器(也就是Linux)極度有興趣。
-          </div>
-          <div class="scrolldown animate-bounce">
-            <i class="bi bi-arrow-down"></i><span>&nbsp;更多資訊</span>
+          <div class="scrolldown">
+            <a href="#content"
+              ><i class="bi bi-arrow-down"></i
+              ><span>&nbsp;{{ t("home.learnmore") }}</span></a
+            >
           </div>
         </div>
-        <div class="displaybackground"></div>
-        <div class="progress-block">
-          <h2 class="section-title">技能熟練度</h2>
-          <div v-if="!progressloading && !progresserror">
-            <div class="progress-panel">
-              <div class="progress-item">
-                <label for="javascript">Javascript/Typescript: </label>
-                <div class="progress-container">
-                  <progress
-                    id="javascript"
-                    :value="progress.progress.js"
-                    max="100"
-                  ></progress>
-                  <span class="progress-value"
-                    >{{ progress.progress.js }}%</span
-                  >
-                </div>
-              </div>
-              <div class="progress-item">
-                <label for="server">伺服器管理: </label>
-                <div class="progress-container">
-                  <progress
-                    id="server"
-                    :value="progress.progress.server"
-                    max="100"
-                  ></progress>
-                  <span class="progress-value"
-                    >{{ progress.progress.server }}%</span
-                  >
-                </div>
-              </div>
-              <div class="progress-item">
-                <label for="python">Python: </label>
-                <div class="progress-container">
-                  <progress
-                    id="python"
-                    :value="progress.progress.py"
-                    max="100"
-                  ></progress>
-                  <span class="progress-value"
-                    >{{ progress.progress.py }}%</span
-                  >
+        <div
+          class="displaybackground"
+          style="--displaybackground-height: 60dvh"
+        ></div>
+        <section id="content">
+          <div class="progress-block">
+            <h4>{{ t("home.codeknowledge") }}</h4>
+            <div v-if="!progressloading">
+              <div class="progress-panel">
+                <div v-for="list in progress" :key="list.id">
+                  <div>
+                    <label
+                      :for="list.lang"
+                      v-if="list.icon"
+                      v-html="`<i class='bi bi-${list.icon}'><i>: `"
+                    ></label>
+                    <label :for="list.lang" v-else>{{ list.lang }}: </label>
+                    <progress
+                      :id="list.lang"
+                      :value="list.progress"
+                      max="100"
+                    ></progress
+                    ><span>&nbsp;{{ list.progress }}%</span>
+                  </div>
                 </div>
               </div>
             </div>
+            <div v-else>
+              <Loader size="20px" />
+            </div>
           </div>
-          <div v-else-if="progressloading" class="loading-container">
-            <Loader size="20px" />
-            <p>加載中...</p>
-          </div>
-          <div v-else class="error-container">
-            <p>無法加載技能數據</p>
-            <button @click="retryLoading" class="retry-button">
-              <i class="bi bi-arrow-clockwise"></i> 重試
-            </button>
-          </div>
-        </div>
-        <div class="status">
-          <h2 class="section-title">現在狀態</h2>
-          <div class="status-container">
-            <section id="spotify" class="status-item">
-              <h3>Spotify 狀態:</h3>
-              <SpotifyStatus />
-            </section>
-            <section id="discord" class="status-item">
-              <h3>Discord 狀態:</h3>
+          <div
+            class="displaybackground"
+            style="--displaybackground-height: 10dvh"
+          ></div>
+          <!--<section id="chatbot" class="chatbot">
+            <h3>{{ t("core.chatbot.title") }}</h3>
+            <div class="chatbot-content">
+              <form @submit.prevent="">
+                <textarea
+                  :placeholder="'Ex: ' + t('core.chatbot.placeholder')"
+                />
+                <button><i class="bi bi-arrow-right"></i></button>
+              </form>
+            </div>
+          </section>-->
+          <div class="status">
+            <!--<section id="spotify">
+        Spotify Status:
+        <SpotifyStatus />
+      </section>-->
+            <section id="discord">
+              Discord Status:
               <DiscordStatus />
             </section>
           </div>
-        </div>
+        </section>
+        <div
+          class="displaybackground"
+          style="--displaybackground-height: 20dvh"
+        ></div>
+        <footer>
+          <span>
+            版權 &copy; {{ new Date().getFullYear() }}
+            <a href="https://yuanhau.com">吳元皓</a>
+          </span>
+          <span>使用 Nuxt || 網站 v4.1.3</span>
+        </footer>
       </div>
     </transition>
   </div>
 </template>
+<style>
+:root {
+  --displaybackground-height: 80dvh;
+}
+</style>
 <style scoped>
+/**It works?? */
 .preventoverpull {
   z-index: -1;
   background-color: #000;
@@ -187,18 +207,9 @@ onMounted(() => {
 
 .mainloader {
   position: fixed;
-  left: 0;
-  right: 0;
-  top: 0;
-  bottom: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 10;
-}
-
-.content-wrapper {
-  animation: content-appear 0.8s ease-out;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
 }
 
 .background {
@@ -212,281 +223,326 @@ onMounted(() => {
   height: 100%;
   object-fit: cover;
   object-position: center;
-  transition: opacity 0.5s ease;
-}
-
-.section-title {
-  text-align: center;
-  margin-bottom: 1.5rem;
-  font-size: 1.8rem;
-  font-weight: 600;
-  color: #f0f0f0;
+  filter: brightness(0.85);
 }
 
 .aboutmeinfoblock {
   background: linear-gradient(
     180deg,
-    rgba(0, 0, 0, 0.9) 0%,
-    rgba(52, 52, 52, 0.9) 28%,
-    rgba(52, 52, 52, 0.8) 56%,
-    rgba(114, 115, 117, 0.6) 83%,
-    rgba(79, 79, 80, 0) 100%
+    rgba(0, 0, 0, 0.95) 0%,
+    rgba(20, 20, 20, 0.9) 28%,
+    rgba(40, 40, 40, 0.8) 56%,
+    rgba(60, 60, 60, 0.6) 83%,
+    rgba(0, 0, 0, 0) 100%
   );
   height: 100dvh;
+  position: relative;
+  justify-content: center;
   display: flex;
   flex-direction: column;
-  position: relative;
+  backdrop-filter: blur(4px);
 }
 
 .displaybackground {
   width: 100%;
-  height: 200px;
+  height: var(--displaybackground-height);
 }
 
 .aboutme {
-  justify-content: center;
   display: flex;
   flex-direction: column;
-  padding: 20px;
-  padding-top: 10vh;
-}
-
-.name-title {
-  margin-top: 1rem;
-  font-size: 2.5rem;
-  text-align: center;
-  font-weight: 700;
-}
-
-.pfp {
-  width: 200px;
-  height: 200px;
-  border-radius: 50%;
-  align-self: center;
-  box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
-  border: 4px solid rgba(255, 255, 255, 0.3);
-  transition: transform 0.3s ease;
-}
-
-.pfp:hover {
-  transform: scale(1.05);
-}
-
-.info {
-  width: 80%;
-  max-width: 600px;
-  margin: 0 auto;
-  text-align: center;
-  padding: 1.5rem;
-  font-size: 1.2rem;
-  line-height: 1.6;
-  color: #e0e0e0;
-}
-
-.scrolldown {
+  justify-content: center;
   position: absolute;
   left: 0;
   right: 0;
-  bottom: 120px;
+  top: 0;
+  bottom: 0;
+  margin: 0;
+  padding: 20px;
   text-align: center;
-  font-size: 1.2rem;
-  color: #ffffff;
-  opacity: 0.8;
-}
-
-.animate-bounce {
-  animation: bounce 2s infinite;
-}
-
-@keyframes bounce {
-  0%,
-  100% {
-    transform: translateY(0);
+  
+  h1 {
+    margin: 16px 0;
+    font-size: 3.2em;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+    background: linear-gradient(90deg, #ffffff, #d0d0d0);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: shimmer 3s infinite;
   }
-  50% {
-    transform: translateY(-10px);
+  
+  a {
+    text-decoration: none;
+    color: white;
+    transition: all 0.2s ease;
+  }
+  
+  a:hover {
+    color: #b3b3b3;
+    transform: translateY(-2px);
+  }
+  
+  NuxtImg,
+  img {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    object-fit: cover;
+    align-self: center;
+    margin-bottom: 16px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
+    border: 3px solid rgba(255, 255, 255, 0.2);
+    transition: all 0.3s ease;
+  }
+  
+  img:hover {
+    transform: scale(1.05);
+    border-color: rgba(255, 255, 255, 0.4);
+  }
+  
+  .info {
+    max-width: 700px;
+    align-self: center;
+    text-align: center;
+    font-size: 1.1em;
+    line-height: 1.6;
+    padding: 20px;
+    margin: 0 auto 20px;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.8);
+    
+    a {
+      border-bottom: 1px dotted rgba(255, 255, 255, 0.5);
+      padding-bottom: 1px;
+    }
+    
+    a:hover {
+      border-color: rgba(255, 255, 255, 0.8);
+    }
+  }
+
+  .socials {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+    margin: 0 auto;
+    max-width: 500px;
+    flex-wrap: wrap;
+    
+    a {
+      color: white;
+      transition: all 0.2s ease;
+      margin: 10px;
+      font-size: 1.5em;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background-color: rgba(255, 255, 255, 0.1);
+    }
+    
+    a:hover {
+      color: #ffffff;
+      background-color: rgba(255, 255, 255, 0.2);
+      transform: translateY(-3px);
+      box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+    }
+  }
+}
+
+.scrolldown {
+  justify-content: center;
+  align-self: center;
+  text-align: center;
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 30px;
+  animation: bounce 2s infinite;
+  
+  a {
+    color: white;
+    text-decoration: none;
+    font-size: 1.1em;
+    padding: 12px 24px;
+    background-color: rgba(0, 0, 0, 0.3);
+    border-radius: 30px;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    backdrop-filter: blur(5px);
+  }
+  
+  a:hover {
+    background-color: rgba(255, 255, 255, 0.15);
+    transform: translateY(-2px);
+  }
+  
+  i {
+    margin-right: 5px;
   }
 }
 
 .progress-block {
   width: 100%;
-  background: linear-gradient(
-    180deg,
-    rgba(0, 0, 0, 0) 0%,
-    rgba(52, 52, 52, 0.9) 15%,
-    rgba(52, 52, 52, 0.9) 85%,
-    rgba(79, 79, 80, 0) 100%
-  );
-  padding: 4rem 0;
-  margin: 3rem 0;
+  background: rgba(38, 38, 38, 0.95);
+  padding: 40px 20px;
+  box-shadow: 0 -5px 15px rgba(0, 0, 0, 0.1);
+  
+  h4 {
+    text-align: center;
+    margin-top: 0;
+    margin-bottom: 30px;
+    font-size: 1.8em;
+    font-weight: 600;
+  }
 }
 
 .progress-panel {
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
+  align-items: center;
+  gap: 15px;
   max-width: 800px;
   margin: 0 auto;
-  padding: 0 20px;
+  
+  div {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 100%;
+    padding: 5px 0;
+    
+    label {
+      min-width: 120px;
+      text-align: right;
+      padding-right: 15px;
+      font-weight: 500;
+    }
+    
+    progress {
+      flex-grow: 1;
+      height: 12px;
+      border-radius: 10px;
+      background: rgba(255, 255, 255, 0.1);
+      border: none;
+    }
+    
+    progress::-webkit-progress-bar {
+      background-color: rgba(255, 255, 255, 0.1);
+      border-radius: 10px;
+    }
+    
+    progress::-webkit-progress-value {
+      background: linear-gradient(90deg, #4a9fff, #835fff);
+      border-radius: 10px;
+      transition: width 1s ease-in-out;
+    }
+    
+    span {
+      min-width: 50px;
+      text-align: right;
+    }
+  }
 }
 
-.progress-item {
+div.status {
+  padding: 40px 20px;
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
-}
-
-.progress-container {
-  display: flex;
   align-items: center;
-  width: 100%;
-  gap: 10px;
+  background: rgba(20, 20, 20, 0.8);
+  
+  section {
+    width: 100%;
+    max-width: 600px;
+    margin-bottom: 20px;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    background-color: rgba(38, 38, 38, 0.5);
+    backdrop-filter: blur(10px);
+  }
+  
+  section#discord {
+    padding: 20px;
+    font-weight: 500;
+    font-size: 1.1em;
+    color: rgba(255, 255, 255, 0.9);
+    letter-spacing: 0.5px;
+  }
 }
 
-.progress-container progress {
-  width: calc(100% - 50px);
-  height: 15px;
-  border-radius: 10px;
-  overflow: hidden;
-}
-
-.progress-container progress::-webkit-progress-bar {
-  background-color: rgba(255, 255, 255, 0.2);
-  border-radius: 10px;
-}
-
-.progress-container progress::-webkit-progress-value {
-  background: linear-gradient(to right, #4286f4, #42c5f4);
-  border-radius: 10px;
-  transition: width 1s ease-in-out;
-}
-
-.progress-value {
-  width: 40px;
-  text-align: right;
-  font-weight: 600;
-}
-
-.loading-container,
-.error-container {
+footer {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 1rem;
-  min-height: 200px;
-  padding: 20px;
-}
-
-.retry-button {
-  background-color: #3498db;
-  color: white;
-  border: none;
-  padding: 8px 16px;
-  border-radius: 4px;
-  cursor: pointer;
-  font-size: 1rem;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  transition: background-color 0.2s;
-}
-
-.retry-button:hover {
-  background-color: #2980b9;
-}
-
-.status {
-  padding: 2rem 0;
-  margin: 0 auto;
-  max-width: 1000px;
-}
-
-.status-container {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 2rem;
-  padding: 0 20px;
-}
-
-.status-item {
-  background: rgba(30, 30, 30, 0.7);
-  border-radius: 10px;
-  padding: 1rem;
-  transition:
-    transform 0.3s ease,
-    box-shadow 0.3s ease;
-}
-
-.status-item:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
-}
-
-.status-item h3 {
-  margin-top: 0;
-  margin-bottom: 1rem;
-  font-size: 1.3rem;
-  font-weight: 600;
-  color: #e0e0e0;
-}
-
-@media screen and (min-width: 719px) {
-  .progress-item {
-    flex-direction: row;
-    align-items: center;
+  padding: 30px 20px;
+  font-size: 0.7em;
+  background: linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 0) 0%,
+    rgba(0, 0, 0, 0.8) 40%
+  );
+  width: 100%;
+  gap: 10px;
+  text-align: center;
+  
+  span {
+    opacity: 0.7;
+    transition: opacity 0.3s;
   }
-
-  .progress-item label {
-    min-width: 180px;
-    text-align: right;
-    padding-right: 1rem;
+  
+  span:hover {
+    opacity: 1;
   }
-}
-
-@media screen and (max-width: 718px) {
-  .progress-block {
-    padding: 3rem 0;
+  
+  a {
+    color: #4a9fff;
+    text-decoration: none;
   }
-
-  .progress-item label {
-    margin-bottom: 0.5rem;
-  }
-
-  .name-title {
-    font-size: 2rem;
-  }
-
-  .info {
-    width: 90%;
-    font-size: 1rem;
-    padding: 1rem;
-  }
-
-  .pfp {
-    width: 150px;
-    height: 150px;
+  
+  a:hover {
+    text-decoration: underline;
   }
 }
 
 /** Animations */
-.loadingtomainanimation {
-  transition: all 300ms ease-in-out;
-  min-height: 100vh;
-  width: 100%;
+@keyframes shimmer {
+  0% {
+    background-position: -100% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
 }
 
-.fade-enter-active {
-  transition: opacity 0.5s ease;
+@keyframes content-appear {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
-.fade-leave-active {
-  transition: opacity 0.3s ease;
-}
-
-.fade-enter-from,
-.fade-leave-to {
-  opacity: 0;
+@keyframes bounce {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+  100% {
+    transform: translateY(0);
+  }
 }
 
 .slide-fade-enter-active {
@@ -503,14 +559,125 @@ onMounted(() => {
   opacity: 0;
 }
 
-@keyframes content-appear {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
+/* Responsive Styles */
+@media screen and (max-width: 768px) {
+  .aboutme {
+    h1 {
+      font-size: 2.5em;
+    }
+    
+    .info {
+      font-size: 1em;
+      padding: 15px 10px;
+    }
+    
+    img {
+      width: 180px;
+      height: 180px;
+    }
+    
+    .socials a {
+      margin: 8px;
+      font-size: 1.3em;
+    }
   }
-  to {
-    opacity: 1;
-    transform: translateY(0);
+  
+  .scrolldown a {
+    font-size: 1em;
+    padding: 10px 20px;
+  }
+  
+  .progress-panel div {
+    label {
+      min-width: 100px;
+      font-size: 0.9em;
+    }
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .aboutme {
+    h1 {
+      font-size: 2em;
+      margin: 10px 0;
+    }
+    
+    img {
+      width: 150px;
+      height: 150px;
+    }
+    
+    .info {
+      font-size: 0.9em;
+      padding: 10px 5px;
+    }
+    
+    .socials a {
+      margin: 6px;
+      font-size: 1.2em;
+      width: 35px;
+      height: 35px;
+    }
+  }
+  
+  .scrolldown {
+    bottom: 20px;
+    
+    a {
+      padding: 8px 16px;
+      font-size: 0.9em;
+    }
+  }
+  
+  .progress-block {
+    padding: 30px 10px;
+    
+    h4 {
+      font-size: 1.5em;
+      margin-bottom: 20px;
+    }
+  }
+  
+  .progress-panel div {
+    flex-direction: column;
+    align-items: flex-start;
+    
+    label {
+      text-align: left;
+      padding-bottom: 5px;
+    }
+    
+    progress {
+      width: 100%;
+    }
+    
+    span {
+      align-self: flex-end;
+    }
+  }
+}
+
+@media screen and (max-height: 570px) {
+  .aboutme {
+    h1 {
+      font-size: 1.8em;
+      margin: 5px 0;
+    }
+    
+    img {
+      width: 120px;
+      height: 120px;
+      margin-bottom: 10px;
+    }
+    
+    .info {
+      font-size: 0.8em;
+      padding: 5px;
+    }
+  }
+  
+  .scrolldown {
+    bottom: 10px;
   }
 }
 </style>
