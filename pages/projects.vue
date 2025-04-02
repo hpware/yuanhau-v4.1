@@ -77,6 +77,7 @@ h6.dec {
     align-content:center;
     justify-content:Center;
     align-items:center;
+    border: 2px solid #adadad;
     padding: 10px;
     width: 300px;
     min-height:350px;
