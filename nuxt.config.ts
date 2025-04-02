@@ -15,7 +15,7 @@ export default defineNuxtConfig({
     "/images/": { prerender: true },
     "/threads": { prerender: true },
     // Redirect old content to old content. and /blog to new.
-    "/posts/": { redirect: "/blog/" },
+    "/posts/": { redirect: "https:///4-1-2.yuanhau.com/posts/" },
     "/posts/**": {
       redirect: "https:///4-1-2.yuanhau.com/posts/**",
     },

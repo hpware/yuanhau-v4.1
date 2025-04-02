@@ -131,7 +131,7 @@ if (checkparam === "active") {
           </NuxtLink>
 
           <NuxtLink
-            :to="localePath('/blog/')"
+            :to="localePath('/posts/')"
             @click="closeSidebar"
             class="nav-item"
           >
