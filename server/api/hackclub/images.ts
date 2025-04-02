@@ -9,9 +9,8 @@ export default defineEventHandler(async (event) => {
   try {
     const { data, error } = await supabase
       .from("hackclubimages")
-      .select("*")
-      .maybeSingle();
-    console.log(data);
+      .select("*");
+     console.log(data);
     return {
       data: data,
     };

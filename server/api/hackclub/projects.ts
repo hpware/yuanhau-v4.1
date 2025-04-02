@@ -9,8 +9,7 @@ export default defineEventHandler(async (event) => {
   try {
     const { data, error } = await supabase
       .from("hackclubprojects")
-      .select("*")
-      .maybeSingle();
+      .select("*");
     return {
       data: data,
     };

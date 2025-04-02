@@ -1,4 +1,6 @@
 <script setup lang="ts">
+// Import start message
+import "~/components/css/start.css";
 // Import Fonts
 import "@fontsource/fira-mono/index.css";
 //import "@fontsource/lxgw-wenkai-tc";

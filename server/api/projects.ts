@@ -10,7 +10,7 @@ export default defineEventHandler(async (event) => {
     const { data, error } = await supabase
       .from("projects")
       .select("*")
-      .maybeSingle();
+      .order("id", { ascending: false });
     return {
       data: data,
     };

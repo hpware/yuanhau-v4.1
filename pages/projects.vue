@@ -13,7 +13,7 @@ const fetchProjects = async () => {
     loading.value = true;
     const req = await fetch("/api/projects");
     const res = await req.json();
-    projects.value = res;
+    projects.value = res.data;
   } catch (e) {
     console.log(e);
     error.value = e;
@@ -29,9 +29,12 @@ onMounted(() => {
   <div class="content">
     <h2 class="title">{{ t("nav.projects") }}</h2>
     <h6 class="dec">{{ t("projects.description") }}</h6>
+    <div v-if="loading">
+      <Loader />
+    </div>
     <Transition name="project-fade">
       <div v-if="!loading" class="projects">
-        <div v-for="obj in projects" :key="obj.name">
+        <div v-for="obj in projects" :key="obj.id">
           <div class="item">
             <h4>{{ obj.name }}</h4>
             <p>{{ obj.description }}</p>
@@ -46,9 +49,6 @@ onMounted(() => {
         </div>
       </div>
     </Transition>
-    <div v-if="loading">
-      <Loading />
-    </div>
   </div>
 </template>
 <style scoped>
@@ -61,18 +61,25 @@ h6.dec {
 }
 .projects {
   display: flex;
-  flex-direction: row-reverse;
+  flex-direction: row;
   width: 100%;
   align-items: center;
   justify-content: center;
+  align-self:center;
+  align-content:center;
   flex-wrap: wrap;
+  margin: 0 auto;
   .item {
     background-color: #504e4e7c;
     margin: 3px;
     border-radius: 20px;
+    align-self:center;
+    align-content:center;
+    justify-content:Center;
+    align-items:center;
     padding: 10px;
-    width: calc(50dvw - 21px);
-
+    width: 300px;
+    min-height:350px;
     a {
       color: rgb(208, 208, 208);
       transition: all 200ms ease-in-out;
@@ -95,9 +102,11 @@ h6.dec {
 }
 @media only screen and (max-width: 500px) {
   .projects {
-    flex-direction: column-reverse;
+    flex-direction: column;
     .item {
-      width: 100px;
+      margin: 0 auto;
+      margin-block: 5px;
+      width: 90%;
     }
   }
 }
