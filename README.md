@@ -1,7 +1,6 @@
 # yuanhau-site ( previously yuanhau-v4.1 )
 
-This repo contains the unreleased versions and the released verisons of the yuanhau-site website.
-
+This repo contains the unreleased versions and the released versions of the yuanhau-site website.
 Prod: https://yhw.tw/site
 
 Beta: https://yhw.tw/yuanhaucombeta
