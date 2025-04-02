@@ -21,4 +21,4 @@ Beta: https://yhw.tw/yuanhaucombeta
 
 ## How long have spent time developing this website?
 
-Uncountable. Just on Hackatime it recorded 39 hours and 54 mintues in total.
+Uncountable. Just on Hackatime it recorded 39 hours and 54 minutes in total.
