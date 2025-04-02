@@ -58,7 +58,7 @@ const fetchdinos = async () => {
     const req = await fetch("/api/hackclub/drawings");
     const res = await req.json();
     console.log(res);
-    imagescontent.value = res;
+    imagescontent.value = res.data;
   } catch (e) {
     console.log(e);
   } finally {
