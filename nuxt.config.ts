@@ -10,7 +10,7 @@ export default defineNuxtConfig({
   routeRules: {
     "/": { prerender: true },
     "/**": { prerender: true },
-    "/bio": { prerender: true },
+    "/legacy-index": { prerender: true },
     "/about": { prerender: true },
     "/images/": { prerender: true },
     "/threads": { prerender: true },
@@ -35,7 +35,7 @@ export default defineNuxtConfig({
     // en
     "/en": { prerender: true },
     "/en/**": { prerender: true },
-    "/en/bio": { prerender: true },
+    "/en/legacy-index": { prerender: true },
     "/en/about": { prerender: true },
     "/en/images/": { prerender: true },
     "/en/threads": { prerender: true },
