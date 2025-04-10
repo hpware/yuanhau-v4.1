@@ -80,7 +80,7 @@ onMounted(() => {
       <h6>What I have done @ hackclub (This is also a special page)</h6>
     </div>
     <div class="links">
-      <a href="https://hackclub.com/"><i class="bi bi-globe"></i></a
+      <a href="https://scrapbook.hackclub.com/yhw_tw"><i class="bi bi-globe"></i></a
       >&nbsp;&nbsp;<a href="https://slack.com/app_redirect?channel=U087ATD163V"
         ><i class="bi bi-slack"></i
       ></a>
