@@ -50,19 +50,7 @@ export default defineNuxtConfig({
     "/en/form/**": { ssr: true },
   },
 
-  modules: [
-    "nuxt-umami",
-    "@nuxtjs/robots",
-    "@kgierke/nuxt-basic-auth",
-    "@sentry/nuxt/module",
-    "@nuxt/image",
-    "@nuxtjs/sitemap",
-    "@nuxt/content",
-    "nuxt-gtag",
-    "@bg-dev/nuxt-s3",
-    "@nuxtjs/i18n",
-    "@logto/nuxt",
-  ],
+  modules: ["nuxt-umami", "@nuxtjs/robots", "@kgierke/nuxt-basic-auth", "@sentry/nuxt/module", "@nuxt/image", "@nuxtjs/sitemap", "@nuxt/content", "nuxt-gtag", "@bg-dev/nuxt-s3", "@nuxtjs/i18n", "@nuxtjs/supabase", "@clerk/nuxt"],
 
   umami: {
     enabled: true,
@@ -128,6 +116,7 @@ export default defineNuxtConfig({
         { name: "og:author", content: "吳元皓" },
         { name: "og:author:email", content: "hw@yuanhau.com" },
         { "http-equiv": "X-UA-Compatible", content: "IE=edge" },
+        { name: "message", content: "Fuck you nazis. Really, and history is just repeating itself. https://www.threads.net/@elvieschen/post/DIg8-6kSkHA"}
       ],
     },
   },
