@@ -34,7 +34,7 @@
     "crypto-js": "^4.2.0",
     "dotenv": "^16.4.7",
     "friendly-challenge": "^0.9.19",
-    "groq-sdk": "^0.17.0",
+    "groq-sdk": "^0.19.0",
     "h3": "^1.15.1",
     "ionicons": "^7.4.0",
     "ipx": "^3.0.3",
