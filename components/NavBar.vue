@@ -168,30 +168,13 @@ if (checkparam === "active") {
             <span>Hack Club</span>
           </NuxtLink>
         </nav>
-        <div class="user">
-          <div v-if="!Boolean(user)">
-            <a href="/sign-in">
-              <i class="bi bi-person"></i
-              ><span>&nbsp;{{ t("login.notloggedin") }}</span>
-            </a>
-          </div>
-          <div v-else>
-            <NuxtLink
-              :to="localePath('/user/')"
-              @click="closeSidebar"
-              class="user-item"
-            >
-              <i v-if="!user.picture" class="bi bi-person"></i
-              ><img v-else :src="user.picture" /><span
-                >&nbsp;{{ user.name ? user.name : user.username }}</span
-              >
-              <span></span>
-            </NuxtLink>
-            <a :href="`/log${user ? 'out' : 'in'}`">
-              登 {{ user ? "出" : "入" }}
-            </a>
-          </div>
-        </div>
+        <SignedOut>
+      <SignInButton />
+    </SignedOut>
+    <SignedIn>
+      <UserButton />
+    </SignedIn>
+        
         <div class="sidebar-footer">
           <div class="social-links">
             <a
@@ -228,6 +211,7 @@ if (checkparam === "active") {
             <!--<a href="https://github.com/hpware/yuanhau-site">GitHub</a> 上-->
             版本 <a href="https://github.com/hpware/yuanhau-v4.1">v4.1.3</a>
           </div>
+        </div>
         </div>
       </div>
     </Transition>

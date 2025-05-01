@@ -50,19 +50,7 @@ export default defineNuxtConfig({
     "/en/form/**": { ssr: true },
   },
 
-  modules: [
-    "nuxt-umami",
-    "@nuxtjs/robots",
-    "@kgierke/nuxt-basic-auth",
-    "@sentry/nuxt/module",
-    "@nuxt/image",
-    "@nuxtjs/sitemap",
-    "@nuxt/content",
-    "nuxt-gtag",
-    "@bg-dev/nuxt-s3",
-    "@nuxtjs/i18n",
-    "@logto/nuxt",
-  ],
+  modules: ["nuxt-umami", "@nuxtjs/robots", "@kgierke/nuxt-basic-auth", "@sentry/nuxt/module", "@nuxt/image", "@nuxtjs/sitemap", "@nuxt/content", "nuxt-gtag", "@bg-dev/nuxt-s3", "@nuxtjs/i18n", "@nuxtjs/supabase", "@clerk/nuxt"],
 
   umami: {
     enabled: true,
