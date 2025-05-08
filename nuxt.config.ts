@@ -128,7 +128,7 @@ export default defineNuxtConfig({
         { name: "og:author", content: "吳元皓" },
         { name: "og:author:email", content: "hw@yuanhau.com" },
         { "http-equiv": "X-UA-Compatible", content: "IE=edge" },
-        { name: "message", content: "Fuck you nazis. Really, and history is just repeating itself. https://www.threads.net/@elvieschen/post/DIg8-6kSkHA"}
+        { name: "message", content: "🖕KMT https://www.threads.com/@mr.kp157/post/DJYFUojSHQ1?xmt=AQF0YsY1bFnHjB3y-jPyMXCqVbKYZ_w-LarImHdTYlfBYw "}
       ],
     },
   },
